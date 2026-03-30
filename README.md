@@ -309,6 +309,40 @@ Comparison artifacts are written to `data/evals/comparisons/<name>/`:
 - `comparison_table.md`
 - `top_insights.md`
 
+Distill the most revealing failures from one or more completed runs:
+
+```bash
+PYTHONPATH=. python -m src.cli.distill_failures data/evals/mock_noisy_full
+```
+
+For multi-run weakness comparison:
+
+```bash
+PYTHONPATH=. python -m src.cli.distill_failures \
+  data/evals/mock_noisy_full \
+  data/evals/mock_shallow_full \
+  --comparison-name noisy_vs_shallow_weaknesses
+```
+
+This writes per-run `distilled_failures.json` and `signature_weaknesses.md`, plus cross-run weakness comparison artifacts under `data/evals/comparisons/<name>/`.
+
+Analyze trajectory instability from completed runs:
+
+```bash
+PYTHONPATH=. python -m src.cli.analyze_instability data/evals/mock_noisy_full
+```
+
+For cross-run instability comparison:
+
+```bash
+PYTHONPATH=. python -m src.cli.analyze_instability \
+  data/evals/mock_noisy_full \
+  data/evals/mock_shallow_full \
+  --comparison-name noisy_vs_shallow_instability
+```
+
+This writes per-run `instability_summary.json` and `instability_highlights.md`, plus comparison-time `instability_comparison.json` and `instability_insights.md`.
+
 Supported interactive families now include:
 
 - `hidden_rule`
