@@ -351,6 +351,29 @@ Supported interactive families now include:
 - `attention_distractors`
 - `social_miniworlds`
 
+## First Local Findings
+
+The first balanced local-model runs already show why AGUS is useful. Static accuracy and dynamic reasoning quality do not line up cleanly:
+
+- `llama3.1:8b` leads on static accuracy: `0.6179`
+- `qwen2.5:7b` leads on `belief_trajectory_quality`: `0.7281` versus `0.5434`
+- `qwen2.5:7b` also has lower overall `trajectory_instability_index`: `0.2626` versus `0.3348`
+
+This suggests AGUS is capturing a real tradeoff between frozen-task correctness and adaptive reasoning quality. The current local runs also show that the biggest separating weakness types are:
+
+- `overconfident_error`
+- `static_dynamic_gap`
+- `social_belief_confusion`
+
+The strongest safe headline is not that one local model is simply better. It is that AGUS reveals cognitive differences that a static benchmark would compress into a single accuracy score.
+
+Judge-facing summaries are in:
+
+- [results_packet.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/results_packet.md)
+- [local_model_findings.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/local_model_findings.md)
+- [failure_gallery.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/failure_gallery.md)
+- [key_claims.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/key_claims.md)
+
 ### Why AGUS Interactive Is More Novel Than Static Reasoning Datasets
 
 Static reasoning datasets mostly reward one-shot competence on a frozen task. AGUS Interactive instead measures whether a model can revise a live belief state after new evidence arrives and sustain that revision over a short episode.
