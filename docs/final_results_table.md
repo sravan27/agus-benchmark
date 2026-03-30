@@ -27,6 +27,16 @@
 | `confidence_recalibration_score` | 0.5995 | 0.8650 | higher is better |
 | `attention_recovery_score` | 0.5750 | 0.7812 | higher is better |
 
+## AGUS v2 Counterfactual Coherence
+
+| Metric | Llama | Qwen | Direction |
+| --- | ---: | ---: | --- |
+| `counterfactual_update_fidelity` | 0.7222 | 0.8333 | higher is better |
+| `invariant_preservation_score` | 0.7500 | 0.8438 | higher is better |
+| `branch_belief_coherence` | 0.7037 | 0.8542 | higher is better |
+| `cross_branch_consistency` | 1.0000 | 1.0000 | higher is better |
+| `counterfactual_confidence_calibration` | 0.9561 | 0.9717 | higher is better |
+
 ## Takeaway
 
-Llama is stronger on frozen-task accuracy. Qwen is stronger on adaptive reasoning quality and less brittle overall. AGUS is valuable because it makes that tradeoff visible.
+Llama is stronger on frozen-task accuracy. Qwen is stronger on adaptive reasoning quality, less brittle overall, and stronger on the first AGUS v2 counterfactual coherence metrics. AGUS is valuable because it makes that tradeoff visible at both the interactive and counterfactual levels.

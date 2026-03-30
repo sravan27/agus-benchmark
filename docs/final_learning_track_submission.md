@@ -34,6 +34,8 @@ AGUS includes both static tasks and lightweight interactive episodes. In the int
 
 This makes the benchmark more diagnostic of **adaptive generalization under shift**, not just one-shot problem solving.
 
+AGUS v2 adds a focused extension: **counterfactual branching episodes**. For selected interactive tasks, one base episode is expanded into 2-4 nearby alternate continuations where one decisive factor changes, such as whether contradiction appears, which representation remap is used, or whether one agent has private information. This allows AGUS to test coherence across nearby alternate futures rather than only performance along one observed trajectory.
+
 ## Dataset
 
 AGUS is generated synthetically with deterministic seeds and a shared schema. Current benchmark components include:
@@ -67,6 +69,14 @@ The benchmark also extracts failure categories such as:
 
 This lets AGUS produce interpretable evidence about *how* a model fails, not only *whether* it fails.
 
+AGUS v2 adds branch-aware metrics including:
+
+- `counterfactual_update_fidelity`
+- `invariant_preservation_score`
+- `branch_belief_coherence`
+- `cross_branch_consistency`
+- `counterfactual_confidence_calibration`
+
 ## Results, Insights, and Conclusions
 
 The first local-model comparisons already support the main AGUS claim.
@@ -90,6 +100,15 @@ The strongest separating weakness types in the current local runs are:
 - `social_belief_confusion`
 
 This is the most important result from AGUS so far: **a model can look much stronger on static accuracy while looking weaker on adaptive reasoning quality, revision, and brittleness under changing evidence.**
+
+AGUS v2 strengthens that story. On counterfactual branching episodes, Qwen again outperforms Llama on coherence-oriented metrics:
+
+- `counterfactual_update_fidelity`: `0.8333` versus `0.7222`
+- `invariant_preservation_score`: `0.8438` versus `0.7500`
+- `branch_belief_coherence`: `0.8542` versus `0.7037`
+- `counterfactual_confidence_calibration`: `0.9717` versus `0.9561`
+
+Both models reached `cross_branch_consistency` of `1.0`, which is encouraging but should not be overstated. The safer interpretation is that AGUS v2 shows promise as a coherence benchmark and that the same general pattern from AGUS v1 persists: Qwen looks weaker on frozen-task accuracy but stronger on adaptive and counterfactual reasoning quality.
 
 That is exactly why AGUS fits the Learning track. It measures whether a model can acquire and update task-relevant structure efficiently, not only whether it can answer familiar-looking tasks correctly.
 

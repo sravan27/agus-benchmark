@@ -1,0 +1,2374 @@
+[
+  {
+    "bundle_id": "hidden_rule_0000__counterfactual",
+    "task_id": "hidden_rule_0000",
+    "family": "hidden_rule",
+    "shared_structure": {
+      "base_question": "Does the rule remain stable when contradiction is absent, and revise when contradiction appears?",
+      "varying_factor": "contradiction_presence"
+    },
+    "shared_checks": [
+      {
+        "name": "initial_answer",
+        "path": "response.initial_answer",
+        "expected": [
+          7,
+          1,
+          5,
+          1
+        ]
+      },
+      {
+        "name": "initial_rule_tag",
+        "path": "response.metadata.initial_rule_tag",
+        "expected": "index_offset"
+      }
+    ],
+    "variant_path": "response.revised_answer",
+    "branches": [
+      {
+        "branch_id": "hidden_rule_0000__counterfactual__confirm",
+        "label": "confirming_evidence",
+        "changed_factor": "contradiction_absent",
+        "expected_revision_kind": "none",
+        "spec": {
+          "task_id": "hidden_rule_0000",
+          "family": "hidden_rule",
+          "episode_type": "counterfactual_rule_confirmation",
+          "initial_context": {
+            "instruction": "Infer the hidden sequence transformation from the induction examples. Then continue after the rule unexpectedly changes.",
+            "symbol_space": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "sequence_length": 4
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_initial_hypothesis",
+              "prompt": {
+                "probe_input": [
+                  5,
+                  7,
+                  9,
+                  3
+                ],
+                "request": "Infer the current rule from the induction examples and answer the probe.",
+                "examples": [
+                  {
+                    "phase": "induction",
+                    "input": [
+                      2,
+                      8,
+                      7,
+                      9
+                    ],
+                    "output": [
+                      4,
+                      2,
+                      3,
+                      7
+                    ]
+                  },
+                  {
+                    "phase": "induction",
+                    "input": [
+                      2,
+                      1,
+                      7,
+                      4
+                    ],
+                    "output": [
+                      4,
+                      5,
+                      3,
+                      2
+                    ]
+                  },
+                  {
+                    "phase": "induction",
+                    "input": [
+                      2,
+                      1,
+                      8,
+                      0
+                    ],
+                    "output": [
+                      4,
+                      5,
+                      4,
+                      8
+                    ]
+                  }
+                ]
+              },
+              "event": null,
+              "accepted_answers": [
+                [
+                  7,
+                  1,
+                  5,
+                  1
+                ]
+              ],
+              "expected_confidence": 0.65,
+              "expected_rule": "index_offset",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_rule_confirmation",
+              "prompt": {
+                "probe_input": [
+                  5,
+                  7,
+                  9,
+                  3
+                ],
+                "request": "Revise the rule and answer the same probe after seeing the contradiction."
+              },
+              "event": {
+                "event_type": "rule_confirmation",
+                "message": "A new observation confirms the original rule instead of contradicting it.",
+                "example": {
+                  "phase": "shift_feedback",
+                  "input": [
+                    1,
+                    0,
+                    0,
+                    3
+                  ],
+                  "output": [
+                    3,
+                    4,
+                    6,
+                    1
+                  ]
+                }
+              },
+              "accepted_answers": [
+                [
+                  7,
+                  1,
+                  5,
+                  1
+                ]
+              ],
+              "expected_confidence": 0.78,
+              "expected_rule": "index_offset",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              [
+                7,
+                1,
+                5,
+                1
+              ]
+            ],
+            "accepted_revised_targets": [
+              [
+                7,
+                1,
+                5,
+                1
+              ]
+            ],
+            "should_update": true,
+            "contradiction_expected": false,
+            "update_mode": "change_rule",
+            "canonical_initial_rule": "index_offset",
+            "canonical_revised_rule": "index_offset",
+            "expected_initial_confidence": 0.65,
+            "expected_revised_confidence": 0.78,
+            "cue_turn": 2
+          }
+        },
+        "notes": [
+          "The same probe should keep the original rule when the new evidence confirms it."
+        ]
+      },
+      {
+        "branch_id": "hidden_rule_0000__counterfactual__shift",
+        "label": "contradicting_evidence",
+        "changed_factor": "contradiction_present",
+        "expected_revision_kind": "rule",
+        "spec": {
+          "task_id": "hidden_rule_0000",
+          "family": "hidden_rule",
+          "episode_type": "counterfactual_rule_shift",
+          "initial_context": {
+            "instruction": "Infer the hidden sequence transformation from the induction examples. Then continue after the rule unexpectedly changes.",
+            "symbol_space": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "sequence_length": 4
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_initial_hypothesis",
+              "prompt": {
+                "probe_input": [
+                  5,
+                  7,
+                  9,
+                  3
+                ],
+                "request": "Infer the current rule from the induction examples and answer the probe.",
+                "examples": [
+                  {
+                    "phase": "induction",
+                    "input": [
+                      2,
+                      8,
+                      7,
+                      9
+                    ],
+                    "output": [
+                      4,
+                      2,
+                      3,
+                      7
+                    ]
+                  },
+                  {
+                    "phase": "induction",
+                    "input": [
+                      2,
+                      1,
+                      7,
+                      4
+                    ],
+                    "output": [
+                      4,
+                      5,
+                      3,
+                      2
+                    ]
+                  },
+                  {
+                    "phase": "induction",
+                    "input": [
+                      2,
+                      1,
+                      8,
+                      0
+                    ],
+                    "output": [
+                      4,
+                      5,
+                      4,
+                      8
+                    ]
+                  }
+                ]
+              },
+              "event": null,
+              "accepted_answers": [
+                [
+                  7,
+                  1,
+                  5,
+                  1
+                ]
+              ],
+              "expected_confidence": 0.65,
+              "expected_rule": "index_offset",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_rule_shift",
+              "prompt": {
+                "probe_input": [
+                  5,
+                  7,
+                  9,
+                  3
+                ],
+                "request": "Revise the rule and answer the same probe after seeing the contradiction."
+              },
+              "event": {
+                "event_type": "rule_shift_contradiction",
+                "message": "A new observation conflicts with the earlier pattern.",
+                "example": {
+                  "phase": "shift_feedback",
+                  "input": [
+                    1,
+                    0,
+                    0,
+                    3
+                  ],
+                  "output": [
+                    2,
+                    2,
+                    3,
+                    7
+                  ]
+                }
+              },
+              "accepted_answers": [
+                [
+                  6,
+                  9,
+                  2,
+                  7
+                ]
+              ],
+              "expected_confidence": 0.82,
+              "expected_rule": "index_offset",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              [
+                7,
+                1,
+                5,
+                1
+              ]
+            ],
+            "accepted_revised_targets": [
+              [
+                6,
+                9,
+                2,
+                7
+              ]
+            ],
+            "should_update": true,
+            "contradiction_expected": true,
+            "update_mode": "change_rule",
+            "canonical_initial_rule": "index_offset",
+            "canonical_revised_rule": "index_offset",
+            "expected_initial_confidence": 0.65,
+            "expected_revised_confidence": 0.82,
+            "cue_turn": 2
+          }
+        },
+        "notes": [
+          "The same probe should force a rule revision once the contradiction appears."
+        ]
+      }
+    ]
+  },
+  {
+    "bundle_id": "hidden_rule_0001__counterfactual",
+    "task_id": "hidden_rule_0001",
+    "family": "hidden_rule",
+    "shared_structure": {
+      "base_question": "Does the rule remain stable when contradiction is absent, and revise when contradiction appears?",
+      "varying_factor": "contradiction_presence"
+    },
+    "shared_checks": [
+      {
+        "name": "initial_answer",
+        "path": "response.initial_answer",
+        "expected": [
+          2,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "initial_rule_tag",
+        "path": "response.metadata.initial_rule_tag",
+        "expected": "rotate_left"
+      }
+    ],
+    "variant_path": "response.revised_answer",
+    "branches": [
+      {
+        "branch_id": "hidden_rule_0001__counterfactual__confirm",
+        "label": "confirming_evidence",
+        "changed_factor": "contradiction_absent",
+        "expected_revision_kind": "none",
+        "spec": {
+          "task_id": "hidden_rule_0001",
+          "family": "hidden_rule",
+          "episode_type": "counterfactual_rule_confirmation",
+          "initial_context": {
+            "instruction": "Infer the hidden sequence transformation from the induction examples. Then continue after the rule unexpectedly changes.",
+            "symbol_space": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "sequence_length": 4
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_initial_hypothesis",
+              "prompt": {
+                "probe_input": [
+                  1,
+                  2,
+                  3,
+                  1
+                ],
+                "request": "Infer the current rule from the induction examples and answer the probe.",
+                "examples": [
+                  {
+                    "phase": "induction",
+                    "input": [
+                      0,
+                      1,
+                      9,
+                      1
+                    ],
+                    "output": [
+                      1,
+                      9,
+                      1,
+                      0
+                    ]
+                  },
+                  {
+                    "phase": "induction",
+                    "input": [
+                      6,
+                      1,
+                      4,
+                      6
+                    ],
+                    "output": [
+                      1,
+                      4,
+                      6,
+                      6
+                    ]
+                  },
+                  {
+                    "phase": "induction",
+                    "input": [
+                      1,
+                      0,
+                      0,
+                      3
+                    ],
+                    "output": [
+                      0,
+                      0,
+                      3,
+                      1
+                    ]
+                  }
+                ]
+              },
+              "event": null,
+              "accepted_answers": [
+                [
+                  2,
+                  3,
+                  1,
+                  1
+                ]
+              ],
+              "expected_confidence": 0.65,
+              "expected_rule": "rotate_left",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_rule_confirmation",
+              "prompt": {
+                "probe_input": [
+                  1,
+                  2,
+                  3,
+                  1
+                ],
+                "request": "Revise the rule and answer the same probe after seeing the contradiction."
+              },
+              "event": {
+                "event_type": "rule_confirmation",
+                "message": "A new observation confirms the original rule instead of contradicting it.",
+                "example": {
+                  "phase": "shift_feedback",
+                  "input": [
+                    3,
+                    4,
+                    5,
+                    1
+                  ],
+                  "output": [
+                    4,
+                    5,
+                    1,
+                    3
+                  ]
+                }
+              },
+              "accepted_answers": [
+                [
+                  2,
+                  3,
+                  1,
+                  1
+                ]
+              ],
+              "expected_confidence": 0.78,
+              "expected_rule": "rotate_left",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              [
+                2,
+                3,
+                1,
+                1
+              ]
+            ],
+            "accepted_revised_targets": [
+              [
+                2,
+                3,
+                1,
+                1
+              ]
+            ],
+            "should_update": true,
+            "contradiction_expected": false,
+            "update_mode": "change_rule",
+            "canonical_initial_rule": "rotate_left",
+            "canonical_revised_rule": "rotate_left",
+            "expected_initial_confidence": 0.65,
+            "expected_revised_confidence": 0.78,
+            "cue_turn": 2
+          }
+        },
+        "notes": [
+          "The same probe should keep the original rule when the new evidence confirms it."
+        ]
+      },
+      {
+        "branch_id": "hidden_rule_0001__counterfactual__shift",
+        "label": "contradicting_evidence",
+        "changed_factor": "contradiction_present",
+        "expected_revision_kind": "rule",
+        "spec": {
+          "task_id": "hidden_rule_0001",
+          "family": "hidden_rule",
+          "episode_type": "counterfactual_rule_shift",
+          "initial_context": {
+            "instruction": "Infer the hidden sequence transformation from the induction examples. Then continue after the rule unexpectedly changes.",
+            "symbol_space": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "sequence_length": 4
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_initial_hypothesis",
+              "prompt": {
+                "probe_input": [
+                  1,
+                  2,
+                  3,
+                  1
+                ],
+                "request": "Infer the current rule from the induction examples and answer the probe.",
+                "examples": [
+                  {
+                    "phase": "induction",
+                    "input": [
+                      0,
+                      1,
+                      9,
+                      1
+                    ],
+                    "output": [
+                      1,
+                      9,
+                      1,
+                      0
+                    ]
+                  },
+                  {
+                    "phase": "induction",
+                    "input": [
+                      6,
+                      1,
+                      4,
+                      6
+                    ],
+                    "output": [
+                      1,
+                      4,
+                      6,
+                      6
+                    ]
+                  },
+                  {
+                    "phase": "induction",
+                    "input": [
+                      1,
+                      0,
+                      0,
+                      3
+                    ],
+                    "output": [
+                      0,
+                      0,
+                      3,
+                      1
+                    ]
+                  }
+                ]
+              },
+              "event": null,
+              "accepted_answers": [
+                [
+                  2,
+                  3,
+                  1,
+                  1
+                ]
+              ],
+              "expected_confidence": 0.65,
+              "expected_rule": "rotate_left",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_rule_shift",
+              "prompt": {
+                "probe_input": [
+                  1,
+                  2,
+                  3,
+                  1
+                ],
+                "request": "Revise the rule and answer the same probe after seeing the contradiction."
+              },
+              "event": {
+                "event_type": "rule_shift_contradiction",
+                "message": "A new observation conflicts with the earlier pattern.",
+                "example": {
+                  "phase": "shift_feedback",
+                  "input": [
+                    3,
+                    4,
+                    5,
+                    1
+                  ],
+                  "output": [
+                    2,
+                    1,
+                    0,
+                    4
+                  ]
+                }
+              },
+              "accepted_answers": [
+                [
+                  4,
+                  3,
+                  2,
+                  4
+                ]
+              ],
+              "expected_confidence": 0.82,
+              "expected_rule": "mirror_anchor",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              [
+                2,
+                3,
+                1,
+                1
+              ]
+            ],
+            "accepted_revised_targets": [
+              [
+                4,
+                3,
+                2,
+                4
+              ]
+            ],
+            "should_update": true,
+            "contradiction_expected": true,
+            "update_mode": "change_rule",
+            "canonical_initial_rule": "rotate_left",
+            "canonical_revised_rule": "mirror_anchor",
+            "expected_initial_confidence": 0.65,
+            "expected_revised_confidence": 0.82,
+            "cue_turn": 2
+          }
+        },
+        "notes": [
+          "The same probe should force a rule revision once the contradiction appears."
+        ]
+      }
+    ]
+  },
+  {
+    "bundle_id": "shift_transfer_0000__counterfactual",
+    "task_id": "shift_transfer_0000",
+    "family": "shift_transfer",
+    "shared_structure": {
+      "base_question": "Does the model preserve the latent rule across nearby remapping variants?",
+      "varying_factor": "representation_variant"
+    },
+    "shared_checks": [
+      {
+        "name": "initial_answer",
+        "path": "response.initial_answer",
+        "expected": [
+          "square",
+          "star",
+          "circle",
+          "circle"
+        ]
+      },
+      {
+        "name": "initial_rule_tag",
+        "path": "response.metadata.initial_rule_tag",
+        "expected": "index_offset"
+      },
+      {
+        "name": "revised_rule_tag",
+        "path": "response.metadata.revised_rule_tag",
+        "expected": "index_offset"
+      }
+    ],
+    "variant_path": "response.revised_answer",
+    "branches": [
+      {
+        "branch_id": "shift_transfer_0000__counterfactual__direct",
+        "label": "direct_transfer",
+        "changed_factor": "direct_codebook",
+        "expected_revision_kind": "representation",
+        "spec": {
+          "task_id": "shift_transfer_0000",
+          "family": "shift_transfer",
+          "episode_type": "counterfactual_direct_transfer",
+          "initial_context": {
+            "instruction": "Infer the latent transformation from examples in one representation, then apply the same structure after the symbols are remapped.",
+            "source_representation": "circle triangle square star",
+            "transfer_representation": "ka zu mi to"
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_source_rule",
+              "prompt": {
+                "probe_input": [
+                  "triangle",
+                  "triangle",
+                  "arc",
+                  "line"
+                ],
+                "request": "Infer the source-form rule and answer the source query.",
+                "examples": [
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "circle",
+                      "cross",
+                      "hex",
+                      "line"
+                    ],
+                    "output": [
+                      "triangle",
+                      "triangle",
+                      "arc",
+                      "circle"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "line",
+                      "wave",
+                      "dot",
+                      "square"
+                    ],
+                    "output": [
+                      "arc",
+                      "circle",
+                      "wave",
+                      "line"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "star",
+                      "hex",
+                      "arc",
+                      "circle"
+                    ],
+                    "output": [
+                      "hex",
+                      "line",
+                      "circle",
+                      "hex"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "star",
+                      "cross",
+                      "arc",
+                      "circle"
+                    ],
+                    "output": [
+                      "hex",
+                      "triangle",
+                      "circle",
+                      "hex"
+                    ]
+                  }
+                ]
+              },
+              "event": null,
+              "accepted_answers": [
+                [
+                  "square",
+                  "star",
+                  "circle",
+                  "circle"
+                ]
+              ],
+              "expected_confidence": 0.74,
+              "expected_rule": "index_offset",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_direct_transfer",
+              "prompt": {
+                "probe_input": [
+                  "ka",
+                  "su",
+                  "lo",
+                  "ve"
+                ],
+                "request": "Apply the same latent rule in the first transfer representation."
+              },
+              "event": {
+                "event_type": "representation_shift",
+                "message": "The codebook changes, but the latent rule stays fixed.",
+                "example": {
+                  "phase": "representation_shift_example",
+                  "input": [
+                    "ka",
+                    "ne",
+                    "ra",
+                    "lo"
+                  ],
+                  "output": [
+                    "zu",
+                    "zu",
+                    "pi",
+                    "ka"
+                  ]
+                }
+              },
+              "accepted_answers": [
+                [
+                  "zu",
+                  "ka",
+                  "ne",
+                  "ne"
+                ]
+              ],
+              "expected_confidence": 0.8,
+              "expected_rule": "index_offset",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              [
+                "square",
+                "star",
+                "circle",
+                "circle"
+              ]
+            ],
+            "accepted_revised_targets": [
+              [
+                "zu",
+                "ka",
+                "ne",
+                "ne"
+              ]
+            ],
+            "should_update": true,
+            "contradiction_expected": false,
+            "update_mode": "preserve_rule",
+            "canonical_initial_rule": "index_offset",
+            "canonical_revised_rule": "index_offset",
+            "expected_initial_confidence": 0.74,
+            "expected_revised_confidence": 0.8,
+            "cue_turn": 2
+          }
+        },
+        "notes": [
+          "The model should change the surface answer while preserving the same rule tag."
+        ]
+      },
+      {
+        "branch_id": "shift_transfer_0000__counterfactual__alternate",
+        "label": "alternate_transfer",
+        "changed_factor": "alternate_codebook",
+        "expected_revision_kind": "representation",
+        "spec": {
+          "task_id": "shift_transfer_0000",
+          "family": "shift_transfer",
+          "episode_type": "counterfactual_alternate_transfer",
+          "initial_context": {
+            "instruction": "Infer the latent transformation from examples in one representation, then apply the same structure after the symbols are remapped.",
+            "source_representation": "circle triangle square star",
+            "transfer_representation": "alternate_counterfactual_codebook"
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_source_rule",
+              "prompt": {
+                "probe_input": [
+                  "triangle",
+                  "triangle",
+                  "arc",
+                  "line"
+                ],
+                "request": "Infer the source-form rule and answer the source query.",
+                "examples": [
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "circle",
+                      "cross",
+                      "hex",
+                      "line"
+                    ],
+                    "output": [
+                      "triangle",
+                      "triangle",
+                      "arc",
+                      "circle"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "line",
+                      "wave",
+                      "dot",
+                      "square"
+                    ],
+                    "output": [
+                      "arc",
+                      "circle",
+                      "wave",
+                      "line"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "star",
+                      "hex",
+                      "arc",
+                      "circle"
+                    ],
+                    "output": [
+                      "hex",
+                      "line",
+                      "circle",
+                      "hex"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "star",
+                      "cross",
+                      "arc",
+                      "circle"
+                    ],
+                    "output": [
+                      "hex",
+                      "triangle",
+                      "circle",
+                      "hex"
+                    ]
+                  }
+                ]
+              },
+              "event": null,
+              "accepted_answers": [
+                [
+                  "square",
+                  "star",
+                  "circle",
+                  "circle"
+                ]
+              ],
+              "expected_confidence": 0.74,
+              "expected_rule": "index_offset",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_alternate_transfer",
+              "prompt": {
+                "probe_input": [
+                  "to",
+                  "to",
+                  "ne",
+                  "su"
+                ],
+                "request": "Keep the rule fixed while revising the representation hypothesis."
+              },
+              "event": {
+                "event_type": "representation_shift_alternate",
+                "message": "The same latent rule is expressed through a different nearby remapping.",
+                "example": {
+                  "phase": "representation_shift_example",
+                  "input": [
+                    "mi",
+                    "zu",
+                    "lo",
+                    "su"
+                  ],
+                  "output": [
+                    "to",
+                    "to",
+                    "ne",
+                    "mi"
+                  ]
+                }
+              },
+              "accepted_answers": [
+                [
+                  "ra",
+                  "ve",
+                  "mi",
+                  "mi"
+                ]
+              ],
+              "expected_confidence": 0.76,
+              "expected_rule": "index_offset",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              [
+                "square",
+                "star",
+                "circle",
+                "circle"
+              ]
+            ],
+            "accepted_revised_targets": [
+              [
+                "ra",
+                "ve",
+                "mi",
+                "mi"
+              ]
+            ],
+            "should_update": true,
+            "contradiction_expected": false,
+            "update_mode": "preserve_rule",
+            "canonical_initial_rule": "index_offset",
+            "canonical_revised_rule": "index_offset",
+            "expected_initial_confidence": 0.74,
+            "expected_revised_confidence": 0.76,
+            "cue_turn": 2
+          }
+        },
+        "notes": [
+          "The alternate branch changes only the codebook, not the latent structure."
+        ]
+      }
+    ]
+  },
+  {
+    "bundle_id": "shift_transfer_0001__counterfactual",
+    "task_id": "shift_transfer_0001",
+    "family": "shift_transfer",
+    "shared_structure": {
+      "base_question": "Does the model preserve the latent rule across nearby remapping variants?",
+      "varying_factor": "representation_variant"
+    },
+    "shared_checks": [
+      {
+        "name": "initial_answer",
+        "path": "response.initial_answer",
+        "expected": [
+          "B",
+          "D",
+          "B",
+          "G"
+        ]
+      },
+      {
+        "name": "initial_rule_tag",
+        "path": "response.metadata.initial_rule_tag",
+        "expected": "add_const"
+      },
+      {
+        "name": "revised_rule_tag",
+        "path": "response.metadata.revised_rule_tag",
+        "expected": "add_const"
+      }
+    ],
+    "variant_path": "response.revised_answer",
+    "branches": [
+      {
+        "branch_id": "shift_transfer_0001__counterfactual__direct",
+        "label": "direct_transfer",
+        "changed_factor": "direct_codebook",
+        "expected_revision_kind": "representation",
+        "spec": {
+          "task_id": "shift_transfer_0001",
+          "family": "shift_transfer",
+          "episode_type": "counterfactual_direct_transfer",
+          "initial_context": {
+            "instruction": "Infer the latent transformation from examples in one representation, then apply the same structure after the symbols are remapped.",
+            "source_representation": "A B C D",
+            "transfer_representation": "amber blue cinder dune"
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_source_rule",
+              "prompt": {
+                "probe_input": [
+                  "H",
+                  "J",
+                  "H",
+                  "C"
+                ],
+                "request": "Infer the source-form rule and answer the source query.",
+                "examples": [
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "A",
+                      "J",
+                      "F",
+                      "C"
+                    ],
+                    "output": [
+                      "E",
+                      "D",
+                      "J",
+                      "G"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "J",
+                      "D",
+                      "F",
+                      "J"
+                    ],
+                    "output": [
+                      "D",
+                      "H",
+                      "J",
+                      "D"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "F",
+                      "J",
+                      "E",
+                      "F"
+                    ],
+                    "output": [
+                      "J",
+                      "D",
+                      "I",
+                      "J"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "J",
+                      "B",
+                      "H",
+                      "C"
+                    ],
+                    "output": [
+                      "D",
+                      "F",
+                      "B",
+                      "G"
+                    ]
+                  }
+                ]
+              },
+              "event": null,
+              "accepted_answers": [
+                [
+                  "B",
+                  "D",
+                  "B",
+                  "G"
+                ]
+              ],
+              "expected_confidence": 0.74,
+              "expected_rule": "add_const",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_direct_transfer",
+              "prompt": {
+                "probe_input": [
+                  "cinder",
+                  "cinder",
+                  "iris",
+                  "frost"
+                ],
+                "request": "Apply the same latent rule in the first transfer representation."
+              },
+              "event": {
+                "event_type": "representation_shift",
+                "message": "The codebook changes, but the latent rule stays fixed.",
+                "example": {
+                  "phase": "representation_shift_example",
+                  "input": [
+                    "amber",
+                    "jade",
+                    "frost",
+                    "cinder"
+                  ],
+                  "output": [
+                    "ember",
+                    "dune",
+                    "jade",
+                    "glade"
+                  ]
+                }
+              },
+              "accepted_answers": [
+                [
+                  "glade",
+                  "glade",
+                  "cinder",
+                  "jade"
+                ]
+              ],
+              "expected_confidence": 0.8,
+              "expected_rule": "add_const",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              [
+                "B",
+                "D",
+                "B",
+                "G"
+              ]
+            ],
+            "accepted_revised_targets": [
+              [
+                "glade",
+                "glade",
+                "cinder",
+                "jade"
+              ]
+            ],
+            "should_update": true,
+            "contradiction_expected": false,
+            "update_mode": "preserve_rule",
+            "canonical_initial_rule": "add_const",
+            "canonical_revised_rule": "add_const",
+            "expected_initial_confidence": 0.74,
+            "expected_revised_confidence": 0.8,
+            "cue_turn": 2
+          }
+        },
+        "notes": [
+          "The model should change the surface answer while preserving the same rule tag."
+        ]
+      },
+      {
+        "branch_id": "shift_transfer_0001__counterfactual__alternate",
+        "label": "alternate_transfer",
+        "changed_factor": "alternate_codebook",
+        "expected_revision_kind": "representation",
+        "spec": {
+          "task_id": "shift_transfer_0001",
+          "family": "shift_transfer",
+          "episode_type": "counterfactual_alternate_transfer",
+          "initial_context": {
+            "instruction": "Infer the latent transformation from examples in one representation, then apply the same structure after the symbols are remapped.",
+            "source_representation": "A B C D",
+            "transfer_representation": "alternate_counterfactual_codebook"
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_source_rule",
+              "prompt": {
+                "probe_input": [
+                  "H",
+                  "J",
+                  "H",
+                  "C"
+                ],
+                "request": "Infer the source-form rule and answer the source query.",
+                "examples": [
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "A",
+                      "J",
+                      "F",
+                      "C"
+                    ],
+                    "output": [
+                      "E",
+                      "D",
+                      "J",
+                      "G"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "J",
+                      "D",
+                      "F",
+                      "J"
+                    ],
+                    "output": [
+                      "D",
+                      "H",
+                      "J",
+                      "D"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "F",
+                      "J",
+                      "E",
+                      "F"
+                    ],
+                    "output": [
+                      "J",
+                      "D",
+                      "I",
+                      "J"
+                    ]
+                  },
+                  {
+                    "phase": "learn_source_representation",
+                    "input": [
+                      "J",
+                      "B",
+                      "H",
+                      "C"
+                    ],
+                    "output": [
+                      "D",
+                      "F",
+                      "B",
+                      "G"
+                    ]
+                  }
+                ]
+              },
+              "event": null,
+              "accepted_answers": [
+                [
+                  "B",
+                  "D",
+                  "B",
+                  "G"
+                ]
+              ],
+              "expected_confidence": 0.74,
+              "expected_rule": "add_const",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_alternate_transfer",
+              "prompt": {
+                "probe_input": [
+                  "jade",
+                  "blue",
+                  "jade",
+                  "ember"
+                ],
+                "request": "Keep the rule fixed while revising the representation hypothesis."
+              },
+              "event": {
+                "event_type": "representation_shift_alternate",
+                "message": "The same latent rule is expressed through a different nearby remapping.",
+                "example": {
+                  "phase": "representation_shift_example",
+                  "input": [
+                    "cinder",
+                    "blue",
+                    "haze",
+                    "ember"
+                  ],
+                  "output": [
+                    "glade",
+                    "frost",
+                    "blue",
+                    "iris"
+                  ]
+                }
+              },
+              "accepted_answers": [
+                [
+                  "dune",
+                  "frost",
+                  "dune",
+                  "iris"
+                ]
+              ],
+              "expected_confidence": 0.76,
+              "expected_rule": "add_const",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {},
+              "expected_trust_top": null,
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              [
+                "B",
+                "D",
+                "B",
+                "G"
+              ]
+            ],
+            "accepted_revised_targets": [
+              [
+                "dune",
+                "frost",
+                "dune",
+                "iris"
+              ]
+            ],
+            "should_update": true,
+            "contradiction_expected": false,
+            "update_mode": "preserve_rule",
+            "canonical_initial_rule": "add_const",
+            "canonical_revised_rule": "add_const",
+            "expected_initial_confidence": 0.74,
+            "expected_revised_confidence": 0.76,
+            "cue_turn": 2
+          }
+        },
+        "notes": [
+          "The alternate branch changes only the codebook, not the latent structure."
+        ]
+      }
+    ]
+  },
+  {
+    "bundle_id": "social_miniworlds_0000__counterfactual",
+    "task_id": "social_miniworlds_0000",
+    "family": "social_miniworlds",
+    "shared_structure": {
+      "base_question": "Does the model keep world state stable while changing only the agent's information state?",
+      "varying_factor": "private_information_access"
+    },
+    "shared_checks": [
+      {
+        "name": "initial_answer",
+        "path": "response.initial_answer",
+        "expected": {
+          "actual_location": "blue locker",
+          "belief_of_false_belief_agent": "blue locker"
+        }
+      },
+      {
+        "name": "actual_location",
+        "path": "response.revised_answer.actual_location",
+        "expected": "green locker"
+      },
+      {
+        "name": "trusted_agent",
+        "path": "response.revised_answer.trusted_agent",
+        "expected": "Faye"
+      }
+    ],
+    "variant_path": "response.revised_answer",
+    "branches": [
+      {
+        "branch_id": "social_miniworlds_0000__counterfactual__private",
+        "label": "private_information",
+        "changed_factor": "one_agent_private_information",
+        "expected_revision_kind": "belief",
+        "spec": {
+          "task_id": "social_miniworlds_0000",
+          "family": "social_miniworlds",
+          "episode_type": "counterfactual_private_information",
+          "initial_context": {
+            "instruction": "Reason about who knows what, who has stale beliefs, and whose statement should be trusted.",
+            "setting": "A small group is trying to locate a badge.",
+            "agents": [
+              "Ben",
+              "Ava",
+              "Dax",
+              "Faye"
+            ]
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_shared_state",
+              "prompt": {
+                "request": "Track the initial state for the badge.",
+                "question": "Where is the badge, and where would Dax look right now?"
+              },
+              "event": {
+                "event_type": "shared_observation",
+                "location": "blue locker"
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "blue locker",
+                  "belief_of_false_belief_agent": "blue locker"
+                }
+              ],
+              "expected_confidence": 0.72,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ben": "blue locker",
+                "Ava": "blue locker",
+                "Dax": "blue locker",
+                "Faye": "blue locker"
+              },
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_private_move",
+              "prompt": {
+                "request": "Update the world state after the private move.",
+                "question": "Where is the badge now, and where does Dax still think it is?"
+              },
+              "event": {
+                "event_type": "private_information_move",
+                "message": "The badge moved to the green locker. Only Faye saw it."
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "green locker",
+                  "belief_of_false_belief_agent": "blue locker",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.58,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ben": "blue locker",
+                "Ava": "blue locker",
+                "Dax": "blue locker",
+                "Faye": "green locker"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            },
+            {
+              "turn_id": "turn_3_conflicting_testimony",
+              "prompt": {
+                "request": "Separate the true world state from stale agent belief under conflict.",
+                "question": "Where is the badge, where does Dax think it is, and who is trustworthy?"
+              },
+              "event": {
+                "event_type": "conflicting_testimony",
+                "truthful_statement": {
+                  "phase": "statement",
+                  "agent": "Faye",
+                  "content": "The badge is now in the green locker.",
+                  "knowledge_access": "direct_observation",
+                  "incentive": "help_the_search"
+                },
+                "deceptive_statement": {
+                  "phase": "statement",
+                  "agent": "Ava",
+                  "content": "The badge is in the red locker.",
+                  "knowledge_access": "no_direct_observation",
+                  "incentive": "wins_if_others_search_the_wrong_place"
+                }
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "green locker",
+                  "belief_of_false_belief_agent": "blue locker",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.74,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ben": "blue locker",
+                "Ava": "blue locker",
+                "Dax": "blue locker",
+                "Faye": "green locker"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            },
+            {
+              "turn_id": "turn_4_final_query",
+              "prompt": {
+                "request": "Provide the final actual location, stale belief, and trusted agent.",
+                "question": "Where is the badge, where does Dax believe it is, and who should be trusted?"
+              },
+              "event": {
+                "event_type": "final_query",
+                "message": "Give the final social-belief summary."
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "green locker",
+                  "belief_of_false_belief_agent": "blue locker",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.82,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ben": "blue locker",
+                "Ava": "blue locker",
+                "Dax": "blue locker",
+                "Faye": "green locker"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              {
+                "actual_location": "blue locker",
+                "belief_of_false_belief_agent": "blue locker"
+              }
+            ],
+            "accepted_revised_targets": [
+              {
+                "actual_location": "green locker",
+                "belief_of_false_belief_agent": "blue locker",
+                "trusted_agent": "Faye"
+              }
+            ],
+            "should_update": true,
+            "contradiction_expected": true,
+            "update_mode": "belief_track",
+            "canonical_initial_rule": "social_reasoning",
+            "canonical_revised_rule": "social_reasoning",
+            "expected_initial_confidence": 0.72,
+            "expected_revised_confidence": 0.82,
+            "cue_turn": 2,
+            "reliable_agent": "Faye",
+            "deceptive_agent": "Ava",
+            "false_belief_agent": "Dax",
+            "initial_location": "blue locker",
+            "actual_location": "green locker"
+          }
+        },
+        "notes": [
+          "Only one agent sees the move, so false-belief structure should remain."
+        ]
+      },
+      {
+        "branch_id": "social_miniworlds_0000__counterfactual__public",
+        "label": "public_information",
+        "changed_factor": "no_private_information",
+        "expected_revision_kind": "belief",
+        "spec": {
+          "task_id": "social_miniworlds_0000",
+          "family": "social_miniworlds",
+          "episode_type": "counterfactual_public_information",
+          "initial_context": {
+            "instruction": "Reason about who knows what, who has stale beliefs, and whose statement should be trusted.",
+            "setting": "A small group is trying to locate a badge.",
+            "agents": [
+              "Ben",
+              "Ava",
+              "Dax",
+              "Faye"
+            ]
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_shared_state",
+              "prompt": {
+                "request": "Track the initial state for the badge.",
+                "question": "Where is the badge, and where would Dax look right now?"
+              },
+              "event": {
+                "event_type": "shared_observation",
+                "location": "blue locker"
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "blue locker",
+                  "belief_of_false_belief_agent": "blue locker"
+                }
+              ],
+              "expected_confidence": 0.72,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ben": "blue locker",
+                "Ava": "blue locker",
+                "Dax": "blue locker",
+                "Faye": "blue locker"
+              },
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_public_move",
+              "prompt": {
+                "request": "Update the world state after the public move.",
+                "question": "Where is the badge now, and where does Dax think it is?"
+              },
+              "event": {
+                "event_type": "public_information_move",
+                "message": "The badge moved to the green locker, and everyone saw it."
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "green locker",
+                  "belief_of_false_belief_agent": "green locker",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.64,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ben": "green locker",
+                "Ava": "green locker",
+                "Dax": "green locker",
+                "Faye": "green locker"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            },
+            {
+              "turn_id": "turn_3_conflicting_testimony",
+              "prompt": {
+                "request": "Keep the now-public world state separate from deceptive testimony.",
+                "question": "Where is the badge, where does Dax think it is, and who is trustworthy?"
+              },
+              "event": {
+                "event_type": "conflicting_testimony",
+                "truthful_statement": {
+                  "phase": "statement",
+                  "agent": "Faye",
+                  "content": "The badge is now in the green locker.",
+                  "knowledge_access": "direct_observation",
+                  "incentive": "help_the_search"
+                },
+                "deceptive_statement": {
+                  "phase": "statement",
+                  "agent": "Ava",
+                  "content": "The badge is in the red locker.",
+                  "knowledge_access": "no_direct_observation",
+                  "incentive": "wins_if_others_search_the_wrong_place"
+                }
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "green locker",
+                  "belief_of_false_belief_agent": "green locker",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.78,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ben": "green locker",
+                "Ava": "green locker",
+                "Dax": "green locker",
+                "Faye": "green locker"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            },
+            {
+              "turn_id": "turn_4_final_query",
+              "prompt": {
+                "request": "Provide the final actual location, updated belief, and trusted agent.",
+                "question": "Where is the badge, where does Dax believe it is, and who should be trusted?"
+              },
+              "event": {
+                "event_type": "final_query",
+                "message": "Give the final social-belief summary."
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "green locker",
+                  "belief_of_false_belief_agent": "green locker",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.84,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ben": "green locker",
+                "Ava": "green locker",
+                "Dax": "green locker",
+                "Faye": "green locker"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              {
+                "actual_location": "blue locker",
+                "belief_of_false_belief_agent": "blue locker"
+              }
+            ],
+            "accepted_revised_targets": [
+              {
+                "actual_location": "green locker",
+                "belief_of_false_belief_agent": "green locker",
+                "trusted_agent": "Faye"
+              }
+            ],
+            "should_update": true,
+            "contradiction_expected": true,
+            "update_mode": "belief_track",
+            "canonical_initial_rule": "social_reasoning",
+            "canonical_revised_rule": "social_reasoning",
+            "expected_initial_confidence": 0.72,
+            "expected_revised_confidence": 0.84,
+            "cue_turn": 2,
+            "reliable_agent": "Faye",
+            "deceptive_agent": "Ava",
+            "false_belief_agent": "Dax",
+            "initial_location": "blue locker",
+            "actual_location": "green locker"
+          }
+        },
+        "notes": [
+          "Everyone sees the move, so the false-belief slot should collapse."
+        ]
+      }
+    ]
+  },
+  {
+    "bundle_id": "social_miniworlds_0001__counterfactual",
+    "task_id": "social_miniworlds_0001",
+    "family": "social_miniworlds",
+    "shared_structure": {
+      "base_question": "Does the model keep world state stable while changing only the agent's information state?",
+      "varying_factor": "private_information_access"
+    },
+    "shared_checks": [
+      {
+        "name": "initial_answer",
+        "path": "response.initial_answer",
+        "expected": {
+          "actual_location": "north room",
+          "belief_of_false_belief_agent": "north room"
+        }
+      },
+      {
+        "name": "actual_location",
+        "path": "response.revised_answer.actual_location",
+        "expected": "west room"
+      },
+      {
+        "name": "trusted_agent",
+        "path": "response.revised_answer.trusted_agent",
+        "expected": "Faye"
+      }
+    ],
+    "variant_path": "response.revised_answer",
+    "branches": [
+      {
+        "branch_id": "social_miniworlds_0001__counterfactual__private",
+        "label": "private_information",
+        "changed_factor": "one_agent_private_information",
+        "expected_revision_kind": "belief",
+        "spec": {
+          "task_id": "social_miniworlds_0001",
+          "family": "social_miniworlds",
+          "episode_type": "counterfactual_private_information",
+          "initial_context": {
+            "instruction": "Reason about who knows what, who has stale beliefs, and whose statement should be trusted.",
+            "setting": "A small group is trying to locate a key.",
+            "agents": [
+              "Ava",
+              "Faye",
+              "Ben"
+            ]
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_shared_state",
+              "prompt": {
+                "request": "Track the initial state for the key.",
+                "question": "Where is the key, and where would Ava look right now?"
+              },
+              "event": {
+                "event_type": "shared_observation",
+                "location": "north room"
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "north room",
+                  "belief_of_false_belief_agent": "north room"
+                }
+              ],
+              "expected_confidence": 0.72,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ava": "north room",
+                "Faye": "north room",
+                "Ben": "north room"
+              },
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_private_move",
+              "prompt": {
+                "request": "Update the world state after the private move.",
+                "question": "Where is the key now, and where does Ava still think it is?"
+              },
+              "event": {
+                "event_type": "private_information_move",
+                "message": "The key moved to the west room. Only Faye saw it."
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "west room",
+                  "belief_of_false_belief_agent": "north room",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.58,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ava": "north room",
+                "Faye": "west room",
+                "Ben": "north room"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            },
+            {
+              "turn_id": "turn_3_conflicting_testimony",
+              "prompt": {
+                "request": "Separate the true world state from stale agent belief under conflict.",
+                "question": "Where is the key, where does Ava think it is, and who is trustworthy?"
+              },
+              "event": {
+                "event_type": "conflicting_testimony",
+                "truthful_statement": {
+                  "phase": "statement",
+                  "agent": "Faye",
+                  "content": "The key is now in the west room.",
+                  "knowledge_access": "direct_observation",
+                  "incentive": "help_the_search"
+                },
+                "deceptive_statement": {
+                  "phase": "statement",
+                  "agent": "Ben",
+                  "content": "The key is in the east room.",
+                  "knowledge_access": "no_direct_observation",
+                  "incentive": "wins_if_others_search_the_wrong_place"
+                }
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "west room",
+                  "belief_of_false_belief_agent": "north room",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.74,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ava": "north room",
+                "Faye": "west room",
+                "Ben": "north room"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            },
+            {
+              "turn_id": "turn_4_final_query",
+              "prompt": {
+                "request": "Provide the final actual location, stale belief, and trusted agent.",
+                "question": "Where is the key, where does Ava believe it is, and who should be trusted?"
+              },
+              "event": {
+                "event_type": "final_query",
+                "message": "Give the final social-belief summary."
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "west room",
+                  "belief_of_false_belief_agent": "north room",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.82,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ava": "north room",
+                "Faye": "west room",
+                "Ben": "north room"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              {
+                "actual_location": "north room",
+                "belief_of_false_belief_agent": "north room"
+              }
+            ],
+            "accepted_revised_targets": [
+              {
+                "actual_location": "west room",
+                "belief_of_false_belief_agent": "north room",
+                "trusted_agent": "Faye"
+              }
+            ],
+            "should_update": true,
+            "contradiction_expected": true,
+            "update_mode": "belief_track",
+            "canonical_initial_rule": "social_reasoning",
+            "canonical_revised_rule": "social_reasoning",
+            "expected_initial_confidence": 0.72,
+            "expected_revised_confidence": 0.82,
+            "cue_turn": 2,
+            "reliable_agent": "Faye",
+            "deceptive_agent": "Ben",
+            "false_belief_agent": "Ava",
+            "initial_location": "north room",
+            "actual_location": "west room"
+          }
+        },
+        "notes": [
+          "Only one agent sees the move, so false-belief structure should remain."
+        ]
+      },
+      {
+        "branch_id": "social_miniworlds_0001__counterfactual__public",
+        "label": "public_information",
+        "changed_factor": "no_private_information",
+        "expected_revision_kind": "belief",
+        "spec": {
+          "task_id": "social_miniworlds_0001",
+          "family": "social_miniworlds",
+          "episode_type": "counterfactual_public_information",
+          "initial_context": {
+            "instruction": "Reason about who knows what, who has stale beliefs, and whose statement should be trusted.",
+            "setting": "A small group is trying to locate a key.",
+            "agents": [
+              "Ava",
+              "Faye",
+              "Ben"
+            ]
+          },
+          "turns": [
+            {
+              "turn_id": "turn_1_shared_state",
+              "prompt": {
+                "request": "Track the initial state for the key.",
+                "question": "Where is the key, and where would Ava look right now?"
+              },
+              "event": {
+                "event_type": "shared_observation",
+                "location": "north room"
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "north room",
+                  "belief_of_false_belief_agent": "north room"
+                }
+              ],
+              "expected_confidence": 0.72,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ava": "north room",
+                "Faye": "north room",
+                "Ben": "north room"
+              },
+              "expected_trust_top": null,
+              "notes": []
+            },
+            {
+              "turn_id": "turn_2_public_move",
+              "prompt": {
+                "request": "Update the world state after the public move.",
+                "question": "Where is the key now, and where does Ava think it is?"
+              },
+              "event": {
+                "event_type": "public_information_move",
+                "message": "The key moved to the west room, and everyone saw it."
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "west room",
+                  "belief_of_false_belief_agent": "west room",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.64,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ava": "west room",
+                "Faye": "west room",
+                "Ben": "west room"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            },
+            {
+              "turn_id": "turn_3_conflicting_testimony",
+              "prompt": {
+                "request": "Keep the now-public world state separate from deceptive testimony.",
+                "question": "Where is the key, where does Ava think it is, and who is trustworthy?"
+              },
+              "event": {
+                "event_type": "conflicting_testimony",
+                "truthful_statement": {
+                  "phase": "statement",
+                  "agent": "Faye",
+                  "content": "The key is now in the west room.",
+                  "knowledge_access": "direct_observation",
+                  "incentive": "help_the_search"
+                },
+                "deceptive_statement": {
+                  "phase": "statement",
+                  "agent": "Ben",
+                  "content": "The key is in the east room.",
+                  "knowledge_access": "no_direct_observation",
+                  "incentive": "wins_if_others_search_the_wrong_place"
+                }
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "west room",
+                  "belief_of_false_belief_agent": "west room",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.78,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ava": "west room",
+                "Faye": "west room",
+                "Ben": "west room"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            },
+            {
+              "turn_id": "turn_4_final_query",
+              "prompt": {
+                "request": "Provide the final actual location, updated belief, and trusted agent.",
+                "question": "Where is the key, where does Ava believe it is, and who should be trusted?"
+              },
+              "event": {
+                "event_type": "final_query",
+                "message": "Give the final social-belief summary."
+              },
+              "accepted_answers": [
+                {
+                  "actual_location": "west room",
+                  "belief_of_false_belief_agent": "west room",
+                  "trusted_agent": "Faye"
+                }
+              ],
+              "expected_confidence": 0.84,
+              "expected_rule": "belief_tracking",
+              "expected_attended_signals": [],
+              "expected_ignored_signals": [],
+              "expected_beliefs": {
+                "Ava": "west room",
+                "Faye": "west room",
+                "Ben": "west room"
+              },
+              "expected_trust_top": "Faye",
+              "notes": []
+            }
+          ],
+          "expected": {
+            "accepted_initial_targets": [
+              {
+                "actual_location": "north room",
+                "belief_of_false_belief_agent": "north room"
+              }
+            ],
+            "accepted_revised_targets": [
+              {
+                "actual_location": "west room",
+                "belief_of_false_belief_agent": "west room",
+                "trusted_agent": "Faye"
+              }
+            ],
+            "should_update": true,
+            "contradiction_expected": true,
+            "update_mode": "belief_track",
+            "canonical_initial_rule": "social_reasoning",
+            "canonical_revised_rule": "social_reasoning",
+            "expected_initial_confidence": 0.72,
+            "expected_revised_confidence": 0.84,
+            "cue_turn": 2,
+            "reliable_agent": "Faye",
+            "deceptive_agent": "Ben",
+            "false_belief_agent": "Ava",
+            "initial_location": "north room",
+            "actual_location": "west room"
+          }
+        },
+        "notes": [
+          "Everyone sees the move, so the false-belief slot should collapse."
+        ]
+      }
+    ]
+  }
+]

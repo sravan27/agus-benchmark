@@ -22,9 +22,12 @@ The clearest result from the first local-model runs is that **static accuracy an
 AGUS is not just another static reasoning dataset. It combines:
 
 - dynamic interactive evaluation
+- branching counterfactual coherence evaluation
 - adversarial curation against shallow solver probes
 - refinement and search-conditioned refinement of weak generators
 - interpretable failure categories such as `static_dynamic_gap`, `overconfident_error`, and `social_belief_confusion`
+
+AGUS v2 adds one especially judge-visible idea: **benchmarking coherence across nearby alternate futures**. Instead of evaluating only one observed trajectory, AGUS can now ask whether a model stays coherent when contradiction appears versus does not appear, when a representation shifts differently, or when private information is present in one branch but not another. In the current local results, Qwen also leads Llama on these counterfactual coherence metrics.
 
 ## What Static Evaluations Miss
 

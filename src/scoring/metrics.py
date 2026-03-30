@@ -544,3 +544,138 @@ def episode_cognitive_flexibility_score(sessions: list[dict[str, Any]]) -> float
             ]
         )
     return round(sum(metrics) / len(metrics), 4) if metrics else 0.0
+
+
+def _get_nested(payload: dict[str, Any], path: str) -> Any:
+    value: Any = payload
+    for part in path.split("."):
+        if isinstance(value, dict):
+            value = value.get(part)
+            continue
+        if isinstance(value, list):
+            try:
+                index = int(part)
+            except ValueError:
+                return None
+            if index < 0 or index >= len(value):
+                return None
+            value = value[index]
+            continue
+        return None
+    return value
+
+
+def counterfactual_update_fidelity(bundle_rows: list[dict[str, Any]]) -> float:
+    """Measure whether revision behavior matches the branch-specific counterfactual."""
+    scores: list[float] = []
+    for bundle in bundle_rows:
+        for branch in bundle.get("branches", []):
+            branch_kind = branch.get("expected_revision_kind", "belief")
+            session = branch["session"]
+            response = session["response"]
+            derived = session["derived"]
+            contradiction_expected = bool(session["expected"].get("contradiction_expected"))
+
+            if branch_kind == "none":
+                components = [
+                    1.0 if not derived["answer_changed"] else 0.0,
+                    1.0 if not derived["rule_changed"] else 0.0,
+                    1.0 if derived["revised_correct"] else 0.0,
+                ]
+            elif branch_kind == "rule":
+                components = [
+                    1.0 if derived["rule_changed"] or derived["answer_changed"] else 0.0,
+                    1.0 if response["contradiction_detected"] == contradiction_expected else 0.0,
+                    1.0 if derived["revised_correct"] else 0.0,
+                ]
+            elif branch_kind == "representation":
+                components = [
+                    1.0 if not derived["rule_changed"] else 0.0,
+                    1.0 if derived["answer_changed"] else 0.0,
+                    1.0 if derived["revised_correct"] else 0.0,
+                ]
+            else:
+                components = [
+                    1.0 if derived["belief_updated"] else 0.0,
+                    1.0 if response["contradiction_detected"] == contradiction_expected else 0.0,
+                    1.0 if derived["revised_correct"] else 0.0,
+                ]
+            scores.append(sum(components) / len(components))
+    return round(sum(scores) / len(scores), 4) if scores else 0.0
+
+
+def invariant_preservation_score(bundle_rows: list[dict[str, Any]]) -> float:
+    """Measure whether shared structure is preserved across nearby branches."""
+    scores: list[float] = []
+    for bundle in bundle_rows:
+        checks = bundle.get("shared_checks", [])
+        for branch in bundle.get("branches", []):
+            session = branch["session"]
+            for check in checks:
+                observed = _get_nested(session, check["path"])
+                scores.append(1.0 if exact_match(observed, check["expected"]) else 0.0)
+    return round(sum(scores) / len(scores), 4) if scores else 0.0
+
+
+def branch_belief_coherence(bundle_rows: list[dict[str, Any]]) -> float:
+    """Measure internal coherence inside each branch trajectory."""
+    scores: list[float] = []
+    for bundle in bundle_rows:
+        for branch in bundle.get("branches", []):
+            session = branch["session"]
+            if bundle["family"] == "social_miniworlds":
+                belief_trace = session["derived"].get("belief_consistency_trace", [])
+                belief_tail = belief_trace[-1] if belief_trace and belief_trace[-1] is not None else 0.0
+                trust_trace = session["derived"].get("trust_trace", [])
+                trust_ok = (
+                    1.0
+                    if trust_trace and trust_trace[-1] == session["expected"]["reliable_agent"]
+                    else 0.0
+                )
+                scores.append((float(belief_tail) + trust_ok + float(session["derived"]["revised_correct"])) / 3.0)
+                continue
+
+            initial_rule = _get_nested(session, "response.metadata.initial_rule_tag")
+            revised_rule = _get_nested(session, "response.metadata.revised_rule_tag")
+            expected_initial = session["expected"].get("canonical_initial_rule")
+            expected_revised = session["expected"].get("canonical_revised_rule")
+            components = [
+                1.0 if _rule_matches(str(initial_rule or ""), expected_initial) else 0.0,
+                1.0 if _rule_matches(str(revised_rule or ""), expected_revised) else 0.0,
+                1.0 if session["derived"]["revised_correct"] else 0.0,
+            ]
+            scores.append(sum(components) / len(components))
+    return round(sum(scores) / len(scores), 4) if scores else 0.0
+
+
+def cross_branch_consistency(bundle_rows: list[dict[str, Any]]) -> float:
+    """Measure whether outputs change when branch outcomes should change, and stay aligned otherwise."""
+    scores: list[float] = []
+    for bundle in bundle_rows:
+        branches = bundle.get("branches", [])
+        for idx, left in enumerate(branches):
+            for right in branches[idx + 1 :]:
+                left_expected = left["expected_final_target"]
+                right_expected = right["expected_final_target"]
+                left_observed = _get_nested(left["session"], bundle["variant_path"])
+                right_observed = _get_nested(right["session"], bundle["variant_path"])
+                expected_equal = exact_match(left_expected, right_expected)
+                observed_equal = exact_match(left_observed, right_observed)
+                scores.append(1.0 if expected_equal == observed_equal else 0.0)
+    return round(sum(scores) / len(scores), 4) if scores else 0.0
+
+
+def counterfactual_confidence_calibration(bundle_rows: list[dict[str, Any]]) -> float:
+    """Compare confidence movement against branch-specific expected confidence profiles."""
+    scores: list[float] = []
+    for bundle in bundle_rows:
+        for branch in bundle.get("branches", []):
+            observed = branch["session"]["response"].get("turn_confidences", [])
+            expected = branch.get("expected_turn_confidences", [])
+            if not observed or not expected:
+                continue
+            pairwise = []
+            for observed_value, expected_value in zip(observed, expected):
+                pairwise.append(1.0 - (float(observed_value) - float(expected_value)) ** 2)
+            scores.append(sum(pairwise) / len(pairwise))
+    return round(sum(scores) / len(scores), 4) if scores else 0.0

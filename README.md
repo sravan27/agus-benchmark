@@ -260,6 +260,33 @@ PYTHONPATH=. python -m src.cli.run_interactive_demo --project-root .
 
 The interactive demo saves a JSON artifact at `data/samples/interactive_demo_results.json` with session traces and dynamic metrics.
 
+## AGUS v2 Counterfactual Branching
+
+AGUS v2 adds a tighter coherence test on top of interactive evaluation. Instead of following only one observed trajectory, a model can now be evaluated across **2-4 nearby counterfactual continuations** of the same base episode.
+
+Current branching support includes:
+
+- `hidden_rule`
+- `shift_transfer`
+- `social_miniworlds`
+
+This makes it possible to ask whether the model:
+
+- updates only when contradiction truly appears
+- preserves invariants across nearby representation shifts
+- keeps world state stable while changing only the right agent beliefs
+
+Run the counterfactual demo:
+
+```bash
+PYTHONPATH=. python -m src.cli.run_counterfactual_branches \
+  --adapter mock-shallow \
+  --run-name agus_v2_counterfactual_demo \
+  --max-per-family 1
+```
+
+See [agus_v2_counterfactuals.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/agus_v2_counterfactuals.md) for the benchmark rationale.
+
 ## Local-First Model Evaluation
 
 AGUS Model Evaluation v1 is designed to work without paid APIs. The harness supports:

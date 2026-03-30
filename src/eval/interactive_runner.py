@@ -1125,9 +1125,8 @@ def make_placeholder_responder(seed: int = 101) -> TurnResponder:
     return respond
 
 
-def run_interactive_session(task: dict[str, Any], responder: TurnResponder) -> dict[str, Any]:
-    """Run an interactive session for one task."""
-    spec = build_interaction_spec(task)
+def run_episode_spec(spec: EpisodeSpec, responder: TurnResponder) -> dict[str, Any]:
+    """Run an interactive session from a prebuilt episode spec."""
     prior_turn_payloads: list[dict[str, Any]] = []
     turn_records: list[dict[str, Any]] = []
     turn_responses: list[TurnResponse] = []
@@ -1194,6 +1193,12 @@ def run_interactive_session(task: dict[str, Any], responder: TurnResponder) -> d
         "response": response.to_dict(),
         "derived": _derive_session_fields(spec, response, turn_records),
     }
+
+
+def run_interactive_session(task: dict[str, Any], responder: TurnResponder) -> dict[str, Any]:
+    """Run an interactive session for one task."""
+    spec = build_interaction_spec(task)
+    return run_episode_spec(spec, responder)
 
 
 def run_interactive_sessions(tasks: list[dict[str, Any]], responder_factory: Callable[[int], TurnResponder]) -> list[dict[str, Any]]:

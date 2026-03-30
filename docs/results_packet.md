@@ -66,6 +66,40 @@ So the current evidence is not "Qwen is simply better." The stronger claim is:
 
 **AGUS exposes different cognitive strengths than static accuracy does, and those strengths do not align perfectly with frozen-task performance.**
 
+## AGUS v2: Counterfactual Branching
+
+AGUS v2 extends the benchmark beyond ordinary interactive evaluation by creating **multiple nearby alternate futures from the same base episode**. Instead of asking whether a model can survive one observed trajectory, AGUS v2 asks whether the model stays coherent when one critical factor changes:
+
+- contradiction appears versus does not appear
+- the representation shifts through one codebook versus a nearby alternate codebook
+- one agent has private information versus everyone sees the same event
+
+This matters because a model can sometimes look competent on a single trajectory by reacting locally to prompts. Branching counterfactuals are a stronger test of whether the model is carrying a coherent internal task model across nearby possibilities.
+
+### Current AGUS v2 Results
+
+| Model | Update Fidelity | Invariant Preservation | Branch Belief Coherence | Cross-Branch Consistency | Counterfactual Confidence Calibration |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `llama3.1:8b` | 0.7222 | 0.7500 | 0.7037 | 1.0000 | 0.9561 |
+| `qwen2.5:7b` | 0.8333 | 0.8438 | 0.8542 | 1.0000 | 0.9717 |
+
+The pattern is consistent with AGUS v1:
+
+- Qwen remains stronger on adaptive coherence metrics
+- Llama remains stronger on frozen-task correctness
+
+That makes AGUS more compelling as a Learning-track benchmark. It now measures not only revision along one path, but also whether revision behavior stays coherent across tightly controlled alternate continuations.
+
+### Why This Goes Beyond Ordinary Interactive Evaluation
+
+Ordinary interactive evaluation can tell us whether a model updates after one stream of evidence. AGUS v2 can tell us whether the same model:
+
+- revises when contradiction truly appears but does not over-revise when it does not
+- preserves the latent rule across nearby remapping branches
+- keeps world state fixed while updating only the appropriate belief state in social branches
+
+That is a more AGI-relevant notion of coherence than answer quality on one path alone.
+
 ## Important Caveats
 
 - These are local-model results from two open models, not frontier closed-model evaluations.
@@ -73,6 +107,7 @@ So the current evidence is not "Qwen is simply better." The stronger claim is:
   - Llama: `0.66`
   - Qwen: `0.64`
 - Qwen is less brittle overall, but not uniformly more stable on every submetric. Its `confidence_volatility` is higher: `0.2772` versus `0.1012`.
+- AGUS v2 is promising, but the current counterfactual evidence still comes from the same two local models. It should be framed as a stronger benchmark design signal, not as a broad model ranking claim.
 
 ## Recommended Use In A Submission
 
@@ -80,8 +115,11 @@ The safest headline for AGUS today is:
 
 **AGUS distinguishes static competence from adaptive reasoning quality, and the first local-model runs already reveal a measurable tradeoff between them.**
 
+AGUS v2 strengthens that claim by showing that the same local models also differ in **counterfactual coherence across nearby alternate futures**, not just on one interactive trajectory.
+
 Supporting materials:
 
 - [local_model_findings.md](./local_model_findings.md)
 - [failure_gallery.md](./failure_gallery.md)
 - [key_claims.md](./key_claims.md)
+- [agus_v2_results.md](./agus_v2_results.md)
