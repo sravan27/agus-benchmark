@@ -1,0 +1,127 @@
+{
+  "overall": {
+    "pre_kept": 325,
+    "post_kept": 423,
+    "kept_delta": 98,
+    "pre_rejected": 110,
+    "post_rejected": 77,
+    "rejected_delta": -33
+  },
+  "by_family": {
+    "attention_distractors": {
+      "pre": {
+        "total": 100,
+        "kept": 0,
+        "reviewed": 51,
+        "rejected": 49,
+        "retention_rate": 0.0
+      },
+      "post": {
+        "total": 100,
+        "kept": 79,
+        "reviewed": 0,
+        "rejected": 21,
+        "retention_rate": 0.79
+      },
+      "retention_rate_delta": 0.79,
+      "avg_benchmark_signal_pre": 0.6337,
+      "avg_benchmark_signal_post": 0.8532,
+      "avg_benchmark_signal_delta": 0.2195,
+      "avg_trajectory_value_pre": 0.0,
+      "avg_trajectory_value_post": 1.0,
+      "avg_trajectory_value_delta": 1.0
+    },
+    "hidden_rule": {
+      "pre": {
+        "total": 100,
+        "kept": 74,
+        "reviewed": 0,
+        "rejected": 26,
+        "retention_rate": 0.74
+      },
+      "post": {
+        "total": 100,
+        "kept": 74,
+        "reviewed": 0,
+        "rejected": 26,
+        "retention_rate": 0.74
+      },
+      "retention_rate_delta": 0.0,
+      "avg_benchmark_signal_pre": 0.7505,
+      "avg_benchmark_signal_post": 0.7505,
+      "avg_benchmark_signal_delta": 0.0,
+      "avg_trajectory_value_pre": 0.0,
+      "avg_trajectory_value_post": 0.6,
+      "avg_trajectory_value_delta": 0.6
+    },
+    "metacog_revision": {
+      "pre": {
+        "total": 100,
+        "kept": 100,
+        "reviewed": 0,
+        "rejected": 0,
+        "retention_rate": 1.0
+      },
+      "post": {
+        "total": 100,
+        "kept": 100,
+        "reviewed": 0,
+        "rejected": 0,
+        "retention_rate": 1.0
+      },
+      "retention_rate_delta": 0.0,
+      "avg_benchmark_signal_pre": 0.8814,
+      "avg_benchmark_signal_post": 0.8814,
+      "avg_benchmark_signal_delta": 0.0,
+      "avg_trajectory_value_pre": 0.0,
+      "avg_trajectory_value_post": 0.6,
+      "avg_trajectory_value_delta": 0.6
+    },
+    "shift_transfer": {
+      "pre": {
+        "total": 100,
+        "kept": 55,
+        "reviewed": 14,
+        "rejected": 31,
+        "retention_rate": 0.55
+      },
+      "post": {
+        "total": 100,
+        "kept": 74,
+        "reviewed": 0,
+        "rejected": 26,
+        "retention_rate": 0.74
+      },
+      "retention_rate_delta": 0.19,
+      "avg_benchmark_signal_pre": 0.6707,
+      "avg_benchmark_signal_post": 0.7424,
+      "avg_benchmark_signal_delta": 0.0717,
+      "avg_trajectory_value_pre": 0.0,
+      "avg_trajectory_value_post": 0.8,
+      "avg_trajectory_value_delta": 0.8
+    },
+    "social_miniworlds": {
+      "pre": {
+        "total": 100,
+        "kept": 96,
+        "reviewed": 0,
+        "rejected": 4,
+        "retention_rate": 0.96
+      },
+      "post": {
+        "total": 100,
+        "kept": 96,
+        "reviewed": 0,
+        "rejected": 4,
+        "retention_rate": 0.96
+      },
+      "retention_rate_delta": 0.0,
+      "avg_benchmark_signal_pre": 0.9074,
+      "avg_benchmark_signal_post": 0.9074,
+      "avg_benchmark_signal_delta": 0.0,
+      "avg_trajectory_value_pre": 0.0,
+      "avg_trajectory_value_post": 1.0,
+      "avg_trajectory_value_delta": 1.0
+    }
+  }
+}

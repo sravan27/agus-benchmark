@@ -143,6 +143,64 @@ Outputs are written to `data/generated/refinement/`:
 - `refined_tasks.json`
 - `refined_curation_report.json`
 
+## Probe-Conditioned Generator Search
+
+AGUS now uses weak-solver probes not only to filter tasks and refine generators manually, but also to search over generator settings directly. This makes benchmark construction more systematic: candidate generator configurations are evaluated under adversarial curation, ranked, and compared using diagnostic signal rather than arbitrary tuning.
+
+Run the search:
+
+```bash
+PYTHONPATH=. python -m src.cli.run_search --count-per-config 24 --emit-best-batches
+```
+
+Outputs are written to `data/generated/search/`:
+
+- `search_results.json`
+- `best_generator_configs.json`
+- `search_summary.json`
+
+Optional best-batch exports are written under `data/generated/search/best_batches/`.
+
+The current search focuses on:
+
+- `attention_distractors`
+  - `distractor_diversity_level`
+  - `cue_delay_level`
+  - `anti_template_strength`
+  - `adversarial_query_mode`
+- `shift_transfer`
+  - `remap_composition_depth`
+  - `bridge_representation_mode`
+  - `anti_anchor_strength`
+  - `latent_rule_mix`
+
+## Search-Conditioned Refinement
+
+AGUS now closes the loop one step further: refinement can promote winning search configurations directly into the next generation pass.
+
+Run search-conditioned refinement:
+
+```bash
+PYTHONPATH=. python -m src.cli.run_refinement_cycle --mode search_conditioned
+```
+
+This mode:
+
+1. inspects curation failures
+2. loads existing search winners, or runs search if needed
+3. promotes the winning generator configs for targeted families
+4. regenerates refined tasks with those promoted configs
+5. reruns curation
+6. compares search-conditioned refinement against both the original benchmark and the prior manual refinement pass
+
+Additional outputs are written to `data/generated/refinement/`:
+
+- `search_conditioned_refinement_summary.json`
+- `search_promoted_configs.json`
+- `search_conditioned_pre_post_curation_comparison.json`
+
+This makes AGUS more adaptive as a benchmark-development pipeline because the same weak-solver pressure used for curation now also shapes future refinement decisions.
+
 ## Scoring Workflow
 
 The scoring harness supports:
@@ -179,6 +237,55 @@ PYTHONPATH=. python -m src.cli.run_interactive_demo --project-root .
 ```
 
 The interactive demo saves a JSON artifact at `data/samples/interactive_demo_results.json` with session traces and dynamic metrics.
+
+## Local-First Model Evaluation
+
+AGUS Model Evaluation v1 is designed to work without paid APIs. The harness supports:
+
+- deterministic mock adapters for validation and CI
+- local adapters for Ollama-style inference
+- resumable run directories for overnight local benchmarking
+- structured artifacts for scores, traces, progress, and failures
+
+Run a local mock baseline:
+
+```bash
+PYTHONPATH=. python -m src.cli.run_model_eval --adapter mock-noisy --run-name mock_noisy_demo
+```
+
+Run a balanced smoke test across families:
+
+```bash
+PYTHONPATH=. python -m src.cli.run_model_eval \
+  --adapter mock-noisy \
+  --run-name mock_balanced_smoke \
+  --balanced \
+  --max-tasks 25 \
+  --per-family-max 5
+```
+
+Run against a local Ollama model:
+
+```bash
+PYTHONPATH=. python -m src.cli.run_model_eval \
+  --adapter ollama \
+  --model llama3.1:8b \
+  --run-name ollama_llama31 \
+  --resume
+```
+
+Each run writes a dedicated folder under `data/evals/<run_name>/` with:
+
+- `config.json`
+- `predictions.jsonl`
+- `interactive_sessions.jsonl`
+- `static_summary.json`
+- `interactive_summary.json`
+- `aggregate_summary.json`
+- `failure_cases.json`
+- `progress.json`
+
+Balanced runs report planned and completed work by family, and `progress.json` is driven by real completed static evaluations plus real completed interactive sessions. This keeps the benchmark usable on an M2 Max for overnight local runs while preserving a clean path for future optional API adapters.
 
 Supported interactive families now include:
 
@@ -238,6 +345,19 @@ This makes AGUS iterative rather than one-shot. Instead of freezing an initial s
 
 In practice, this reduces templatedness, improves transfer depth, and makes the benchmark development process itself easier to defend to Kaggle judges and researchers.
 
+## Why Probe-Conditioned Search Matters
+
+This search layer makes AGUS less dependent on one-off manual refinement. Generator settings are now evaluated by how much diagnostic pressure they create under the benchmark’s own weak-solver probes.
+
+That matters because it means AGUS development is guided by:
+
+- shortcut resistance
+- adaptive-cognition signal
+- curation-aware retention tradeoffs
+- family-specific discriminative value
+
+rather than by arbitrary intuition or one static generator configuration.
+
 ## Benchmark Philosophy
 
 AGUS is designed around **adaptive generalization under shift**:
@@ -249,4 +369,4 @@ AGUS is designed around **adaptive generalization under shift**:
 - social reasoning should require belief tracking and incentive inference
 - interactive evaluation should reward belief change when the evidence warrants it
 
-For more detail, see [benchmark_design.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/measuring_agi_project/docs/benchmark_design.md) and [research_note.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/measuring_agi_project/docs/research_note.md).
+For more detail, see [benchmark_design.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/benchmark_design.md) and [research_note.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/research_note.md).

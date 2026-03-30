@@ -56,6 +56,7 @@ class AttentionDistractorConfig:
     anti_template_strength: int = 1
     distractor_diversity_level: int = 2
     cue_delay_level: int = 1
+    adversarial_query_mode: str = "confusable"
 
 
 def _sequence_overlap(left: list[int], right: list[int]) -> float:
@@ -128,8 +129,9 @@ def _choose_query_row(
     rule: RuleSpec,
     domain_size: int,
     anti_template_strength: int,
+    adversarial_query_mode: str,
 ) -> tuple[list[int], float]:
-    if anti_template_strength <= 0:
+    if anti_template_strength <= 0 or adversarial_query_mode == "first_candidate":
         return (candidates[0], 0.0)
 
     def score(row: list[int]) -> tuple[float, int, int]:
@@ -144,10 +146,20 @@ def _choose_query_row(
                 best_overlap = max(best_overlap, overlap)
                 if overlap >= 0.5:
                     mismatch_bonus = 1
-        return (best_overlap + mismatch_bonus + (0.1 * anti_template_strength), unique_bonus, sum(target))
+        if adversarial_query_mode == "max_confusable":
+            confusion_bonus = 0.4
+        elif adversarial_query_mode == "contrastive_confusable":
+            confusion_bonus = 0.25 if mismatch_bonus else -0.1
+        else:
+            confusion_bonus = 0.15
+        return (
+            best_overlap + mismatch_bonus + confusion_bonus + (0.1 * anti_template_strength),
+            unique_bonus,
+            sum(target),
+        )
 
     indexed = list(enumerate(candidates))
-    best_idx, best_row = max(indexed, key=lambda item: score(item[1]))
+    _best_idx, best_row = max(indexed, key=lambda item: score(item[1]))
     best_score = score(best_row)[0]
     return (best_row, round(best_score, 4))
 
@@ -217,9 +229,12 @@ def generate_attention_distractor_tasks(cfg: AttentionDistractorConfig) -> list[
             allowed=allowed_rules,
             domain_size=cfg.domain_size,
         )
+        candidate_pool_size = 5
+        if cfg.anti_template_strength > 0:
+            candidate_pool_size = 10 if cfg.adversarial_query_mode == "first_candidate" else 12
         rows = sample_unique_sequences(
             rng,
-            12 if cfg.anti_template_strength > 0 else 5,
+            candidate_pool_size,
             cfg.sequence_length,
             cfg.domain_size,
         )
@@ -231,6 +246,7 @@ def generate_attention_distractor_tasks(cfg: AttentionDistractorConfig) -> list[
             rule=signal_rule,
             domain_size=cfg.domain_size,
             anti_template_strength=cfg.anti_template_strength,
+            adversarial_query_mode=cfg.adversarial_query_mode,
         )
 
         styles = _style_pool(cfg.distractor_diversity_level)
@@ -310,6 +326,7 @@ def generate_attention_distractor_tasks(cfg: AttentionDistractorConfig) -> list[
                 "anti_template_strength": cfg.anti_template_strength,
                 "distractor_diversity_level": cfg.distractor_diversity_level,
                 "cue_delay_level": cue_delay,
+                "adversarial_query_mode": cfg.adversarial_query_mode,
             },
             latent_rule_summary=(
                 "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, "

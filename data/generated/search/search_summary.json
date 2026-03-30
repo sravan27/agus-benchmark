@@ -1,0 +1,280 @@
+{
+  "weights": {
+    "average_benchmark_signal": 0.32,
+    "kept_rate": 0.24,
+    "shortcut_resistance_index": 0.16,
+    "family_specific_signal": 0.14,
+    "average_trajectory_value": 0.08,
+    "survival_rate": 0.06
+  },
+  "families": {
+    "attention_distractors": {
+      "family": "attention_distractors",
+      "winner": {
+        "config_id": "attn_03",
+        "label": "diverse_hard",
+        "config": {
+          "count": 24,
+          "seed": 51,
+          "anti_template_strength": 2,
+          "distractor_diversity_level": 3,
+          "cue_delay_level": 1,
+          "adversarial_query_mode": "max_confusable"
+        },
+        "search_metrics": {
+          "kept_rate": 0.8333,
+          "review_rate": 0.0,
+          "reject_rate": 0.1667,
+          "average_benchmark_signal": 0.8929,
+          "average_trajectory_value": 1.0,
+          "shortcut_resistance_index": 0.7538,
+          "family_specific_signal": 0.8518,
+          "average_baseline_solve_rate": 0.0,
+          "curation_weighted_score": 0.8556,
+          "family_specific_metric": "distractor_discrimination_score",
+          "top_rejection_reasons": {
+            "too_templated": 4
+          }
+        },
+        "why_it_won": [
+          {
+            "metric": "kept_rate",
+            "delta_vs_family_mean": 0.0555
+          },
+          {
+            "metric": "average_benchmark_signal",
+            "delta_vs_family_mean": 0.037
+          },
+          {
+            "metric": "curation_weighted_score",
+            "delta_vs_family_mean": 0.0301
+          }
+        ],
+        "tradeoffs": [
+          "balanced signal and retention"
+        ]
+      },
+      "fallback": {
+        "config_id": "attn_04",
+        "label": "diverse_delayed_hard",
+        "config": {
+          "count": 24,
+          "seed": 51,
+          "anti_template_strength": 2,
+          "distractor_diversity_level": 3,
+          "cue_delay_level": 2,
+          "adversarial_query_mode": "max_confusable"
+        },
+        "search_metrics": {
+          "kept_rate": 0.8333,
+          "review_rate": 0.0,
+          "reject_rate": 0.1667,
+          "average_benchmark_signal": 0.8929,
+          "average_trajectory_value": 1.0,
+          "shortcut_resistance_index": 0.7538,
+          "family_specific_signal": 0.8519,
+          "average_baseline_solve_rate": 0.0,
+          "curation_weighted_score": 0.8556,
+          "family_specific_metric": "distractor_discrimination_score",
+          "top_rejection_reasons": {
+            "too_templated": 4
+          }
+        }
+      },
+      "top_3": [
+        {
+          "config_id": "attn_03",
+          "label": "diverse_hard",
+          "search_metrics": {
+            "kept_rate": 0.8333,
+            "review_rate": 0.0,
+            "reject_rate": 0.1667,
+            "average_benchmark_signal": 0.8929,
+            "average_trajectory_value": 1.0,
+            "shortcut_resistance_index": 0.7538,
+            "family_specific_signal": 0.8518,
+            "average_baseline_solve_rate": 0.0,
+            "curation_weighted_score": 0.8556,
+            "family_specific_metric": "distractor_discrimination_score",
+            "top_rejection_reasons": {
+              "too_templated": 4
+            }
+          }
+        },
+        {
+          "config_id": "attn_04",
+          "label": "diverse_delayed_hard",
+          "search_metrics": {
+            "kept_rate": 0.8333,
+            "review_rate": 0.0,
+            "reject_rate": 0.1667,
+            "average_benchmark_signal": 0.8929,
+            "average_trajectory_value": 1.0,
+            "shortcut_resistance_index": 0.7538,
+            "family_specific_signal": 0.8519,
+            "average_baseline_solve_rate": 0.0,
+            "curation_weighted_score": 0.8556,
+            "family_specific_metric": "distractor_discrimination_score",
+            "top_rejection_reasons": {
+              "too_templated": 4
+            }
+          }
+        },
+        {
+          "config_id": "attn_05",
+          "label": "contrastive_delayed",
+          "search_metrics": {
+            "kept_rate": 0.8333,
+            "review_rate": 0.0,
+            "reject_rate": 0.1667,
+            "average_benchmark_signal": 0.8929,
+            "average_trajectory_value": 1.0,
+            "shortcut_resistance_index": 0.7538,
+            "family_specific_signal": 0.8519,
+            "average_baseline_solve_rate": 0.0,
+            "curation_weighted_score": 0.8556,
+            "family_specific_metric": "distractor_discrimination_score",
+            "top_rejection_reasons": {
+              "too_templated": 4
+            }
+          }
+        }
+      ]
+    },
+    "shift_transfer": {
+      "family": "shift_transfer",
+      "winner": {
+        "config_id": "shift_04",
+        "label": "attribute_bridge_hard",
+        "config": {
+          "count": 24,
+          "seed": 23,
+          "anti_template_strength": 2,
+          "remap_composition_depth": 3,
+          "bridge_representation_mode": "attribute_bridge",
+          "anti_anchor_strength": 2,
+          "latent_rule_mix": "transfer_hard"
+        },
+        "search_metrics": {
+          "kept_rate": 0.875,
+          "review_rate": 0.0,
+          "reject_rate": 0.125,
+          "average_benchmark_signal": 0.7907,
+          "average_trajectory_value": 0.8,
+          "shortcut_resistance_index": 0.6945,
+          "family_specific_signal": 0.75,
+          "average_baseline_solve_rate": 0.0,
+          "curation_weighted_score": 0.7956,
+          "family_specific_metric": "transfer_depth_score",
+          "top_rejection_reasons": {
+            "too_templated": 3
+          }
+        },
+        "why_it_won": [
+          {
+            "metric": "kept_rate",
+            "delta_vs_family_mean": 0.1806
+          },
+          {
+            "metric": "curation_weighted_score",
+            "delta_vs_family_mean": 0.0671
+          },
+          {
+            "metric": "average_trajectory_value",
+            "delta_vs_family_mean": 0.0583
+          }
+        ],
+        "tradeoffs": [
+          "balanced signal and retention"
+        ]
+      },
+      "fallback": {
+        "config_id": "shift_05",
+        "label": "mixed_bridge_hard",
+        "config": {
+          "count": 24,
+          "seed": 23,
+          "anti_template_strength": 2,
+          "remap_composition_depth": 3,
+          "bridge_representation_mode": "mixed",
+          "anti_anchor_strength": 2,
+          "latent_rule_mix": "transfer_hard"
+        },
+        "search_metrics": {
+          "kept_rate": 0.875,
+          "review_rate": 0.0,
+          "reject_rate": 0.125,
+          "average_benchmark_signal": 0.7907,
+          "average_trajectory_value": 0.8,
+          "shortcut_resistance_index": 0.6945,
+          "family_specific_signal": 0.75,
+          "average_baseline_solve_rate": 0.0,
+          "curation_weighted_score": 0.7956,
+          "family_specific_metric": "transfer_depth_score",
+          "top_rejection_reasons": {
+            "too_templated": 3
+          }
+        }
+      },
+      "top_3": [
+        {
+          "config_id": "shift_04",
+          "label": "attribute_bridge_hard",
+          "search_metrics": {
+            "kept_rate": 0.875,
+            "review_rate": 0.0,
+            "reject_rate": 0.125,
+            "average_benchmark_signal": 0.7907,
+            "average_trajectory_value": 0.8,
+            "shortcut_resistance_index": 0.6945,
+            "family_specific_signal": 0.75,
+            "average_baseline_solve_rate": 0.0,
+            "curation_weighted_score": 0.7956,
+            "family_specific_metric": "transfer_depth_score",
+            "top_rejection_reasons": {
+              "too_templated": 3
+            }
+          }
+        },
+        {
+          "config_id": "shift_05",
+          "label": "mixed_bridge_hard",
+          "search_metrics": {
+            "kept_rate": 0.875,
+            "review_rate": 0.0,
+            "reject_rate": 0.125,
+            "average_benchmark_signal": 0.7907,
+            "average_trajectory_value": 0.8,
+            "shortcut_resistance_index": 0.6945,
+            "family_specific_signal": 0.75,
+            "average_baseline_solve_rate": 0.0,
+            "curation_weighted_score": 0.7956,
+            "family_specific_metric": "transfer_depth_score",
+            "top_rejection_reasons": {
+              "too_templated": 3
+            }
+          }
+        },
+        {
+          "config_id": "shift_01",
+          "label": "alias_chain_mid",
+          "search_metrics": {
+            "kept_rate": 0.5833,
+            "review_rate": 0.0,
+            "reject_rate": 0.4167,
+            "average_benchmark_signal": 0.7629,
+            "average_trajectory_value": 0.8,
+            "shortcut_resistance_index": 0.6945,
+            "family_specific_signal": 0.75,
+            "average_baseline_solve_rate": 0.0,
+            "curation_weighted_score": 0.6992,
+            "family_specific_metric": "transfer_depth_score",
+            "top_rejection_reasons": {
+              "too_templated": 10
+            }
+          }
+        }
+      ]
+    }
+  }
+}

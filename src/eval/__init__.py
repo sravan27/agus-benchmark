@@ -1,2 +1,1 @@
-"""Interactive evaluation utilities for AGUS."""
-
+"""Evaluation utilities for AGUS."""

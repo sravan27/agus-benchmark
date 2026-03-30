@@ -287,6 +287,89 @@ The benchmark is therefore not just:
 
 It is iteratively hardened using observed weak-solver failures, which makes its retained tasks more discriminative and its design process more transparent.
 
+## Probe-Conditioned Generator Search
+
+AGUS now adds a third layer after generation and curation: generator search. Rather than assuming that one manually chosen generator setting is best, the benchmark can now evaluate multiple compact, deterministic generator configurations and rank them by diagnostic value.
+
+This search is not model hyperparameter tuning. It is benchmark-construction search. Candidate generator settings are scored by how they behave under adversarial curation, with emphasis on:
+
+- kept rate after curation
+- average benchmark signal
+- shortcut resistance
+- trajectory value
+- family-specific discrimination
+
+The current search focuses on the two families where generator design matters most for discriminative validity:
+
+- `attention_distractors`
+  - distractor diversity
+  - cue delay
+  - anti-template strength
+  - adversarial query selection mode
+- `shift_transfer`
+  - remap composition depth
+  - bridge representation mode
+  - anti-anchor strength
+  - latent rule mix
+
+### Why This Improves Defensibility
+
+Probe-conditioned search makes AGUS more systematic in a way that should be legible to both Kaggle judges and researchers. The benchmark is no longer just:
+
+1. generated
+2. filtered
+3. lightly hand-tuned
+
+It is now:
+
+1. generated under several explicit candidate designs
+2. challenged by weak heuristic probes
+3. ranked by discriminative signal and shortcut resistance
+4. updated using the strongest generator settings
+
+That makes the benchmark-development loop more transparent, more reproducible, and less dependent on informal taste.
+
+## Search-Conditioned Refinement
+
+AGUS now supports a search-conditioned refinement mode that promotes winning generator configurations directly into the next refinement pass. This means the benchmark-development loop is no longer:
+
+1. generate
+2. curate
+3. manually refine
+
+It can now be:
+
+1. generate
+2. curate
+3. search generator settings under weak-solver pressure
+4. promote the winning configurations
+5. regenerate and re-curate
+6. compare the result against the prior manual refinement baseline
+
+The point is not to optimize for one narrow leaderboard behavior. The point is to make benchmark construction itself more adaptive and more evidence-driven.
+
+### Why This Strengthens The Benchmark Story
+
+For judges and researchers, this matters because AGUS can now show a fully closed-loop development process:
+
+- weak baselines expose failure modes
+- search explores generator settings that increase diagnostic pressure
+- refinement adopts the winning settings
+- the benchmark reports whether this actually improves retained signal relative to prior manual refinement
+
+That makes AGUS easier to defend as a benchmark-development methodology rather than only as a static benchmark artifact.
+
+## Local-First Model Evaluation
+
+AGUS evaluation is intentionally local-first. Under realistic research budgets, the benchmark needs to remain runnable without paid frontier APIs, so the evaluation harness supports deterministic mock adapters, local Ollama-style inference, resumable run directories, and structured failure extraction.
+
+This matters for benchmark legitimacy because it separates two questions:
+
+1. is the benchmark construction pipeline sound and reproducible?
+2. how do particular models perform on it?
+
+The current harness lets us make strong claims about the first question even before running large frontier-model sweeps. It also makes AGUS practical on a single workstation by supporting overnight runs, incremental resume, and artifact-level inspection of where a model failed statically or during interactive revision.
+
 ## Why This Feels Different
 
 AGUS is not just a bundle of static logic questions. Its novelty comes from **sequencing cognitive pressures**:

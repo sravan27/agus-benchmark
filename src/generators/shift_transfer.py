@@ -33,6 +33,9 @@ class ShiftTransferConfig:
     examples_per_task: int = 4
     anti_template_strength: int = 1
     remap_composition_depth: int = 2
+    bridge_representation_mode: str = "alias_chain"
+    anti_anchor_strength: int = 1
+    latent_rule_mix: str = "anchor_resistant"
 
 
 def _token_overlap(left: list[str], right: list[str]) -> float:
@@ -40,15 +43,38 @@ def _token_overlap(left: list[str], right: list[str]) -> float:
     return matches / max(len(left), len(right))
 
 
-def _sample_transfer_rule(rng, *, domain_size: int, anti_template_strength: int) -> RuleSpec:
-    if anti_template_strength <= 0:
+def _sample_transfer_rule(
+    rng,
+    *,
+    domain_size: int,
+    anti_anchor_strength: int,
+    latent_rule_mix: str,
+) -> RuleSpec:
+    if latent_rule_mix == "baseline":
         allowed = ("add_const", "rotate_left", "index_offset", "mirror_anchor")
+    elif latent_rule_mix == "transfer_hard":
+        allowed = ("reverse_add", "mirror_anchor", "index_offset")
     else:
         allowed = ("index_offset", "mirror_anchor", "reverse_add", "rotate_left")
+    if anti_anchor_strength <= 0 and latent_rule_mix != "transfer_hard":
+        allowed = ("add_const", "rotate_left", "index_offset", "mirror_anchor")
     return random_rule(rng, allowed=allowed, domain_size=domain_size)
 
 
-def _build_bridge_vocab(source_vocab: list[str], stems: list[str], task_index: int) -> list[str]:
+def _build_bridge_vocab(
+    source_vocab: list[str],
+    stems: list[str],
+    task_index: int,
+    *,
+    mode: str,
+) -> list[str] | None:
+    if mode == "none":
+        return None
+    if mode == "attribute_bridge":
+        return [
+            f"{stems[idx]}-{source_vocab[(idx + task_index) % len(source_vocab)][-2:]}"
+            for idx in range(len(source_vocab))
+        ]
     return [
         f"{stems[idx]}::{source_vocab[(idx + task_index) % len(source_vocab)][:2]}"
         for idx in range(len(source_vocab))
@@ -65,6 +91,11 @@ def _build_transfer_vocab(
     task_index: int,
 ) -> list[str]:
     if depth <= 1 or bridge_vocab is None:
+        if profile == "attribute_bridge":
+            return [
+                f"{base_transfer[idx]}-{source_vocab[(idx + task_index + 1) % len(source_vocab)][:2]}"
+                for idx in range(len(base_transfer))
+            ]
         return list(base_transfer)
 
     if profile == "composed_alias":
@@ -83,12 +114,21 @@ def _build_transfer_vocab(
     return tokens
 
 
-def _row_anchor_penalty(rule: RuleSpec, row: list[int], domain_size: int) -> tuple[int, int, int]:
+def _row_anchor_penalty(
+    rule: RuleSpec,
+    row: list[int],
+    domain_size: int,
+    *,
+    anti_anchor_strength: int,
+) -> tuple[float, int, int]:
     target = rule.apply(row, domain_size)
-    differs_from_identity = int(target != row)
-    differs_from_reverse = int(target != list(reversed(row)))
+    identity_overlap = _token_overlap([str(value) for value in row], [str(value) for value in target])
+    reverse_overlap = _token_overlap([str(value) for value in reversed(row)], [str(value) for value in target])
+    differs_from_identity = 1.0 - identity_overlap
+    differs_from_reverse = 1.0 - reverse_overlap
     uniqueness = len(set(target))
-    return (differs_from_identity + differs_from_reverse, uniqueness, sum(target))
+    anchor_weight = max(1, anti_anchor_strength)
+    return ((differs_from_identity + differs_from_reverse) * anchor_weight, uniqueness, sum(target))
 
 
 def _choose_query_rows(
@@ -96,19 +136,19 @@ def _choose_query_rows(
     *,
     rule: RuleSpec,
     domain_size: int,
-    anti_template_strength: int,
+    anti_anchor_strength: int,
 ) -> tuple[list[list[int]], list[int], list[int], list[int]]:
     example_rows = rows[:4]
     source_query = rows[4]
     bridge_query = rows[5] if len(rows) > 5 else rows[4]
     transfer_query = rows[6] if len(rows) > 6 else rows[5]
 
-    if anti_template_strength <= 0:
+    if anti_anchor_strength <= 0:
         return (example_rows, source_query, bridge_query, transfer_query)
 
     ranked = sorted(
         rows[4:],
-        key=lambda row: _row_anchor_penalty(rule, row, domain_size),
+        key=lambda row: _row_anchor_penalty(rule, row, domain_size, anti_anchor_strength=anti_anchor_strength),
         reverse=True,
     )
     source_query = ranked[0]
@@ -123,15 +163,24 @@ def generate_shift_transfer_tasks(cfg: ShiftTransferConfig) -> list[dict]:
     tasks: list[dict] = []
 
     for idx in range(cfg.count):
-        rule = _sample_transfer_rule(rng, domain_size=cfg.domain_size, anti_template_strength=cfg.anti_template_strength)
+        effective_anti_anchor = max(cfg.anti_anchor_strength, cfg.anti_template_strength)
+        rule = _sample_transfer_rule(
+            rng,
+            domain_size=cfg.domain_size,
+            anti_anchor_strength=effective_anti_anchor,
+            latent_rule_mix=cfg.latent_rule_mix,
+        )
         source_vocab = list(BASE_VOCABS[idx % len(BASE_VOCABS)])
         base_transfer = list(TRANSFER_VOCABS[idx % len(TRANSFER_VOCABS)])
         bridge_stems = list(BRIDGE_STEMS[idx % len(BRIDGE_STEMS)])
-        remap_profile = "composed_alias" if idx % 2 == 0 else "attribute_swap"
+        remap_profile = "composed_alias" if cfg.bridge_representation_mode == "alias_chain" else "attribute_bridge"
+        if cfg.bridge_representation_mode == "mixed":
+            remap_profile = "composed_alias" if idx % 2 == 0 else "attribute_bridge"
 
         bridge_vocab = None
         if cfg.remap_composition_depth > 1:
-            bridge_vocab = _build_bridge_vocab(source_vocab, bridge_stems, idx)
+            bridge_mode = cfg.bridge_representation_mode if cfg.bridge_representation_mode != "mixed" else remap_profile
+            bridge_vocab = _build_bridge_vocab(source_vocab, bridge_stems, idx, mode=bridge_mode)
         transfer_vocab = _build_transfer_vocab(
             source_vocab,
             base_transfer,
@@ -141,7 +190,7 @@ def generate_shift_transfer_tasks(cfg: ShiftTransferConfig) -> list[dict]:
             task_index=idx,
         )
 
-        row_count = cfg.examples_per_task + 5 if cfg.anti_template_strength > 0 else cfg.examples_per_task + 2
+        row_count = cfg.examples_per_task + 5 if effective_anti_anchor > 0 else cfg.examples_per_task + 2
         rows = sample_unique_sequences(
             rng,
             row_count,
@@ -152,7 +201,7 @@ def generate_shift_transfer_tasks(cfg: ShiftTransferConfig) -> list[dict]:
             rows,
             rule=rule,
             domain_size=cfg.domain_size,
-            anti_template_strength=cfg.anti_template_strength,
+            anti_anchor_strength=effective_anti_anchor,
         )
 
         examples = [
@@ -171,7 +220,11 @@ def generate_shift_transfer_tasks(cfg: ShiftTransferConfig) -> list[dict]:
         transfer_target = sequence_to_tokens(rule.apply(transfer_query, cfg.domain_size), transfer_vocab)
 
         transfer_overlap = _token_overlap(source_target, transfer_target)
-        difficulty = "hard" if cfg.remap_composition_depth > 1 or rule.name in {"index_offset", "mirror_anchor", "reverse_add"} else "medium"
+        difficulty = (
+            "hard"
+            if cfg.remap_composition_depth > 1 or rule.name in {"index_offset", "mirror_anchor", "reverse_add"}
+            else "medium"
+        )
 
         query = {
             "source_query": {"input": sequence_to_tokens(source_query, source_vocab)},
@@ -208,8 +261,11 @@ def generate_shift_transfer_tasks(cfg: ShiftTransferConfig) -> list[dict]:
                 "bridge_vocab": bridge_vocab,
                 "transfer_vocab": transfer_vocab,
                 "remap_profile": remap_profile,
+                "bridge_representation_mode": cfg.bridge_representation_mode,
                 "remap_composition_depth": cfg.remap_composition_depth,
                 "anti_template_strength": cfg.anti_template_strength,
+                "anti_anchor_strength": effective_anti_anchor,
+                "latent_rule_mix": cfg.latent_rule_mix,
                 "source_transfer_overlap": round(transfer_overlap, 4),
             },
             latent_rule_summary=(

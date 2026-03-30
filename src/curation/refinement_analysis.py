@@ -160,14 +160,17 @@ def build_pre_post_curation_comparison(
 ) -> dict[str, Any]:
     """Compare curation outcomes before and after a refinement cycle."""
 
-    def family_score_map(report: dict[str, Any]) -> dict[str, list[float]]:
+    def family_metric_map(report: dict[str, Any], metric_name: str) -> dict[str, list[float]]:
         grouped: defaultdict[str, list[float]] = defaultdict(list)
         for row in report["task_index"]:
-            grouped[row["family"]].append(float(row["benchmark_signal_score"]))
+            if metric_name in row:
+                grouped[row["family"]].append(float(row[metric_name]))
         return grouped
 
-    pre_scores = family_score_map(pre_report)
-    post_scores = family_score_map(post_report)
+    pre_scores = family_metric_map(pre_report, "benchmark_signal_score")
+    post_scores = family_metric_map(post_report, "benchmark_signal_score")
+    pre_trajectory = family_metric_map(pre_report, "trajectory_value_score")
+    post_trajectory = family_metric_map(post_report, "trajectory_value_score")
     family_names = sorted(set(pre_report["per_family_retention_rates"]) | set(post_report["per_family_retention_rates"]))
     by_family: dict[str, Any] = {}
 
@@ -176,8 +179,12 @@ def build_pre_post_curation_comparison(
         post_retention = post_report["per_family_retention_rates"].get(family, {})
         pre_family_scores = pre_scores.get(family, [])
         post_family_scores = post_scores.get(family, [])
+        pre_family_trajectory = pre_trajectory.get(family, [])
+        post_family_trajectory = post_trajectory.get(family, [])
         pre_avg_signal = (sum(pre_family_scores) / len(pre_family_scores)) if pre_family_scores else 0.0
         post_avg_signal = (sum(post_family_scores) / len(post_family_scores)) if post_family_scores else 0.0
+        pre_avg_trajectory = (sum(pre_family_trajectory) / len(pre_family_trajectory)) if pre_family_trajectory else 0.0
+        post_avg_trajectory = (sum(post_family_trajectory) / len(post_family_trajectory)) if post_family_trajectory else 0.0
         by_family[family] = {
             "pre": pre_retention,
             "post": post_retention,
@@ -185,6 +192,9 @@ def build_pre_post_curation_comparison(
             "avg_benchmark_signal_pre": round(pre_avg_signal, 4),
             "avg_benchmark_signal_post": round(post_avg_signal, 4),
             "avg_benchmark_signal_delta": round(post_avg_signal - pre_avg_signal, 4),
+            "avg_trajectory_value_pre": round(pre_avg_trajectory, 4),
+            "avg_trajectory_value_post": round(post_avg_trajectory, 4),
+            "avg_trajectory_value_delta": round(post_avg_trajectory - pre_avg_trajectory, 4),
         }
 
     return {
@@ -197,4 +207,75 @@ def build_pre_post_curation_comparison(
             "rejected_delta": post_report["rejected_count"] - pre_report["rejected_count"],
         },
         "by_family": by_family,
+    }
+
+
+def load_best_generator_configs(
+    best_configs_path: Path,
+    *,
+    target_families: tuple[str, ...] = TARGET_FAMILIES,
+) -> dict[str, dict[str, Any]]:
+    """Load winning generator configs from search artifacts."""
+    payload = load_json(best_configs_path)
+    promoted: dict[str, dict[str, Any]] = {}
+    for family in target_families:
+        if family not in payload:
+            continue
+        winner = payload[family]["winner"]
+        promoted[family] = {
+            "config_id": winner["config_id"],
+            "label": winner["label"],
+            "config": dict(winner["config"]),
+            "search_metrics": dict(winner["search_metrics"]),
+        }
+    return promoted
+
+
+def build_search_conditioned_refinement_summary(
+    *,
+    target_families: tuple[str, ...],
+    promoted_configs: dict[str, dict[str, Any]],
+    search_summary: dict[str, Any],
+    pre_to_search_conditioned: dict[str, Any],
+    manual_to_search_conditioned: dict[str, Any],
+    manual_baseline_source: str,
+    search_source: str,
+) -> dict[str, Any]:
+    """Summarize search-conditioned refinement outcomes and config promotion."""
+    family_outcomes: dict[str, Any] = {}
+    improved_families: list[str] = []
+
+    for family in target_families:
+        promoted = promoted_configs.get(family)
+        search_family = search_summary.get("families", {}).get(family, {})
+        pre_metrics = pre_to_search_conditioned["by_family"].get(family, {})
+        manual_metrics = manual_to_search_conditioned["by_family"].get(family, {})
+        improved_vs_manual = (
+            manual_metrics.get("retention_rate_delta", 0.0) >= 0.0
+            and manual_metrics.get("avg_benchmark_signal_delta", 0.0) >= 0.0
+        )
+        if improved_vs_manual:
+            improved_families.append(family)
+
+        family_outcomes[family] = {
+            "promoted_config": promoted,
+            "winner_rationale": search_family.get("winner", {}).get("why_it_won", []),
+            "pre_to_search_conditioned": pre_metrics,
+            "manual_to_search_conditioned": manual_metrics,
+            "improved_vs_manual_refinement": improved_vs_manual,
+        }
+
+    return {
+        "mode": "search_conditioned",
+        "families_targeted": list(target_families),
+        "promotion_sources": {
+            "manual_refinement_baseline": manual_baseline_source,
+            "search_artifacts": search_source,
+        },
+        "promoted_configs": promoted_configs,
+        "pre_to_search_conditioned": pre_to_search_conditioned,
+        "manual_to_search_conditioned": manual_to_search_conditioned,
+        "family_outcomes": family_outcomes,
+        "improved_families_vs_manual": improved_families,
+        "search_conditioned_outperformed_manual": len(improved_families) == len(target_families),
     }

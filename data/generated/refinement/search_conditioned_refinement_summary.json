@@ -1,0 +1,509 @@
+{
+  "mode": "search_conditioned",
+  "families_targeted": [
+    "attention_distractors",
+    "shift_transfer"
+  ],
+  "promotion_sources": {
+    "manual_refinement_baseline": "existing_artifact",
+    "search_artifacts": "loaded_existing"
+  },
+  "promoted_configs": {
+    "attention_distractors": {
+      "config_id": "attn_03",
+      "label": "diverse_hard",
+      "config": {
+        "count": 24,
+        "seed": 51,
+        "anti_template_strength": 2,
+        "distractor_diversity_level": 3,
+        "cue_delay_level": 1,
+        "adversarial_query_mode": "max_confusable"
+      },
+      "search_metrics": {
+        "kept_rate": 0.8333,
+        "review_rate": 0.0,
+        "reject_rate": 0.1667,
+        "average_benchmark_signal": 0.8929,
+        "average_trajectory_value": 1.0,
+        "shortcut_resistance_index": 0.7538,
+        "family_specific_signal": 0.8518,
+        "average_baseline_solve_rate": 0.0,
+        "curation_weighted_score": 0.8556,
+        "family_specific_metric": "distractor_discrimination_score",
+        "top_rejection_reasons": {
+          "too_templated": 4
+        }
+      }
+    },
+    "shift_transfer": {
+      "config_id": "shift_04",
+      "label": "attribute_bridge_hard",
+      "config": {
+        "count": 24,
+        "seed": 23,
+        "anti_template_strength": 2,
+        "remap_composition_depth": 3,
+        "bridge_representation_mode": "attribute_bridge",
+        "anti_anchor_strength": 2,
+        "latent_rule_mix": "transfer_hard"
+      },
+      "search_metrics": {
+        "kept_rate": 0.875,
+        "review_rate": 0.0,
+        "reject_rate": 0.125,
+        "average_benchmark_signal": 0.7907,
+        "average_trajectory_value": 0.8,
+        "shortcut_resistance_index": 0.6945,
+        "family_specific_signal": 0.75,
+        "average_baseline_solve_rate": 0.0,
+        "curation_weighted_score": 0.7956,
+        "family_specific_metric": "transfer_depth_score",
+        "top_rejection_reasons": {
+          "too_templated": 3
+        }
+      }
+    }
+  },
+  "pre_to_search_conditioned": {
+    "overall": {
+      "pre_kept": 325,
+      "post_kept": 423,
+      "kept_delta": 98,
+      "pre_rejected": 110,
+      "post_rejected": 77,
+      "rejected_delta": -33
+    },
+    "by_family": {
+      "attention_distractors": {
+        "pre": {
+          "total": 100,
+          "kept": 0,
+          "reviewed": 51,
+          "rejected": 49,
+          "retention_rate": 0.0
+        },
+        "post": {
+          "total": 100,
+          "kept": 79,
+          "reviewed": 0,
+          "rejected": 21,
+          "retention_rate": 0.79
+        },
+        "retention_rate_delta": 0.79,
+        "avg_benchmark_signal_pre": 0.6337,
+        "avg_benchmark_signal_post": 0.8532,
+        "avg_benchmark_signal_delta": 0.2195,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 1.0,
+        "avg_trajectory_value_delta": 1.0
+      },
+      "hidden_rule": {
+        "pre": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "post": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.7505,
+        "avg_benchmark_signal_post": 0.7505,
+        "avg_benchmark_signal_delta": 0.0,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 0.6,
+        "avg_trajectory_value_delta": 0.6
+      },
+      "metacog_revision": {
+        "pre": {
+          "total": 100,
+          "kept": 100,
+          "reviewed": 0,
+          "rejected": 0,
+          "retention_rate": 1.0
+        },
+        "post": {
+          "total": 100,
+          "kept": 100,
+          "reviewed": 0,
+          "rejected": 0,
+          "retention_rate": 1.0
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.8814,
+        "avg_benchmark_signal_post": 0.8814,
+        "avg_benchmark_signal_delta": 0.0,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 0.6,
+        "avg_trajectory_value_delta": 0.6
+      },
+      "shift_transfer": {
+        "pre": {
+          "total": 100,
+          "kept": 55,
+          "reviewed": 14,
+          "rejected": 31,
+          "retention_rate": 0.55
+        },
+        "post": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "retention_rate_delta": 0.19,
+        "avg_benchmark_signal_pre": 0.6707,
+        "avg_benchmark_signal_post": 0.7424,
+        "avg_benchmark_signal_delta": 0.0717,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 0.8,
+        "avg_trajectory_value_delta": 0.8
+      },
+      "social_miniworlds": {
+        "pre": {
+          "total": 100,
+          "kept": 96,
+          "reviewed": 0,
+          "rejected": 4,
+          "retention_rate": 0.96
+        },
+        "post": {
+          "total": 100,
+          "kept": 96,
+          "reviewed": 0,
+          "rejected": 4,
+          "retention_rate": 0.96
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.9074,
+        "avg_benchmark_signal_post": 0.9074,
+        "avg_benchmark_signal_delta": 0.0,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 1.0,
+        "avg_trajectory_value_delta": 1.0
+      }
+    }
+  },
+  "manual_to_search_conditioned": {
+    "overall": {
+      "pre_kept": 423,
+      "post_kept": 423,
+      "kept_delta": 0,
+      "pre_rejected": 77,
+      "post_rejected": 77,
+      "rejected_delta": 0
+    },
+    "by_family": {
+      "attention_distractors": {
+        "pre": {
+          "total": 100,
+          "kept": 79,
+          "reviewed": 0,
+          "rejected": 21,
+          "retention_rate": 0.79
+        },
+        "post": {
+          "total": 100,
+          "kept": 79,
+          "reviewed": 0,
+          "rejected": 21,
+          "retention_rate": 0.79
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.8532,
+        "avg_benchmark_signal_post": 0.8532,
+        "avg_benchmark_signal_delta": -0.0,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 1.0,
+        "avg_trajectory_value_delta": 1.0
+      },
+      "hidden_rule": {
+        "pre": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "post": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.7505,
+        "avg_benchmark_signal_post": 0.7505,
+        "avg_benchmark_signal_delta": 0.0,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 0.6,
+        "avg_trajectory_value_delta": 0.6
+      },
+      "metacog_revision": {
+        "pre": {
+          "total": 100,
+          "kept": 100,
+          "reviewed": 0,
+          "rejected": 0,
+          "retention_rate": 1.0
+        },
+        "post": {
+          "total": 100,
+          "kept": 100,
+          "reviewed": 0,
+          "rejected": 0,
+          "retention_rate": 1.0
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.8814,
+        "avg_benchmark_signal_post": 0.8814,
+        "avg_benchmark_signal_delta": 0.0,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 0.6,
+        "avg_trajectory_value_delta": 0.6
+      },
+      "shift_transfer": {
+        "pre": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "post": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.7544,
+        "avg_benchmark_signal_post": 0.7424,
+        "avg_benchmark_signal_delta": -0.012,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 0.8,
+        "avg_trajectory_value_delta": 0.8
+      },
+      "social_miniworlds": {
+        "pre": {
+          "total": 100,
+          "kept": 96,
+          "reviewed": 0,
+          "rejected": 4,
+          "retention_rate": 0.96
+        },
+        "post": {
+          "total": 100,
+          "kept": 96,
+          "reviewed": 0,
+          "rejected": 4,
+          "retention_rate": 0.96
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.9074,
+        "avg_benchmark_signal_post": 0.9074,
+        "avg_benchmark_signal_delta": 0.0,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 1.0,
+        "avg_trajectory_value_delta": 1.0
+      }
+    }
+  },
+  "family_outcomes": {
+    "attention_distractors": {
+      "promoted_config": {
+        "config_id": "attn_03",
+        "label": "diverse_hard",
+        "config": {
+          "count": 24,
+          "seed": 51,
+          "anti_template_strength": 2,
+          "distractor_diversity_level": 3,
+          "cue_delay_level": 1,
+          "adversarial_query_mode": "max_confusable"
+        },
+        "search_metrics": {
+          "kept_rate": 0.8333,
+          "review_rate": 0.0,
+          "reject_rate": 0.1667,
+          "average_benchmark_signal": 0.8929,
+          "average_trajectory_value": 1.0,
+          "shortcut_resistance_index": 0.7538,
+          "family_specific_signal": 0.8518,
+          "average_baseline_solve_rate": 0.0,
+          "curation_weighted_score": 0.8556,
+          "family_specific_metric": "distractor_discrimination_score",
+          "top_rejection_reasons": {
+            "too_templated": 4
+          }
+        }
+      },
+      "winner_rationale": [
+        {
+          "metric": "kept_rate",
+          "delta_vs_family_mean": 0.0555
+        },
+        {
+          "metric": "average_benchmark_signal",
+          "delta_vs_family_mean": 0.037
+        },
+        {
+          "metric": "curation_weighted_score",
+          "delta_vs_family_mean": 0.0301
+        }
+      ],
+      "pre_to_search_conditioned": {
+        "pre": {
+          "total": 100,
+          "kept": 0,
+          "reviewed": 51,
+          "rejected": 49,
+          "retention_rate": 0.0
+        },
+        "post": {
+          "total": 100,
+          "kept": 79,
+          "reviewed": 0,
+          "rejected": 21,
+          "retention_rate": 0.79
+        },
+        "retention_rate_delta": 0.79,
+        "avg_benchmark_signal_pre": 0.6337,
+        "avg_benchmark_signal_post": 0.8532,
+        "avg_benchmark_signal_delta": 0.2195,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 1.0,
+        "avg_trajectory_value_delta": 1.0
+      },
+      "manual_to_search_conditioned": {
+        "pre": {
+          "total": 100,
+          "kept": 79,
+          "reviewed": 0,
+          "rejected": 21,
+          "retention_rate": 0.79
+        },
+        "post": {
+          "total": 100,
+          "kept": 79,
+          "reviewed": 0,
+          "rejected": 21,
+          "retention_rate": 0.79
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.8532,
+        "avg_benchmark_signal_post": 0.8532,
+        "avg_benchmark_signal_delta": -0.0,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 1.0,
+        "avg_trajectory_value_delta": 1.0
+      },
+      "improved_vs_manual_refinement": true
+    },
+    "shift_transfer": {
+      "promoted_config": {
+        "config_id": "shift_04",
+        "label": "attribute_bridge_hard",
+        "config": {
+          "count": 24,
+          "seed": 23,
+          "anti_template_strength": 2,
+          "remap_composition_depth": 3,
+          "bridge_representation_mode": "attribute_bridge",
+          "anti_anchor_strength": 2,
+          "latent_rule_mix": "transfer_hard"
+        },
+        "search_metrics": {
+          "kept_rate": 0.875,
+          "review_rate": 0.0,
+          "reject_rate": 0.125,
+          "average_benchmark_signal": 0.7907,
+          "average_trajectory_value": 0.8,
+          "shortcut_resistance_index": 0.6945,
+          "family_specific_signal": 0.75,
+          "average_baseline_solve_rate": 0.0,
+          "curation_weighted_score": 0.7956,
+          "family_specific_metric": "transfer_depth_score",
+          "top_rejection_reasons": {
+            "too_templated": 3
+          }
+        }
+      },
+      "winner_rationale": [
+        {
+          "metric": "kept_rate",
+          "delta_vs_family_mean": 0.1806
+        },
+        {
+          "metric": "curation_weighted_score",
+          "delta_vs_family_mean": 0.0671
+        },
+        {
+          "metric": "average_trajectory_value",
+          "delta_vs_family_mean": 0.0583
+        }
+      ],
+      "pre_to_search_conditioned": {
+        "pre": {
+          "total": 100,
+          "kept": 55,
+          "reviewed": 14,
+          "rejected": 31,
+          "retention_rate": 0.55
+        },
+        "post": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "retention_rate_delta": 0.19,
+        "avg_benchmark_signal_pre": 0.6707,
+        "avg_benchmark_signal_post": 0.7424,
+        "avg_benchmark_signal_delta": 0.0717,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 0.8,
+        "avg_trajectory_value_delta": 0.8
+      },
+      "manual_to_search_conditioned": {
+        "pre": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "post": {
+          "total": 100,
+          "kept": 74,
+          "reviewed": 0,
+          "rejected": 26,
+          "retention_rate": 0.74
+        },
+        "retention_rate_delta": 0.0,
+        "avg_benchmark_signal_pre": 0.7544,
+        "avg_benchmark_signal_post": 0.7424,
+        "avg_benchmark_signal_delta": -0.012,
+        "avg_trajectory_value_pre": 0.0,
+        "avg_trajectory_value_post": 0.8,
+        "avg_trajectory_value_delta": 0.8
+      },
+      "improved_vs_manual_refinement": false
+    }
+  },
+  "improved_families_vs_manual": [
+    "attention_distractors"
+  ],
+  "search_conditioned_outperformed_manual": false
+}

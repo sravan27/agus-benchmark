@@ -1,0 +1,2198 @@
+[
+  {
+    "task_id": "shift_transfer_0000",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "circle triangle square star",
+      "transfer_representation": "ka-tr|r0 zu-sq|r2 mi-st|r4 to-he|r1",
+      "bridge_representation": "qx-le ly-le no-re te-ar",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "circle",
+          "cross",
+          "hex",
+          "line"
+        ],
+        "output": [
+          "square",
+          "star",
+          "wave",
+          "line"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "line",
+          "wave",
+          "dot",
+          "square"
+        ],
+        "output": [
+          "line",
+          "hex",
+          "arc",
+          "circle"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "star",
+          "hex",
+          "arc",
+          "circle"
+        ],
+        "output": [
+          "cross",
+          "wave",
+          "dot",
+          "square"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "star",
+          "cross",
+          "arc",
+          "circle"
+        ],
+        "output": [
+          "cross",
+          "star",
+          "dot",
+          "square"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "dot",
+          "square",
+          "cross",
+          "star"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "ve-li|r0",
+          "ne-ci|r3",
+          "ve-li|r0",
+          "ne-ci|r3"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "qx-le",
+          "te-ar",
+          "qx-le",
+          "da-ss"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "arc",
+        "circle",
+        "star",
+        "cross"
+      ],
+      "transfer_target": [
+        "pi-wa|r4",
+        "to-he|r1",
+        "pi-wa|r4",
+        "to-he|r1"
+      ],
+      "bridge_target": [
+        "no-re",
+        "da-ss",
+        "no-re",
+        "te-ar"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "mirror_anchor",
+        "params": {
+          "anchor": 2
+        }
+      },
+      "source_vocab": [
+        "circle",
+        "triangle",
+        "square",
+        "star",
+        "hex",
+        "dot",
+        "line",
+        "arc",
+        "wave",
+        "cross"
+      ],
+      "bridge_vocab": [
+        "qx-le",
+        "ly-le",
+        "no-re",
+        "te-ar",
+        "va-ex",
+        "ru-ot",
+        "si-ne",
+        "po-rc",
+        "me-ve",
+        "da-ss"
+      ],
+      "transfer_vocab": [
+        "ka-tr|r0",
+        "zu-sq|r2",
+        "mi-st|r4",
+        "to-he|r1",
+        "ra-do|r3",
+        "ve-li|r0",
+        "lo-ar|r2",
+        "pi-wa|r4",
+        "su-cr|r1",
+        "ne-ci|r3"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0001",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "A B C D",
+      "transfer_representation": "amber-C|r1 blue-D|r3 cinder-E|r0 dune-F|r2",
+      "bridge_representation": "c1-B c2-C c3-D c4-E",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "J",
+          "B",
+          "H",
+          "C"
+        ],
+        "output": [
+          "H",
+          "F",
+          "J",
+          "E"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "H",
+          "J",
+          "H",
+          "C"
+        ],
+        "output": [
+          "J",
+          "H",
+          "J",
+          "E"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "C",
+          "C",
+          "I",
+          "F"
+        ],
+        "output": [
+          "E",
+          "E",
+          "I",
+          "B"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "I",
+          "D",
+          "J",
+          "B"
+        ],
+        "output": [
+          "I",
+          "D",
+          "H",
+          "F"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "B",
+          "B",
+          "G",
+          "A"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "ember-G|r4",
+          "iris-A|r2",
+          "ember-G|r4",
+          "haze-J|r0"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "c0-A",
+          "c5-F",
+          "c0-A",
+          "c5-F"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "F",
+        "F",
+        "A",
+        "G"
+      ],
+      "transfer_target": [
+        "cinder-E|r0",
+        "iris-A|r2",
+        "cinder-E|r0",
+        "jade-B|r4"
+      ],
+      "bridge_target": [
+        "c8-I",
+        "c3-D",
+        "c8-I",
+        "c3-D"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "mirror_anchor",
+        "params": {
+          "anchor": 6
+        }
+      },
+      "source_vocab": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "bridge_vocab": [
+        "c1-B",
+        "c2-C",
+        "c3-D",
+        "c4-E",
+        "c5-F",
+        "c6-G",
+        "c7-H",
+        "c8-I",
+        "c9-J",
+        "c0-A"
+      ],
+      "transfer_vocab": [
+        "amber-C|r1",
+        "blue-D|r3",
+        "cinder-E|r0",
+        "dune-F|r2",
+        "ember-G|r4",
+        "frost-H|r1",
+        "glade-I|r3",
+        "haze-J|r0",
+        "iris-A|r2",
+        "jade-B|r4"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0002",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "circle triangle square star",
+      "transfer_representation": "ka-st|r2 zu-he|r4 mi-do|r1 to-li|r3",
+      "bridge_representation": "qx-re ly-ar no-ex te-ot",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "arc",
+          "star",
+          "dot",
+          "wave"
+        ],
+        "output": [
+          "circle",
+          "arc",
+          "dot",
+          "cross"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "square",
+          "cross",
+          "triangle",
+          "line"
+        ],
+        "output": [
+          "wave",
+          "star",
+          "triangle",
+          "hex"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "square",
+          "arc",
+          "circle",
+          "circle"
+        ],
+        "output": [
+          "square",
+          "square",
+          "cross",
+          "hex"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "line",
+          "line",
+          "circle",
+          "square"
+        ],
+        "output": [
+          "hex",
+          "square",
+          "wave",
+          "wave"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "circle",
+          "line",
+          "arc",
+          "star"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "su-tr|r3",
+          "to-li|r3",
+          "pi-ci|r1",
+          "ra-ar|r0"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "qx-re",
+          "ly-ar",
+          "va-ne",
+          "po-ss"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "dot",
+        "cross",
+        "wave",
+        "square"
+      ],
+      "transfer_target": [
+        "lo-cr|r4",
+        "ne-sq|r0",
+        "ve-wa|r2",
+        "ka-st|r2"
+      ],
+      "bridge_target": [
+        "da-le",
+        "si-ve",
+        "te-ot",
+        "no-ex"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "reverse_add",
+        "params": {
+          "k": 2
+        }
+      },
+      "source_vocab": [
+        "circle",
+        "triangle",
+        "square",
+        "star",
+        "hex",
+        "dot",
+        "line",
+        "arc",
+        "wave",
+        "cross"
+      ],
+      "bridge_vocab": [
+        "qx-re",
+        "ly-ar",
+        "no-ex",
+        "te-ot",
+        "va-ne",
+        "ru-rc",
+        "si-ve",
+        "po-ss",
+        "me-le",
+        "da-le"
+      ],
+      "transfer_vocab": [
+        "ka-st|r2",
+        "zu-he|r4",
+        "mi-do|r1",
+        "to-li|r3",
+        "ra-ar|r0",
+        "ve-wa|r2",
+        "lo-cr|r4",
+        "pi-ci|r1",
+        "su-tr|r3",
+        "ne-sq|r0"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0003",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "A B C D",
+      "transfer_representation": "amber-E|r3 blue-F|r0 cinder-G|r2 dune-H|r4",
+      "bridge_representation": "c1-D c2-E c3-F c4-G",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "B",
+          "I",
+          "I",
+          "C"
+        ],
+        "output": [
+          "E",
+          "A",
+          "A",
+          "D"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "I",
+          "I",
+          "D",
+          "E"
+        ],
+        "output": [
+          "G",
+          "F",
+          "A",
+          "A"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "B",
+          "G",
+          "C",
+          "A"
+        ],
+        "output": [
+          "C",
+          "E",
+          "I",
+          "D"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "H",
+          "F",
+          "G",
+          "C"
+        ],
+        "output": [
+          "E",
+          "I",
+          "H",
+          "J"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "C",
+          "F",
+          "I",
+          "G"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "amber-E|r3",
+          "ember-I|r1",
+          "blue-F|r0",
+          "amber-E|r3"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "c0-C",
+          "c7-J",
+          "c2-E",
+          "c4-G"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "I",
+        "A",
+        "H",
+        "E"
+      ],
+      "transfer_target": [
+        "cinder-G|r2",
+        "dune-H|r4",
+        "glade-A|r0",
+        "cinder-G|r2"
+      ],
+      "bridge_target": [
+        "c6-I",
+        "c4-G",
+        "c9-B",
+        "c2-E"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "reverse_add",
+        "params": {
+          "k": 2
+        }
+      },
+      "source_vocab": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "bridge_vocab": [
+        "c1-D",
+        "c2-E",
+        "c3-F",
+        "c4-G",
+        "c5-H",
+        "c6-I",
+        "c7-J",
+        "c8-A",
+        "c9-B",
+        "c0-C"
+      ],
+      "transfer_vocab": [
+        "amber-E|r3",
+        "blue-F|r0",
+        "cinder-G|r2",
+        "dune-H|r4",
+        "ember-I|r1",
+        "frost-J|r3",
+        "glade-A|r0",
+        "haze-B|r2",
+        "iris-C|r4",
+        "jade-D|r1"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0004",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "circle triangle square star",
+      "transfer_representation": "ka-do|r4 zu-li|r1 mi-ar|r3 to-wa|r0",
+      "bridge_representation": "qx-ex ly-ot no-ne te-rc",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "triangle",
+          "dot",
+          "wave",
+          "wave"
+        ],
+        "output": [
+          "triangle",
+          "triangle",
+          "wave",
+          "hex"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "triangle",
+          "star",
+          "wave",
+          "arc"
+        ],
+        "output": [
+          "circle",
+          "triangle",
+          "line",
+          "hex"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "arc",
+          "hex",
+          "circle",
+          "dot"
+        ],
+        "output": [
+          "wave",
+          "star",
+          "arc",
+          "circle"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "line",
+          "circle",
+          "square",
+          "line"
+        ],
+        "output": [
+          "cross",
+          "dot",
+          "star",
+          "cross"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "hex",
+          "triangle",
+          "star",
+          "circle"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "lo-tr|r1",
+          "zu-li|r1",
+          "lo-tr|r1",
+          "ra-cr|r2"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "te-rc",
+          "qx-ex",
+          "no-ne",
+          "po-le"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "star",
+        "line",
+        "hex",
+        "arc"
+      ],
+      "transfer_target": [
+        "pi-sq|r3",
+        "ne-he|r2",
+        "ra-cr|r2",
+        "ne-he|r2"
+      ],
+      "bridge_target": [
+        "qx-ex",
+        "ru-ss",
+        "te-rc",
+        "si-le"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "reverse_add",
+        "params": {
+          "k": 3
+        }
+      },
+      "source_vocab": [
+        "circle",
+        "triangle",
+        "square",
+        "star",
+        "hex",
+        "dot",
+        "line",
+        "arc",
+        "wave",
+        "cross"
+      ],
+      "bridge_vocab": [
+        "qx-ex",
+        "ly-ot",
+        "no-ne",
+        "te-rc",
+        "va-ve",
+        "ru-ss",
+        "si-le",
+        "po-le",
+        "me-re",
+        "da-ar"
+      ],
+      "transfer_vocab": [
+        "ka-do|r4",
+        "zu-li|r1",
+        "mi-ar|r3",
+        "to-wa|r0",
+        "ra-cr|r2",
+        "ve-ci|r4",
+        "lo-tr|r1",
+        "pi-sq|r3",
+        "su-st|r0",
+        "ne-he|r2"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0005",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "A B C D",
+      "transfer_representation": "amber-G|r0 blue-H|r2 cinder-I|r4 dune-J|r1",
+      "bridge_representation": "c1-F c2-G c3-H c4-I",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "A",
+          "H",
+          "J",
+          "G"
+        ],
+        "output": [
+          "H",
+          "A",
+          "I",
+          "B"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "E",
+          "F",
+          "G",
+          "F"
+        ],
+        "output": [
+          "D",
+          "C",
+          "B",
+          "C"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "E",
+          "E",
+          "F",
+          "C"
+        ],
+        "output": [
+          "D",
+          "D",
+          "C",
+          "F"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "G",
+          "A",
+          "G",
+          "H"
+        ],
+        "output": [
+          "B",
+          "H",
+          "B",
+          "A"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "C",
+          "I",
+          "F",
+          "B"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "blue-H|r2",
+          "glade-C|r2",
+          "dune-J|r1",
+          "ember-A|r3"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "c0-E",
+          "c8-C",
+          "c2-G",
+          "c5-J"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "F",
+        "J",
+        "C",
+        "G"
+      ],
+      "transfer_target": [
+        "glade-C|r2",
+        "blue-H|r2",
+        "ember-A|r3",
+        "dune-J|r1"
+      ],
+      "bridge_target": [
+        "c9-D",
+        "c1-F",
+        "c7-B",
+        "c4-I"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "mirror_anchor",
+        "params": {
+          "anchor": 7
+        }
+      },
+      "source_vocab": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "bridge_vocab": [
+        "c1-F",
+        "c2-G",
+        "c3-H",
+        "c4-I",
+        "c5-J",
+        "c6-A",
+        "c7-B",
+        "c8-C",
+        "c9-D",
+        "c0-E"
+      ],
+      "transfer_vocab": [
+        "amber-G|r0",
+        "blue-H|r2",
+        "cinder-I|r4",
+        "dune-J|r1",
+        "ember-A|r3",
+        "frost-B|r0",
+        "glade-C|r2",
+        "haze-D|r4",
+        "iris-E|r1",
+        "jade-F|r3"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0006",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "circle triangle square star",
+      "transfer_representation": "ka-ar|r1 zu-wa|r3 mi-cr|r0 to-ci|r2",
+      "bridge_representation": "qx-ne ly-rc no-ve te-ss",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "star",
+          "cross",
+          "arc",
+          "circle"
+        ],
+        "output": [
+          "cross",
+          "star",
+          "dot",
+          "square"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "line",
+          "triangle",
+          "hex",
+          "star"
+        ],
+        "output": [
+          "line",
+          "triangle",
+          "wave",
+          "cross"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "dot",
+          "cross",
+          "square",
+          "cross"
+        ],
+        "output": [
+          "arc",
+          "star",
+          "circle",
+          "star"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "triangle",
+          "square",
+          "wave",
+          "line"
+        ],
+        "output": [
+          "triangle",
+          "circle",
+          "hex",
+          "line"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "cross",
+          "square",
+          "hex",
+          "arc"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "ne-li|r4",
+          "ne-li|r4",
+          "mi-cr|r0",
+          "ka-ar|r1"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "va-le",
+          "da-ot",
+          "qx-ne",
+          "qx-ne"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "star",
+        "circle",
+        "wave",
+        "dot"
+      ],
+      "transfer_target": [
+        "to-ci|r2",
+        "to-ci|r2",
+        "ka-ar|r1",
+        "mi-cr|r0"
+      ],
+      "bridge_target": [
+        "me-ex",
+        "te-ss",
+        "no-ve",
+        "no-ve"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "mirror_anchor",
+        "params": {
+          "anchor": 2
+        }
+      },
+      "source_vocab": [
+        "circle",
+        "triangle",
+        "square",
+        "star",
+        "hex",
+        "dot",
+        "line",
+        "arc",
+        "wave",
+        "cross"
+      ],
+      "bridge_vocab": [
+        "qx-ne",
+        "ly-rc",
+        "no-ve",
+        "te-ss",
+        "va-le",
+        "ru-le",
+        "si-re",
+        "po-ar",
+        "me-ex",
+        "da-ot"
+      ],
+      "transfer_vocab": [
+        "ka-ar|r1",
+        "zu-wa|r3",
+        "mi-cr|r0",
+        "to-ci|r2",
+        "ra-tr|r4",
+        "ve-sq|r1",
+        "lo-st|r3",
+        "pi-he|r0",
+        "su-do|r2",
+        "ne-li|r4"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0007",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "A B C D",
+      "transfer_representation": "amber-I|r2 blue-J|r4 cinder-A|r1 dune-B|r3",
+      "bridge_representation": "c1-H c2-I c3-J c4-A",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "F",
+          "A",
+          "C",
+          "F"
+        ],
+        "output": [
+          "G",
+          "C",
+          "F",
+          "J"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "B",
+          "C",
+          "D",
+          "D"
+        ],
+        "output": [
+          "C",
+          "E",
+          "G",
+          "H"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "G",
+          "F",
+          "J",
+          "D"
+        ],
+        "output": [
+          "H",
+          "H",
+          "C",
+          "H"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "I",
+          "J",
+          "G",
+          "F"
+        ],
+        "output": [
+          "J",
+          "B",
+          "J",
+          "J"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "D",
+          "F",
+          "G",
+          "G"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "frost-D|r2",
+          "dune-B|r3",
+          "iris-G|r3",
+          "cinder-A|r1"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "c8-E",
+          "c3-J",
+          "c6-C",
+          "c7-D"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "E",
+        "H",
+        "J",
+        "A"
+      ],
+      "transfer_target": [
+        "glade-E|r4",
+        "frost-D|r2",
+        "blue-J|r4",
+        "glade-E|r4"
+      ],
+      "bridge_target": [
+        "c9-F",
+        "c5-B",
+        "c9-F",
+        "c1-H"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "index_offset",
+        "params": {
+          "k": 1
+        }
+      },
+      "source_vocab": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "bridge_vocab": [
+        "c1-H",
+        "c2-I",
+        "c3-J",
+        "c4-A",
+        "c5-B",
+        "c6-C",
+        "c7-D",
+        "c8-E",
+        "c9-F",
+        "c0-G"
+      ],
+      "transfer_vocab": [
+        "amber-I|r2",
+        "blue-J|r4",
+        "cinder-A|r1",
+        "dune-B|r3",
+        "ember-C|r0",
+        "frost-D|r2",
+        "glade-E|r4",
+        "haze-F|r1",
+        "iris-G|r3",
+        "jade-H|r0"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0008",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "circle triangle square star",
+      "transfer_representation": "ka-cr|r3 zu-ci|r0 mi-tr|r2 to-sq|r4",
+      "bridge_representation": "qx-ve ly-ss no-le te-le",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "dot",
+          "line",
+          "arc",
+          "square"
+        ],
+        "output": [
+          "star",
+          "wave",
+          "arc",
+          "line"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "cross",
+          "line",
+          "dot",
+          "star"
+        ],
+        "output": [
+          "hex",
+          "line",
+          "arc",
+          "circle"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "dot",
+          "circle",
+          "hex",
+          "arc"
+        ],
+        "output": [
+          "wave",
+          "dot",
+          "triangle",
+          "line"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "square",
+          "line",
+          "dot",
+          "cross"
+        ],
+        "output": [
+          "circle",
+          "line",
+          "arc",
+          "star"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "star",
+          "line",
+          "triangle",
+          "arc"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "ka-cr|r3",
+          "lo-do|r0",
+          "lo-do|r0",
+          "ra-st|r1"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "po-ot",
+          "qx-ve",
+          "me-ne",
+          "da-rc"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "wave",
+        "square",
+        "arc",
+        "hex"
+      ],
+      "transfer_target": [
+        "ve-he|r3",
+        "pi-li|r2",
+        "pi-li|r2",
+        "zu-ci|r0"
+      ],
+      "bridge_target": [
+        "qx-ve",
+        "da-rc",
+        "ly-ss",
+        "me-ne"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "reverse_add",
+        "params": {
+          "k": 1
+        }
+      },
+      "source_vocab": [
+        "circle",
+        "triangle",
+        "square",
+        "star",
+        "hex",
+        "dot",
+        "line",
+        "arc",
+        "wave",
+        "cross"
+      ],
+      "bridge_vocab": [
+        "qx-ve",
+        "ly-ss",
+        "no-le",
+        "te-le",
+        "va-re",
+        "ru-ar",
+        "si-ex",
+        "po-ot",
+        "me-ne",
+        "da-rc"
+      ],
+      "transfer_vocab": [
+        "ka-cr|r3",
+        "zu-ci|r0",
+        "mi-tr|r2",
+        "to-sq|r4",
+        "ra-st|r1",
+        "ve-he|r3",
+        "lo-do|r0",
+        "pi-li|r2",
+        "su-ar|r4",
+        "ne-wa|r1"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0009",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "A B C D",
+      "transfer_representation": "amber-A|r4 blue-B|r1 cinder-C|r3 dune-D|r0",
+      "bridge_representation": "c1-J c2-A c3-B c4-C",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "C",
+          "C",
+          "J",
+          "B"
+        ],
+        "output": [
+          "D",
+          "D",
+          "G",
+          "E"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "J",
+          "I",
+          "H",
+          "I"
+        ],
+        "output": [
+          "G",
+          "H",
+          "I",
+          "H"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "B",
+          "B",
+          "G",
+          "H"
+        ],
+        "output": [
+          "E",
+          "E",
+          "J",
+          "I"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "C",
+          "E",
+          "B",
+          "J"
+        ],
+        "output": [
+          "D",
+          "B",
+          "E",
+          "G"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "A",
+          "I",
+          "J",
+          "D"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "iris-I|r0",
+          "dune-D|r0",
+          "frost-F|r4",
+          "ember-E|r2"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "c1-J",
+          "c4-C",
+          "c0-I",
+          "c9-H"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "F",
+        "H",
+        "G",
+        "C"
+      ],
+      "transfer_target": [
+        "haze-H|r3",
+        "cinder-C|r3",
+        "amber-A|r4",
+        "blue-B|r1"
+      ],
+      "bridge_target": [
+        "c6-E",
+        "c3-B",
+        "c7-F",
+        "c8-G"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "mirror_anchor",
+        "params": {
+          "anchor": 5
+        }
+      },
+      "source_vocab": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "bridge_vocab": [
+        "c1-J",
+        "c2-A",
+        "c3-B",
+        "c4-C",
+        "c5-D",
+        "c6-E",
+        "c7-F",
+        "c8-G",
+        "c9-H",
+        "c0-I"
+      ],
+      "transfer_vocab": [
+        "amber-A|r4",
+        "blue-B|r1",
+        "cinder-C|r3",
+        "dune-D|r0",
+        "ember-E|r2",
+        "frost-F|r4",
+        "glade-G|r1",
+        "haze-H|r3",
+        "iris-I|r0",
+        "jade-J|r2"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0010",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "circle triangle square star",
+      "transfer_representation": "ka-tr|r0 zu-sq|r2 mi-st|r4 to-he|r1",
+      "bridge_representation": "qx-le ly-le no-re te-ar",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "square",
+          "triangle",
+          "hex",
+          "hex"
+        ],
+        "output": [
+          "line",
+          "line",
+          "star",
+          "hex"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "triangle",
+          "cross",
+          "triangle",
+          "triangle"
+        ],
+        "output": [
+          "star",
+          "star",
+          "triangle",
+          "star"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "circle",
+          "arc",
+          "circle",
+          "wave"
+        ],
+        "output": [
+          "circle",
+          "square",
+          "cross",
+          "square"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "hex",
+          "hex",
+          "wave",
+          "cross"
+        ],
+        "output": [
+          "triangle",
+          "circle",
+          "line",
+          "line"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "line",
+          "circle",
+          "star",
+          "triangle"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "ne-ci|r3",
+          "lo-ar|r2",
+          "ka-tr|r0",
+          "ka-tr|r0"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "no-re",
+          "no-re",
+          "te-ar",
+          "po-rc"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "star",
+        "dot",
+        "square",
+        "wave"
+      ],
+      "transfer_target": [
+        "mi-st|r4",
+        "mi-st|r4",
+        "su-cr|r1",
+        "zu-sq|r2"
+      ],
+      "bridge_target": [
+        "da-ss",
+        "ru-ot",
+        "va-ex",
+        "va-ex"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "reverse_add",
+        "params": {
+          "k": 2
+        }
+      },
+      "source_vocab": [
+        "circle",
+        "triangle",
+        "square",
+        "star",
+        "hex",
+        "dot",
+        "line",
+        "arc",
+        "wave",
+        "cross"
+      ],
+      "bridge_vocab": [
+        "qx-le",
+        "ly-le",
+        "no-re",
+        "te-ar",
+        "va-ex",
+        "ru-ot",
+        "si-ne",
+        "po-rc",
+        "me-ve",
+        "da-ss"
+      ],
+      "transfer_vocab": [
+        "ka-tr|r0",
+        "zu-sq|r2",
+        "mi-st|r4",
+        "to-he|r1",
+        "ra-do|r3",
+        "ve-li|r0",
+        "lo-ar|r2",
+        "pi-wa|r4",
+        "su-cr|r1",
+        "ne-ci|r3"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  },
+  {
+    "task_id": "shift_transfer_0011",
+    "family": "shift_transfer",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from examples in one representation, then preserve the same rule through one or more codebook changes.",
+      "source_representation": "A B C D",
+      "transfer_representation": "amber-C|r1 blue-D|r3 cinder-E|r0 dune-F|r2",
+      "bridge_representation": "c1-B c2-C c3-D c4-E",
+      "representation_profile": "attribute_bridge"
+    },
+    "examples": [
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "A",
+          "F",
+          "J",
+          "I"
+        ],
+        "output": [
+          "B",
+          "C",
+          "I",
+          "D"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "I",
+          "G",
+          "A",
+          "H"
+        ],
+        "output": [
+          "A",
+          "D",
+          "J",
+          "B"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "B",
+          "H",
+          "F",
+          "E"
+        ],
+        "output": [
+          "H",
+          "I",
+          "A",
+          "E"
+        ],
+        "surface_profile": "source_tokens"
+      },
+      {
+        "phase": "learn_source_representation",
+        "input": [
+          "J",
+          "A",
+          "C",
+          "D"
+        ],
+        "output": [
+          "G",
+          "F",
+          "D",
+          "C"
+        ],
+        "surface_profile": "source_tokens"
+      }
+    ],
+    "query": {
+      "source_query": {
+        "input": [
+          "G",
+          "I",
+          "D",
+          "C"
+        ]
+      },
+      "transfer_query": {
+        "input": [
+          "iris-A|r2",
+          "iris-A|r2",
+          "jade-B|r4",
+          "jade-B|r4"
+        ]
+      },
+      "bridge_query": {
+        "input": [
+          "c5-F",
+          "c2-C",
+          "c3-D",
+          "c3-D"
+        ]
+      }
+    },
+    "answer": {
+      "source_target": [
+        "F",
+        "G",
+        "B",
+        "J"
+      ],
+      "transfer_target": [
+        "cinder-E|r0",
+        "cinder-E|r0",
+        "blue-D|r3",
+        "blue-D|r3"
+      ],
+      "bridge_target": [
+        "c6-G",
+        "c6-G",
+        "c5-F",
+        "c8-I"
+      ]
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "reverse_add",
+        "params": {
+          "k": 3
+        }
+      },
+      "source_vocab": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "bridge_vocab": [
+        "c1-B",
+        "c2-C",
+        "c3-D",
+        "c4-E",
+        "c5-F",
+        "c6-G",
+        "c7-H",
+        "c8-I",
+        "c9-J",
+        "c0-A"
+      ],
+      "transfer_vocab": [
+        "amber-C|r1",
+        "blue-D|r3",
+        "cinder-E|r0",
+        "dune-F|r2",
+        "ember-G|r4",
+        "frost-H|r1",
+        "glade-I|r3",
+        "haze-J|r0",
+        "iris-A|r2",
+        "jade-B|r4"
+      ],
+      "remap_profile": "attribute_bridge",
+      "bridge_representation_mode": "attribute_bridge",
+      "remap_composition_depth": 3,
+      "anti_template_strength": 2,
+      "anti_anchor_strength": 2,
+      "latent_rule_mix": "transfer_hard",
+      "source_transfer_overlap": 0.0
+    },
+    "latent_rule_summary": "The latent operator stays fixed while the surface codebook shifts through composed aliases and near-miss token regularities.",
+    "shift_type": "representation_remap",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Exact-match the source query to verify rule learning.",
+      "Transfer turns should preserve the rule while revising the representation hypothesis.",
+      "Composed remaps are intended to punish source-answer anchoring."
+    ]
+  }
+]

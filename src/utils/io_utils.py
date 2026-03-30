@@ -27,8 +27,27 @@ def save_jsonl(path: Path, rows: Iterable[dict[str, Any]]) -> None:
             handle.write(json.dumps(row) + "\n")
 
 
+def append_jsonl(path: Path, row: dict[str, Any]) -> None:
+    """Append one JSON row to a JSONL file."""
+    ensure_parent(path)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(row) + "\n")
+
+
 def load_json(path: Path) -> Any:
     """Load a JSON payload."""
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
 
+
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    """Load a JSONL file if it exists."""
+    if not path.exists():
+        return []
+    rows: list[dict[str, Any]] = []
+    with path.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            line = line.strip()
+            if line:
+                rows.append(json.loads(line))
+    return rows

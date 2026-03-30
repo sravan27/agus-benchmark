@@ -501,6 +501,9 @@ def _template_signature(task: dict[str, Any]) -> tuple[Any, ...]:
             task["metadata"]["internal_rule"]["name"],
             task["metadata"].get("remap_profile", "direct_remap"),
             int(task["metadata"].get("remap_composition_depth", 1)),
+            task["metadata"].get("bridge_representation_mode", "none"),
+            task["metadata"].get("latent_rule_mix", "baseline"),
+            int(task["metadata"].get("anti_anchor_strength", task["metadata"].get("anti_template_strength", 0))),
             tuple(task["metadata"]["source_vocab"][:2]),
             tuple(task["metadata"]["transfer_vocab"][:2]),
         )
@@ -518,6 +521,7 @@ def _template_signature(task: dict[str, Any]) -> tuple[Any, ...]:
             task["metadata"]["internal_rule"]["name"],
             task["distractor_level"],
             int(task["metadata"].get("cue_delay_level", 1)),
+            task["metadata"].get("adversarial_query_mode", "first_candidate"),
             tuple(sorted(set(task["metadata"].get("distractor_profiles", [])))[:3]),
         )
     return (
@@ -692,6 +696,7 @@ def curate_tasks(tasks: list[dict[str, Any]], policy: CurationPolicy | None = No
                 "family": task["family"],
                 "decision": decision,
                 "benchmark_signal_score": curation["scores"]["benchmark_signal_score"],
+                "trajectory_value_score": curation["scores"]["trajectory_value_score"],
                 "reasons": reasons,
             }
         )

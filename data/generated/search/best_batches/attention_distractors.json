@@ -1,0 +1,2303 @@
+[
+  {
+    "task_id": "attention_distractors_0000",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "offset_clone",
+        "reverse_salience",
+        "rotating_decoy"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          3,
+          3,
+          8,
+          4
+        ],
+        "distractor_sequence": [
+          4,
+          8,
+          3,
+          3
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field."
+        ],
+        "output": [
+          4,
+          5,
+          1,
+          8
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "reverse_salience",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          6,
+          8,
+          7,
+          8
+        ],
+        "distractor_sequence": [
+          7,
+          8,
+          6,
+          8
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule."
+        ],
+        "output": [
+          7,
+          0,
+          0,
+          2
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          8,
+          5,
+          9,
+          5
+        ],
+        "distractor_sequence": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale."
+        ],
+        "output": [
+          9,
+          7,
+          2,
+          9
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          6,
+          4,
+          6,
+          0
+        ],
+        "distractor_sequence": [
+          1,
+          9,
+          1,
+          5
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule."
+        ],
+        "output": [
+          7,
+          6,
+          9,
+          4
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          1,
+          0,
+          8,
+          4
+        ],
+        "distractor_sequence": [
+          8,
+          4,
+          1,
+          0
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule."
+        ],
+        "distractor_profile": "rotating_decoy"
+      }
+    },
+    "answer": {
+      "target": [
+        2,
+        2,
+        1,
+        8
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "index_offset",
+        "params": {
+          "k": 1
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "reverse_salience",
+        "rotating_decoy",
+        "anchor_repeat",
+        "offset_clone",
+        "rotating_decoy"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0001",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "offset_clone",
+        "rotating_decoy",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          9,
+          5,
+          7,
+          7
+        ],
+        "distractor_sequence": [
+          5,
+          7,
+          7,
+          9
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 1: clutter level 2."
+        ],
+        "output": [
+          5,
+          7,
+          7,
+          9
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          1,
+          8,
+          7,
+          0
+        ],
+        "distractor_sequence": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 2: clutter level 2."
+        ],
+        "output": [
+          8,
+          7,
+          0,
+          1
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          6,
+          8,
+          0,
+          7
+        ],
+        "distractor_sequence": [
+          0,
+          2,
+          4,
+          1
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule.",
+          "Record note 3: clutter level 2."
+        ],
+        "output": [
+          8,
+          0,
+          7,
+          6
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          8,
+          8,
+          1,
+          8
+        ],
+        "distractor_sequence": [
+          8,
+          0,
+          7,
+          6
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 4: clutter level 2."
+        ],
+        "output": [
+          8,
+          1,
+          8,
+          8
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          4,
+          8,
+          7,
+          0
+        ],
+        "distractor_sequence": [
+          8,
+          1,
+          8,
+          8
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 5: clutter level 2."
+        ],
+        "distractor_profile": "stale_output"
+      }
+    },
+    "answer": {
+      "target": [
+        8,
+        7,
+        0,
+        4
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "rotate_left",
+        "params": {
+          "k": 1
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "rotating_decoy",
+        "anchor_repeat",
+        "offset_clone",
+        "stale_output",
+        "stale_output"
+      ],
+      "query_confusion_score": 2.35,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 1,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0002",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "offset_clone",
+        "reverse_salience",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          2,
+          1,
+          4,
+          7
+        ],
+        "distractor_sequence": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 1: clutter level 3."
+        ],
+        "output": [
+          4,
+          5,
+          0,
+          5
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          0,
+          2,
+          6,
+          1
+        ],
+        "distractor_sequence": [
+          4,
+          6,
+          0,
+          5
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule.",
+          "Record note 2: clutter level 3."
+        ],
+        "output": [
+          2,
+          6,
+          2,
+          9
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          8,
+          8,
+          8,
+          4
+        ],
+        "distractor_sequence": [
+          2,
+          6,
+          2,
+          9
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 3: clutter level 3."
+        ],
+        "output": [
+          0,
+          2,
+          4,
+          2
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          9,
+          9,
+          7,
+          7
+        ],
+        "distractor_sequence": [
+          7,
+          7,
+          9,
+          9
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field.",
+          "Record note 4: clutter level 3."
+        ],
+        "output": [
+          1,
+          3,
+          3,
+          5
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "reverse_salience",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          8,
+          9,
+          5,
+          7
+        ],
+        "distractor_sequence": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 5: clutter level 3."
+        ],
+        "distractor_profile": "anchor_repeat"
+      }
+    },
+    "answer": {
+      "target": [
+        0,
+        3,
+        1,
+        5
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "index_offset",
+        "params": {
+          "k": 2
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "anchor_repeat",
+        "offset_clone",
+        "stale_output",
+        "reverse_salience",
+        "anchor_repeat"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 2,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0003",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "offset_clone",
+        "reverse_salience",
+        "rotating_decoy",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          0,
+          5,
+          0,
+          4
+        ],
+        "distractor_sequence": [
+          3,
+          8,
+          3,
+          7
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule.",
+          "Record note 1: clutter level 4."
+        ],
+        "output": [
+          2,
+          9,
+          6,
+          2
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          7,
+          1,
+          9,
+          7
+        ],
+        "distractor_sequence": [
+          2,
+          9,
+          6,
+          2
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 2: clutter level 4."
+        ],
+        "output": [
+          9,
+          5,
+          5,
+          5
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          8,
+          8,
+          2,
+          5
+        ],
+        "distractor_sequence": [
+          5,
+          2,
+          8,
+          8
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field.",
+          "Record note 3: clutter level 4."
+        ],
+        "output": [
+          0,
+          2,
+          8,
+          3
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "reverse_salience",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          4,
+          1,
+          7,
+          8
+        ],
+        "distractor_sequence": [
+          4,
+          1,
+          7,
+          8
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 4: clutter level 4."
+        ],
+        "output": [
+          6,
+          5,
+          3,
+          6
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          0,
+          1,
+          4,
+          8
+        ],
+        "distractor_sequence": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 5: clutter level 4."
+        ],
+        "distractor_profile": "anchor_repeat"
+      }
+    },
+    "answer": {
+      "target": [
+        2,
+        5,
+        0,
+        6
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "index_offset",
+        "params": {
+          "k": 2
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "offset_clone",
+        "stale_output",
+        "reverse_salience",
+        "rotating_decoy",
+        "anchor_repeat"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 3,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0004",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "reverse_salience",
+        "rotating_decoy",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          2,
+          1,
+          9,
+          8
+        ],
+        "distractor_sequence": [
+          8,
+          0,
+          6,
+          6
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule."
+        ],
+        "output": [
+          3,
+          3,
+          2,
+          2
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          3,
+          7,
+          5,
+          3
+        ],
+        "distractor_sequence": [
+          3,
+          5,
+          7,
+          3
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field."
+        ],
+        "output": [
+          4,
+          9,
+          8,
+          7
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "reverse_salience",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          7,
+          3,
+          1,
+          1
+        ],
+        "distractor_sequence": [
+          1,
+          7,
+          3,
+          1
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule."
+        ],
+        "output": [
+          8,
+          5,
+          4,
+          5
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          7,
+          8,
+          3,
+          2
+        ],
+        "distractor_sequence": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale."
+        ],
+        "output": [
+          8,
+          0,
+          6,
+          6
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          5,
+          1,
+          1,
+          8
+        ],
+        "distractor_sequence": [
+          1,
+          8,
+          5,
+          1
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule."
+        ],
+        "distractor_profile": "rotating_decoy"
+      }
+    },
+    "answer": {
+      "target": [
+        6,
+        3,
+        4,
+        2
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "index_offset",
+        "params": {
+          "k": 1
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "stale_output",
+        "reverse_salience",
+        "rotating_decoy",
+        "anchor_repeat",
+        "rotating_decoy"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0005",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "offset_clone",
+        "reverse_salience",
+        "rotating_decoy"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          4,
+          0,
+          8,
+          6
+        ],
+        "distractor_sequence": [
+          6,
+          8,
+          0,
+          4
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field.",
+          "Record note 1: clutter level 2."
+        ],
+        "output": [
+          8,
+          6,
+          4,
+          0
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "reverse_salience",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          5,
+          9,
+          0,
+          7
+        ],
+        "distractor_sequence": [
+          0,
+          7,
+          5,
+          9
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 2: clutter level 2."
+        ],
+        "output": [
+          0,
+          7,
+          5,
+          9
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          2,
+          0,
+          0,
+          4
+        ],
+        "distractor_sequence": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 3: clutter level 2."
+        ],
+        "output": [
+          0,
+          4,
+          2,
+          0
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          7,
+          5,
+          0,
+          8
+        ],
+        "distractor_sequence": [
+          3,
+          1,
+          6,
+          4
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule.",
+          "Record note 4: clutter level 2."
+        ],
+        "output": [
+          0,
+          8,
+          7,
+          5
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          4,
+          9,
+          8,
+          1
+        ],
+        "distractor_sequence": [
+          1,
+          8,
+          9,
+          4
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field.",
+          "Record note 5: clutter level 2."
+        ],
+        "distractor_profile": "reverse_salience"
+      }
+    },
+    "answer": {
+      "target": [
+        8,
+        1,
+        4,
+        9
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "rotate_left",
+        "params": {
+          "k": 2
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "reverse_salience",
+        "rotating_decoy",
+        "anchor_repeat",
+        "offset_clone",
+        "reverse_salience"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 1,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0006",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "offset_clone",
+        "rotating_decoy",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          3,
+          5,
+          4,
+          9
+        ],
+        "distractor_sequence": [
+          5,
+          4,
+          9,
+          3
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 1: clutter level 3."
+        ],
+        "output": [
+          4,
+          9,
+          3,
+          5
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          7,
+          0,
+          0,
+          3
+        ],
+        "distractor_sequence": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 2: clutter level 3."
+        ],
+        "output": [
+          0,
+          3,
+          7,
+          0
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          1,
+          6,
+          2,
+          0
+        ],
+        "distractor_sequence": [
+          6,
+          1,
+          7,
+          5
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule.",
+          "Record note 3: clutter level 3."
+        ],
+        "output": [
+          2,
+          0,
+          1,
+          6
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          5,
+          3,
+          2,
+          4
+        ],
+        "distractor_sequence": [
+          2,
+          0,
+          1,
+          6
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 4: clutter level 3."
+        ],
+        "output": [
+          2,
+          4,
+          5,
+          3
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          1,
+          6,
+          5,
+          4
+        ],
+        "distractor_sequence": [
+          2,
+          4,
+          5,
+          3
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 5: clutter level 3."
+        ],
+        "distractor_profile": "stale_output"
+      }
+    },
+    "answer": {
+      "target": [
+        5,
+        4,
+        1,
+        6
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "rotate_left",
+        "params": {
+          "k": 2
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "rotating_decoy",
+        "anchor_repeat",
+        "offset_clone",
+        "stale_output",
+        "stale_output"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 2,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0007",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "offset_clone",
+        "reverse_salience",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          3,
+          0,
+          7,
+          8
+        ],
+        "distractor_sequence": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 1: clutter level 4."
+        ],
+        "output": [
+          5,
+          4,
+          3,
+          6
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          0,
+          0,
+          4,
+          4
+        ],
+        "distractor_sequence": [
+          4,
+          4,
+          8,
+          8
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule.",
+          "Record note 2: clutter level 4."
+        ],
+        "output": [
+          2,
+          4,
+          0,
+          2
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          4,
+          4,
+          0,
+          8
+        ],
+        "distractor_sequence": [
+          2,
+          4,
+          0,
+          2
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 3: clutter level 4."
+        ],
+        "output": [
+          6,
+          8,
+          6,
+          6
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          3,
+          4,
+          4,
+          4
+        ],
+        "distractor_sequence": [
+          4,
+          4,
+          4,
+          3
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field.",
+          "Record note 4: clutter level 4."
+        ],
+        "output": [
+          5,
+          8,
+          0,
+          2
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "reverse_salience",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          7,
+          4,
+          5,
+          4
+        ],
+        "distractor_sequence": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 5: clutter level 4."
+        ],
+        "distractor_profile": "anchor_repeat"
+      }
+    },
+    "answer": {
+      "target": [
+        9,
+        8,
+        1,
+        2
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "index_offset",
+        "params": {
+          "k": 2
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "anchor_repeat",
+        "offset_clone",
+        "stale_output",
+        "reverse_salience",
+        "anchor_repeat"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 3,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0008",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "offset_clone",
+        "reverse_salience",
+        "rotating_decoy",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          2,
+          3,
+          1,
+          6
+        ],
+        "distractor_sequence": [
+          8,
+          9,
+          7,
+          2
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule."
+        ],
+        "output": [
+          3,
+          2,
+          4,
+          9
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          7,
+          4,
+          5,
+          5
+        ],
+        "distractor_sequence": [
+          3,
+          2,
+          4,
+          9
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule."
+        ],
+        "output": [
+          8,
+          1,
+          0,
+          0
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          2,
+          3,
+          5,
+          8
+        ],
+        "distractor_sequence": [
+          8,
+          5,
+          3,
+          2
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field."
+        ],
+        "output": [
+          3,
+          2,
+          0,
+          7
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "reverse_salience",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          1,
+          9,
+          3,
+          3
+        ],
+        "distractor_sequence": [
+          1,
+          9,
+          3,
+          3
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule."
+        ],
+        "output": [
+          4,
+          6,
+          2,
+          2
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          6,
+          3,
+          5,
+          3
+        ],
+        "distractor_sequence": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale."
+        ],
+        "distractor_profile": "anchor_repeat"
+      }
+    },
+    "answer": {
+      "target": [
+        9,
+        2,
+        0,
+        2
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "mirror_anchor",
+        "params": {
+          "anchor": 5
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "offset_clone",
+        "stale_output",
+        "reverse_salience",
+        "rotating_decoy",
+        "anchor_repeat"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 0,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0009",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "reverse_salience",
+        "rotating_decoy",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          1,
+          9,
+          1,
+          5
+        ],
+        "distractor_sequence": [
+          4,
+          9,
+          1,
+          8
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 1: clutter level 2."
+        ],
+        "output": [
+          8,
+          0,
+          8,
+          4
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          9,
+          8,
+          3,
+          6
+        ],
+        "distractor_sequence": [
+          6,
+          3,
+          8,
+          9
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field.",
+          "Record note 2: clutter level 2."
+        ],
+        "output": [
+          0,
+          1,
+          6,
+          3
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "reverse_salience",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          8,
+          7,
+          2,
+          8
+        ],
+        "distractor_sequence": [
+          8,
+          8,
+          7,
+          2
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 3: clutter level 2."
+        ],
+        "output": [
+          1,
+          2,
+          7,
+          1
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          5,
+          0,
+          8,
+          1
+        ],
+        "distractor_sequence": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 4: clutter level 2."
+        ],
+        "output": [
+          4,
+          9,
+          1,
+          8
+        ],
+        "salience_bias": "balanced",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          9,
+          7,
+          2,
+          4
+        ],
+        "distractor_sequence": [
+          4,
+          9,
+          1,
+          8
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 5: clutter level 2."
+        ],
+        "distractor_profile": "stale_output"
+      }
+    },
+    "answer": {
+      "target": [
+        0,
+        2,
+        7,
+        5
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "mirror_anchor",
+        "params": {
+          "anchor": 9
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "stale_output",
+        "reverse_salience",
+        "rotating_decoy",
+        "anchor_repeat",
+        "stale_output"
+      ],
+      "query_confusion_score": 2.1,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 1,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0010",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "offset_clone",
+        "reverse_salience",
+        "rotating_decoy"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          3,
+          9,
+          0,
+          7
+        ],
+        "distractor_sequence": [
+          7,
+          0,
+          9,
+          3
+        ],
+        "irrelevant_notes": [
+          "Visual note: the mirrored stripe is intentionally eye-catching.",
+          "Archive note: analysts once overfit to the mirrored field.",
+          "Record note 1: clutter level 3."
+        ],
+        "output": [
+          9,
+          0,
+          7,
+          3
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "reverse_salience",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          5,
+          3,
+          4,
+          0
+        ],
+        "distractor_sequence": [
+          4,
+          0,
+          5,
+          3
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 2: clutter level 3."
+        ],
+        "output": [
+          3,
+          4,
+          0,
+          5
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          8,
+          5,
+          7,
+          7
+        ],
+        "distractor_sequence": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 3: clutter level 3."
+        ],
+        "output": [
+          5,
+          7,
+          7,
+          8
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          9,
+          0,
+          3,
+          9
+        ],
+        "distractor_sequence": [
+          4,
+          5,
+          8,
+          4
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule.",
+          "Record note 4: clutter level 3."
+        ],
+        "output": [
+          0,
+          3,
+          9,
+          9
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          9,
+          2,
+          3,
+          9
+        ],
+        "distractor_sequence": [
+          3,
+          9,
+          9,
+          2
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 5: clutter level 3."
+        ],
+        "distractor_profile": "rotating_decoy"
+      }
+    },
+    "answer": {
+      "target": [
+        2,
+        3,
+        9,
+        9
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "rotate_left",
+        "params": {
+          "k": 1
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "reverse_salience",
+        "rotating_decoy",
+        "anchor_repeat",
+        "offset_clone",
+        "rotating_decoy"
+      ],
+      "query_confusion_score": 2.35,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 2,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  },
+  {
+    "task_id": "attention_distractors_0011",
+    "family": "attention_distractors",
+    "difficulty": "hard",
+    "context": {
+      "instruction": "Infer the latent transformation from prior records. Each record contains one causally relevant signal field plus several structured distractors.",
+      "relevant_field_unknown_to_solver": true,
+      "distractor_modes": [
+        "anchor_repeat",
+        "offset_clone",
+        "rotating_decoy",
+        "stale_output"
+      ]
+    },
+    "examples": [
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          1,
+          9,
+          9,
+          0
+        ],
+        "distractor_sequence": [
+          9,
+          9,
+          0,
+          1
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 1: clutter level 4."
+        ],
+        "output": [
+          0,
+          2,
+          2,
+          1
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "rotating_decoy",
+        "example_index": 0
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          4,
+          5,
+          1,
+          6
+        ],
+        "distractor_sequence": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "irrelevant_notes": [
+          "Gloss note: a repeated anchor token can look predictive without being generative.",
+          "Review note: static repetitions are often tempting but stale.",
+          "Record note 2: clutter level 4."
+        ],
+        "output": [
+          7,
+          6,
+          0,
+          5
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "anchor_repeat",
+        "example_index": 1
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          4,
+          6,
+          1,
+          8
+        ],
+        "distractor_sequence": [
+          8,
+          0,
+          5,
+          2
+        ],
+        "irrelevant_notes": [
+          "Operator note: a constant shift appears in the decoy field but drifts across records.",
+          "Control note: local offsets are present, but not the governing rule.",
+          "Record note 3: clutter level 4."
+        ],
+        "output": [
+          7,
+          5,
+          0,
+          3
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "offset_clone",
+        "example_index": 2
+      },
+      {
+        "phase": "mixed_signal",
+        "signal_sequence": [
+          1,
+          6,
+          6,
+          2
+        ],
+        "distractor_sequence": [
+          7,
+          5,
+          0,
+          3
+        ],
+        "irrelevant_notes": [
+          "Memory note: one field echoes an earlier answer and can feel trustworthy.",
+          "History note: prior outputs are present as noise, not as the current rule.",
+          "Record note 4: clutter level 4."
+        ],
+        "output": [
+          0,
+          5,
+          5,
+          9
+        ],
+        "salience_bias": "distractor_sequence",
+        "distractor_profile": "stale_output",
+        "example_index": 3
+      }
+    ],
+    "query": {
+      "record": {
+        "signal_sequence": [
+          1,
+          5,
+          1,
+          6
+        ],
+        "distractor_sequence": [
+          1,
+          6,
+          1,
+          5
+        ],
+        "irrelevant_notes": [
+          "Structural note: a rotating side-channel sometimes looks causal.",
+          "Telemetry note: the decoy field preserves motion but not the rule.",
+          "Record note 5: clutter level 4."
+        ],
+        "distractor_profile": "rotating_decoy"
+      }
+    },
+    "answer": {
+      "target": [
+        0,
+        6,
+        0,
+        5
+      ],
+      "relevant_field": "signal_sequence"
+    },
+    "metadata": {
+      "internal_rule": {
+        "name": "mirror_anchor",
+        "params": {
+          "anchor": 1
+        }
+      },
+      "distractor_pattern": "mixed_decoy_bank",
+      "distractor_profiles": [
+        "rotating_decoy",
+        "anchor_repeat",
+        "offset_clone",
+        "stale_output",
+        "rotating_decoy"
+      ],
+      "query_confusion_score": 2.35,
+      "anti_template_strength": 2,
+      "distractor_diversity_level": 3,
+      "cue_delay_level": 1,
+      "adversarial_query_mode": "max_confusable"
+    },
+    "latent_rule_summary": "Only the signal field follows the hidden rule; distractors mix stale outputs, mirrored structure, offset clones, and salience-heavy decoys.",
+    "shift_type": "none",
+    "distractor_level": 3,
+    "scoring_notes": [
+      "Primary accuracy depends on recovering the correct output.",
+      "High-salience distractors are intentionally diverse and partially correlated with the answer.",
+      "Interactive scoring should reward delayed recovery after the disambiguating cue."
+    ]
+  }
+]
