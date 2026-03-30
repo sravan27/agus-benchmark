@@ -1,6 +1,28 @@
 # AGUS: Adaptive Generalization Under Shift
 
-AGUS is a synthetic benchmark suite for the Kaggle competition **"Measuring Progress Toward AGI - Cognitive Abilities."** The design goal is to test **dynamic cognition**, not static recall.
+AGUS is a **Learning-track benchmark** for the Kaggle competition **"Measuring Progress Toward AGI - Cognitive Abilities."** Its core claim is simple:
+
+**static correctness and adaptive reasoning quality can diverge sharply.**
+
+In the current local-model results:
+
+- `llama3.1:8b` scores higher on static accuracy: `0.6179`
+- `qwen2.5:7b` scores higher on `belief_trajectory_quality`: `0.7281` versus `0.5434`
+- `qwen2.5:7b` is also less brittle overall on `trajectory_instability_index`: `0.2626` versus `0.3348`, lower is better
+
+AGUS is not just another static reasoning dataset. It is designed to test **adaptive generalization under shift**: whether a model can infer a rule, detect change, revise its hypothesis, recalibrate confidence, resist distractors, and maintain coherent belief updates across short interactive episodes.
+
+Submission-oriented docs:
+
+- [final_learning_track_submission.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
+- [final_submission_summary.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_submission_summary.md)
+- [final_track_positioning.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_track_positioning.md)
+- [final_results_table.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_results_table.md)
+- [final_failure_gallery.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_failure_gallery.md)
+- [final_submission_checklist.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_submission_checklist.md)
+- [final_requirements_audit.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_requirements_audit.md)
+
+The design goal is to test **dynamic cognition**, not static recall.
 
 Instead of rewarding benchmark familiarity, AGUS asks whether a model can:
 
