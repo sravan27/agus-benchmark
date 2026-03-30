@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agus-benchmark"
+version = "0.1.0"
+description = "Adaptive Generalization Under Shift benchmark suite for Measuring Progress Toward AGI."
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2.0",
+    "jupyter>=1.0.0",
+]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_default_fixture_loop_scope = "function"

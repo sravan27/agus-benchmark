@@ -1,0 +1,2371 @@
+{
+  "selected_task_ids": [
+    "attention_distractors_0000",
+    "hidden_rule_0000",
+    "metacog_revision_0000",
+    "shift_transfer_0000",
+    "social_miniworlds_0000"
+  ],
+  "supported_families": [
+    "attention_distractors",
+    "hidden_rule",
+    "metacog_revision",
+    "shift_transfer",
+    "social_miniworlds"
+  ],
+  "sessions": [
+    {
+      "task_id": "attention_distractors_0000",
+      "family": "attention_distractors",
+      "episode_type": "attention_recovery_episode",
+      "initial_context": {
+        "instruction": "Infer the latent transformation from prior records. Each record contains relevant signal and irrelevant but patterned distractors.",
+        "distractor_level": 0
+      },
+      "turns": [
+        {
+          "turn_spec": {
+            "turn_id": "turn_1_mixed_context",
+            "prompt": {
+              "query_record": {
+                "signal_sequence": [
+                  1,
+                  0,
+                  8,
+                  4
+                ],
+                "distractor_sequence": [
+                  4,
+                  8,
+                  0,
+                  1
+                ],
+                "irrelevant_notes": [
+                  "Reminder: the shiny pattern often repeats, but not always."
+                ]
+              },
+              "examples": [
+                {
+                  "phase": "mixed_signal",
+                  "signal_sequence": [
+                    3,
+                    3,
+                    8,
+                    4
+                  ],
+                  "distractor_sequence": [
+                    4,
+                    8,
+                    3,
+                    3
+                  ],
+                  "irrelevant_notes": [
+                    "Reminder: the shiny pattern often repeats, but not always."
+                  ],
+                  "output": [
+                    6,
+                    6,
+                    1,
+                    7
+                  ],
+                  "salience_bias": "balanced",
+                  "example_index": 0
+                },
+                {
+                  "phase": "mixed_signal",
+                  "signal_sequence": [
+                    6,
+                    8,
+                    7,
+                    8
+                  ],
+                  "distractor_sequence": [
+                    8,
+                    7,
+                    8,
+                    6
+                  ],
+                  "irrelevant_notes": [
+                    "Reminder: the shiny pattern often repeats, but not always."
+                  ],
+                  "output": [
+                    9,
+                    1,
+                    0,
+                    1
+                  ],
+                  "salience_bias": "balanced",
+                  "example_index": 1
+                }
+              ],
+              "request": "Answer the query, state which fields you are attending to, and provide confidence under mixed relevant and irrelevant information."
+            },
+            "event": null,
+            "accepted_answers": [
+              [
+                4,
+                3,
+                1,
+                7
+              ]
+            ],
+            "expected_confidence": 0.62,
+            "expected_rule": "add_const",
+            "expected_attended_signals": [
+              "signal_sequence"
+            ],
+            "expected_ignored_signals": [
+              "distractor_sequence"
+            ],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_1_mixed_context",
+            "answer": [
+              7,
+              1,
+              3,
+              4
+            ],
+            "confidence": 0.7,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [
+              "distractor_sequence"
+            ],
+            "ignored_signals": [
+              "signal_sequence"
+            ],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "captured_by_distractor"
+            ],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          "derived": {
+            "answer_correct": false,
+            "signal_focus_correct": false,
+            "ignored_distractor": false,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_2_noise_escalation",
+            "prompt": {
+              "query_record": {
+                "signal_sequence": [
+                  1,
+                  0,
+                  8,
+                  4
+                ],
+                "distractor_sequence": [
+                  4,
+                  8,
+                  0,
+                  1
+                ],
+                "irrelevant_notes": [
+                  "Reminder: the shiny pattern often repeats, but not always."
+                ]
+              },
+              "request": "Update your answer and confidence under increased clutter."
+            },
+            "event": {
+              "event_type": "noise_escalation",
+              "message": "A new high-salience decoy appears and suggests the distractor field may matter.",
+              "example": {
+                "phase": "mixed_signal",
+                "signal_sequence": [
+                  8,
+                  5,
+                  9,
+                  5
+                ],
+                "distractor_sequence": [
+                  5,
+                  9,
+                  5,
+                  8
+                ],
+                "irrelevant_notes": [
+                  "Reminder: the shiny pattern often repeats, but not always."
+                ],
+                "output": [
+                  1,
+                  8,
+                  2,
+                  8
+                ],
+                "salience_bias": "balanced",
+                "example_index": 2
+              },
+              "decoy_hypothesis_output": [
+                7,
+                1,
+                3,
+                4
+              ]
+            },
+            "accepted_answers": [
+              [
+                4,
+                3,
+                1,
+                7
+              ]
+            ],
+            "expected_confidence": 0.56,
+            "expected_rule": "add_const",
+            "expected_attended_signals": [
+              "signal_sequence"
+            ],
+            "expected_ignored_signals": [
+              "distractor_sequence"
+            ],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_2_noise_escalation",
+            "answer": [
+              7,
+              1,
+              3,
+              4
+            ],
+            "confidence": 0.56,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [
+              "distractor_sequence"
+            ],
+            "ignored_signals": [
+              "signal_sequence"
+            ],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "noise_escalation"
+            ],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          "derived": {
+            "answer_correct": false,
+            "signal_focus_correct": false,
+            "ignored_distractor": false,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_3_disambiguating_cue",
+            "prompt": {
+              "query_record": {
+                "signal_sequence": [
+                  1,
+                  0,
+                  8,
+                  4
+                ],
+                "distractor_sequence": [
+                  4,
+                  8,
+                  0,
+                  1
+                ],
+                "irrelevant_notes": [
+                  "Reminder: the shiny pattern often repeats, but not always."
+                ]
+              },
+              "request": "Revise your answer, attended signals, and confidence after the cue."
+            },
+            "event": {
+              "event_type": "disambiguating_cue",
+              "message": "A controlled test reveals which field actually matters.",
+              "controlled_example": {
+                "phase": "controlled_cue",
+                "signal_sequence": [
+                  1,
+                  0,
+                  8,
+                  4
+                ],
+                "distractor_sequence": [
+                  4,
+                  8,
+                  3,
+                  3
+                ],
+                "output": [
+                  4,
+                  3,
+                  1,
+                  7
+                ],
+                "message": "The output stays tied to the signal even when the distractor changes."
+              }
+            },
+            "accepted_answers": [
+              [
+                4,
+                3,
+                1,
+                7
+              ]
+            ],
+            "expected_confidence": 0.72,
+            "expected_rule": "add_const",
+            "expected_attended_signals": [
+              "signal_sequence"
+            ],
+            "expected_ignored_signals": [
+              "distractor_sequence"
+            ],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_3_disambiguating_cue",
+            "answer": [
+              4,
+              3,
+              1,
+              7
+            ],
+            "confidence": 0.72,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [
+              "signal_sequence"
+            ],
+            "ignored_signals": [
+              "distractor_sequence"
+            ],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "attention_recovery",
+              "cue_used"
+            ],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": true,
+            "ignored_distractor": true,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_4_compressed_summary",
+            "prompt": {
+              "query_record": {
+                "signal_sequence": [
+                  1,
+                  0,
+                  8,
+                  4
+                ],
+                "distractor_sequence": [
+                  4,
+                  8,
+                  0,
+                  1
+                ],
+                "irrelevant_notes": [
+                  "Reminder: the shiny pattern often repeats, but not always."
+                ]
+              },
+              "request": "Give the final answer and name the causally relevant field."
+            },
+            "event": {
+              "event_type": "compressed_summary_challenge",
+              "message": "Now answer again from a compressed recap while preserving the correct attentional focus.",
+              "summary": {
+                "relevant_field": "signal_sequence",
+                "query_signal_sequence": [
+                  1,
+                  0,
+                  8,
+                  4
+                ],
+                "query_distractor_sequence": [
+                  4,
+                  8,
+                  0,
+                  1
+                ]
+              }
+            },
+            "accepted_answers": [
+              [
+                4,
+                3,
+                1,
+                7
+              ]
+            ],
+            "expected_confidence": 0.82,
+            "expected_rule": "add_const",
+            "expected_attended_signals": [
+              "signal_sequence"
+            ],
+            "expected_ignored_signals": [
+              "distractor_sequence"
+            ],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_4_compressed_summary",
+            "answer": [
+              4,
+              3,
+              1,
+              7
+            ],
+            "confidence": 0.82,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": true,
+            "contradiction_detected": false,
+            "attended_signals": [
+              "signal_sequence"
+            ],
+            "ignored_signals": [
+              "distractor_sequence"
+            ],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "maintained_signal_focus"
+            ],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": true,
+            "ignored_distractor": true,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        }
+      ],
+      "expected": {
+        "accepted_initial_targets": [
+          [
+            4,
+            3,
+            1,
+            7
+          ]
+        ],
+        "accepted_revised_targets": [
+          [
+            4,
+            3,
+            1,
+            7
+          ]
+        ],
+        "should_update": true,
+        "contradiction_expected": true,
+        "update_mode": "refocus_signal",
+        "canonical_initial_rule": "add_const",
+        "canonical_revised_rule": "add_const",
+        "expected_initial_confidence": 0.62,
+        "expected_revised_confidence": 0.82,
+        "cue_turn": 3,
+        "trap_signal": "distractor_sequence",
+        "relevant_signal": "signal_sequence",
+        "decoy_target": [
+          7,
+          1,
+          3,
+          4
+        ],
+        "distractor_level": 0
+      },
+      "response": {
+        "task_id": "attention_distractors_0000",
+        "initial_answer": [
+          7,
+          1,
+          3,
+          4
+        ],
+        "initial_confidence": 0.7,
+        "initial_rule_explanation": "add_const",
+        "revised_answer": [
+          4,
+          3,
+          1,
+          7
+        ],
+        "revised_confidence": 0.82,
+        "revised_rule_explanation": "add_const",
+        "evidence_acknowledged": true,
+        "contradiction_detected": true,
+        "turns": [
+          {
+            "turn_id": "turn_1_mixed_context",
+            "answer": [
+              7,
+              1,
+              3,
+              4
+            ],
+            "confidence": 0.7,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [
+              "distractor_sequence"
+            ],
+            "ignored_signals": [
+              "signal_sequence"
+            ],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "captured_by_distractor"
+            ],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          {
+            "turn_id": "turn_2_noise_escalation",
+            "answer": [
+              7,
+              1,
+              3,
+              4
+            ],
+            "confidence": 0.56,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [
+              "distractor_sequence"
+            ],
+            "ignored_signals": [
+              "signal_sequence"
+            ],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "noise_escalation"
+            ],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          {
+            "turn_id": "turn_3_disambiguating_cue",
+            "answer": [
+              4,
+              3,
+              1,
+              7
+            ],
+            "confidence": 0.72,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [
+              "signal_sequence"
+            ],
+            "ignored_signals": [
+              "distractor_sequence"
+            ],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "attention_recovery",
+              "cue_used"
+            ],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          {
+            "turn_id": "turn_4_compressed_summary",
+            "answer": [
+              4,
+              3,
+              1,
+              7
+            ],
+            "confidence": 0.82,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": true,
+            "contradiction_detected": false,
+            "attended_signals": [
+              "signal_sequence"
+            ],
+            "ignored_signals": [
+              "distractor_sequence"
+            ],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "maintained_signal_focus"
+            ],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          }
+        ],
+        "turn_confidences": [
+          0.7,
+          0.56,
+          0.72,
+          0.82
+        ],
+        "belief_state_trace": [],
+        "attended_signals": [
+          [
+            "distractor_sequence"
+          ],
+          [
+            "distractor_sequence"
+          ],
+          [
+            "signal_sequence"
+          ],
+          [
+            "signal_sequence"
+          ]
+        ],
+        "ignored_signals": [
+          [
+            "signal_sequence"
+          ],
+          [
+            "signal_sequence"
+          ],
+          [
+            "distractor_sequence"
+          ],
+          [
+            "distractor_sequence"
+          ]
+        ],
+        "trust_scores_by_agent": {},
+        "inferred_agent_beliefs": {},
+        "revision_events": [
+          "captured_by_distractor",
+          "noise_escalation",
+          "attention_recovery",
+          "cue_used",
+          "maintained_signal_focus"
+        ],
+        "metadata": {
+          "initial_rule_tag": "add_const",
+          "revised_rule_tag": "add_const",
+          "episode_type": "attention_recovery_episode"
+        }
+      },
+      "derived": {
+        "initial_correct": false,
+        "revised_correct": true,
+        "turn_correctness": [
+          false,
+          false,
+          true,
+          true
+        ],
+        "answer_changed": true,
+        "rule_changed": false,
+        "belief_updated": true,
+        "num_turns": 4,
+        "cue_turn": 3,
+        "capture_turns": [
+          1,
+          2
+        ],
+        "recovery_turn": 3
+      }
+    },
+    {
+      "task_id": "hidden_rule_0000",
+      "family": "hidden_rule",
+      "episode_type": "two_turn_rule_shift",
+      "initial_context": {
+        "instruction": "Infer the hidden sequence transformation from the induction examples. Then continue after the rule unexpectedly changes.",
+        "symbol_space": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "sequence_length": 4
+      },
+      "turns": [
+        {
+          "turn_spec": {
+            "turn_id": "turn_1_initial_hypothesis",
+            "prompt": {
+              "probe_input": [
+                5,
+                7,
+                9,
+                3
+              ],
+              "request": "Infer the current rule from the induction examples and answer the probe.",
+              "examples": [
+                {
+                  "phase": "induction",
+                  "input": [
+                    2,
+                    8,
+                    7,
+                    9
+                  ],
+                  "output": [
+                    4,
+                    2,
+                    3,
+                    7
+                  ]
+                },
+                {
+                  "phase": "induction",
+                  "input": [
+                    2,
+                    1,
+                    7,
+                    4
+                  ],
+                  "output": [
+                    4,
+                    5,
+                    3,
+                    2
+                  ]
+                },
+                {
+                  "phase": "induction",
+                  "input": [
+                    2,
+                    1,
+                    8,
+                    0
+                  ],
+                  "output": [
+                    4,
+                    5,
+                    4,
+                    8
+                  ]
+                }
+              ]
+            },
+            "event": null,
+            "accepted_answers": [
+              [
+                7,
+                1,
+                5,
+                1
+              ]
+            ],
+            "expected_confidence": 0.65,
+            "expected_rule": "index_offset",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_1_initial_hypothesis",
+            "answer": [
+              1,
+              5,
+              1,
+              7
+            ],
+            "confidence": 0.65,
+            "rule_explanation": "index_offset",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [],
+            "metadata": {
+              "rule_tag": "index_offset"
+            }
+          },
+          "derived": {
+            "answer_correct": false,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_2_rule_shift",
+            "prompt": {
+              "probe_input": [
+                5,
+                7,
+                9,
+                3
+              ],
+              "request": "Revise the rule and answer the same probe after seeing the contradiction."
+            },
+            "event": {
+              "event_type": "rule_shift_contradiction",
+              "message": "A new observation conflicts with the earlier pattern.",
+              "example": {
+                "phase": "shift_feedback",
+                "input": [
+                  1,
+                  0,
+                  0,
+                  3
+                ],
+                "output": [
+                  2,
+                  2,
+                  3,
+                  7
+                ]
+              }
+            },
+            "accepted_answers": [
+              [
+                6,
+                9,
+                2,
+                7
+              ]
+            ],
+            "expected_confidence": 0.82,
+            "expected_rule": "index_offset",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_2_rule_shift",
+            "answer": [
+              6,
+              9,
+              2,
+              7
+            ],
+            "confidence": 0.82,
+            "rule_explanation": "index_offset",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "rule_shift_update"
+            ],
+            "metadata": {
+              "rule_tag": "index_offset"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        }
+      ],
+      "expected": {
+        "accepted_initial_targets": [
+          [
+            7,
+            1,
+            5,
+            1
+          ]
+        ],
+        "accepted_revised_targets": [
+          [
+            6,
+            9,
+            2,
+            7
+          ]
+        ],
+        "should_update": true,
+        "contradiction_expected": true,
+        "update_mode": "change_rule",
+        "canonical_initial_rule": "index_offset",
+        "canonical_revised_rule": "index_offset",
+        "expected_initial_confidence": 0.65,
+        "expected_revised_confidence": 0.82,
+        "cue_turn": 2
+      },
+      "response": {
+        "task_id": "hidden_rule_0000",
+        "initial_answer": [
+          1,
+          5,
+          1,
+          7
+        ],
+        "initial_confidence": 0.65,
+        "initial_rule_explanation": "index_offset",
+        "revised_answer": [
+          6,
+          9,
+          2,
+          7
+        ],
+        "revised_confidence": 0.82,
+        "revised_rule_explanation": "index_offset",
+        "evidence_acknowledged": true,
+        "contradiction_detected": true,
+        "turns": [
+          {
+            "turn_id": "turn_1_initial_hypothesis",
+            "answer": [
+              1,
+              5,
+              1,
+              7
+            ],
+            "confidence": 0.65,
+            "rule_explanation": "index_offset",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [],
+            "metadata": {
+              "rule_tag": "index_offset"
+            }
+          },
+          {
+            "turn_id": "turn_2_rule_shift",
+            "answer": [
+              6,
+              9,
+              2,
+              7
+            ],
+            "confidence": 0.82,
+            "rule_explanation": "index_offset",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "rule_shift_update"
+            ],
+            "metadata": {
+              "rule_tag": "index_offset"
+            }
+          }
+        ],
+        "turn_confidences": [
+          0.65,
+          0.82
+        ],
+        "belief_state_trace": [],
+        "attended_signals": [
+          [],
+          []
+        ],
+        "ignored_signals": [
+          [],
+          []
+        ],
+        "trust_scores_by_agent": {},
+        "inferred_agent_beliefs": {},
+        "revision_events": [
+          "rule_shift_update"
+        ],
+        "metadata": {
+          "initial_rule_tag": "index_offset",
+          "revised_rule_tag": "index_offset",
+          "episode_type": "two_turn_rule_shift"
+        }
+      },
+      "derived": {
+        "initial_correct": false,
+        "revised_correct": true,
+        "turn_correctness": [
+          false,
+          true
+        ],
+        "answer_changed": true,
+        "rule_changed": false,
+        "belief_updated": true,
+        "num_turns": 2
+      }
+    },
+    {
+      "task_id": "metacog_revision_0000",
+      "family": "metacog_revision",
+      "episode_type": "two_turn_belief_revision",
+      "initial_context": {
+        "instruction": "Give an initial answer, confidence, and short rule hypothesis from the ambiguous evidence. Then revise after seeing corrective evidence.",
+        "response_fields": [
+          "initial_answer",
+          "initial_confidence",
+          "initial_rule_guess",
+          "revised_answer",
+          "revised_confidence",
+          "revised_rule_guess"
+        ]
+      },
+      "turns": [
+        {
+          "turn_spec": {
+            "turn_id": "turn_1_ambiguous_hypothesis",
+            "prompt": {
+              "probe_input": [
+                4,
+                6,
+                6,
+                7,
+                2
+              ],
+              "request": "Give a tentative answer, hypothesis, and confidence under ambiguity.",
+              "examples": [
+                {
+                  "phase": "ambiguous_evidence",
+                  "input": [
+                    9,
+                    8,
+                    0,
+                    8,
+                    9
+                  ],
+                  "output": [
+                    1,
+                    0,
+                    2,
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "phase": "ambiguous_evidence",
+                  "input": [
+                    5,
+                    7,
+                    8,
+                    7,
+                    5
+                  ],
+                  "output": [
+                    7,
+                    9,
+                    0,
+                    9,
+                    7
+                  ]
+                },
+                {
+                  "phase": "ambiguous_evidence",
+                  "input": [
+                    1,
+                    7,
+                    9,
+                    7,
+                    1
+                  ],
+                  "output": [
+                    3,
+                    9,
+                    1,
+                    9,
+                    3
+                  ]
+                }
+              ]
+            },
+            "event": null,
+            "accepted_answers": [
+              [
+                6,
+                8,
+                8,
+                9,
+                4
+              ],
+              [
+                4,
+                9,
+                8,
+                8,
+                6
+              ]
+            ],
+            "expected_confidence": 0.4,
+            "expected_rule": [
+              "add_const",
+              "reverse_add"
+            ],
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_1_ambiguous_hypothesis",
+            "answer": [
+              6,
+              8,
+              8,
+              9,
+              4
+            ],
+            "confidence": 0.4,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_2_corrective_revision",
+            "prompt": {
+              "probe_input": [
+                4,
+                6,
+                6,
+                7,
+                2
+              ],
+              "request": "Revise your answer, confidence, and hypothesis after the corrective evidence."
+            },
+            "event": {
+              "event_type": "corrective_evidence",
+              "message": "A new example disambiguates the competing hypotheses.",
+              "example": {
+                "phase": "corrective_evidence",
+                "input": [
+                  0,
+                  1,
+                  6,
+                  1,
+                  8
+                ],
+                "output": [
+                  0,
+                  3,
+                  8,
+                  3,
+                  2
+                ]
+              }
+            },
+            "accepted_answers": [
+              [
+                4,
+                9,
+                8,
+                8,
+                6
+              ]
+            ],
+            "expected_confidence": 0.9,
+            "expected_rule": "reverse_add",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_2_corrective_revision",
+            "answer": [
+              4,
+              9,
+              8,
+              8,
+              6
+            ],
+            "confidence": 0.9,
+            "rule_explanation": "reverse_add",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "hypothesis_disambiguated"
+            ],
+            "metadata": {
+              "rule_tag": "reverse_add"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        }
+      ],
+      "expected": {
+        "accepted_initial_targets": [
+          [
+            6,
+            8,
+            8,
+            9,
+            4
+          ],
+          [
+            4,
+            9,
+            8,
+            8,
+            6
+          ]
+        ],
+        "accepted_revised_targets": [
+          [
+            4,
+            9,
+            8,
+            8,
+            6
+          ]
+        ],
+        "should_update": true,
+        "contradiction_expected": true,
+        "update_mode": "disambiguate_rule",
+        "canonical_initial_rule": [
+          "add_const",
+          "reverse_add"
+        ],
+        "canonical_revised_rule": "reverse_add",
+        "expected_initial_confidence": 0.4,
+        "expected_revised_confidence": 0.9,
+        "cue_turn": 2
+      },
+      "response": {
+        "task_id": "metacog_revision_0000",
+        "initial_answer": [
+          6,
+          8,
+          8,
+          9,
+          4
+        ],
+        "initial_confidence": 0.4,
+        "initial_rule_explanation": "add_const",
+        "revised_answer": [
+          4,
+          9,
+          8,
+          8,
+          6
+        ],
+        "revised_confidence": 0.9,
+        "revised_rule_explanation": "reverse_add",
+        "evidence_acknowledged": true,
+        "contradiction_detected": true,
+        "turns": [
+          {
+            "turn_id": "turn_1_ambiguous_hypothesis",
+            "answer": [
+              6,
+              8,
+              8,
+              9,
+              4
+            ],
+            "confidence": 0.4,
+            "rule_explanation": "add_const",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [],
+            "metadata": {
+              "rule_tag": "add_const"
+            }
+          },
+          {
+            "turn_id": "turn_2_corrective_revision",
+            "answer": [
+              4,
+              9,
+              8,
+              8,
+              6
+            ],
+            "confidence": 0.9,
+            "rule_explanation": "reverse_add",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "hypothesis_disambiguated"
+            ],
+            "metadata": {
+              "rule_tag": "reverse_add"
+            }
+          }
+        ],
+        "turn_confidences": [
+          0.4,
+          0.9
+        ],
+        "belief_state_trace": [],
+        "attended_signals": [
+          [],
+          []
+        ],
+        "ignored_signals": [
+          [],
+          []
+        ],
+        "trust_scores_by_agent": {},
+        "inferred_agent_beliefs": {},
+        "revision_events": [
+          "hypothesis_disambiguated"
+        ],
+        "metadata": {
+          "initial_rule_tag": "add_const",
+          "revised_rule_tag": "reverse_add",
+          "episode_type": "two_turn_belief_revision"
+        }
+      },
+      "derived": {
+        "initial_correct": true,
+        "revised_correct": true,
+        "turn_correctness": [
+          true,
+          true
+        ],
+        "answer_changed": true,
+        "rule_changed": true,
+        "belief_updated": true,
+        "num_turns": 2
+      }
+    },
+    {
+      "task_id": "shift_transfer_0000",
+      "family": "shift_transfer",
+      "episode_type": "two_turn_representation_shift",
+      "initial_context": {
+        "instruction": "Infer the latent transformation from examples in one representation, then apply the same structure after the symbols are remapped.",
+        "source_representation": "circle triangle square star",
+        "transfer_representation": "ka zu mi to"
+      },
+      "turns": [
+        {
+          "turn_spec": {
+            "turn_id": "turn_1_source_rule",
+            "prompt": {
+              "probe_input": [
+                "triangle",
+                "triangle",
+                "arc",
+                "line"
+              ],
+              "request": "Answer the source-form query, explain the rule, and provide confidence.",
+              "examples": [
+                {
+                  "phase": "learn_source_representation",
+                  "input": [
+                    "circle",
+                    "cross",
+                    "hex",
+                    "line"
+                  ],
+                  "output": [
+                    "triangle",
+                    "triangle",
+                    "arc",
+                    "circle"
+                  ]
+                },
+                {
+                  "phase": "learn_source_representation",
+                  "input": [
+                    "line",
+                    "wave",
+                    "dot",
+                    "square"
+                  ],
+                  "output": [
+                    "arc",
+                    "circle",
+                    "wave",
+                    "line"
+                  ]
+                },
+                {
+                  "phase": "learn_source_representation",
+                  "input": [
+                    "star",
+                    "hex",
+                    "arc",
+                    "circle"
+                  ],
+                  "output": [
+                    "hex",
+                    "line",
+                    "circle",
+                    "hex"
+                  ]
+                },
+                {
+                  "phase": "learn_source_representation",
+                  "input": [
+                    "star",
+                    "cross",
+                    "arc",
+                    "circle"
+                  ],
+                  "output": [
+                    "hex",
+                    "triangle",
+                    "circle",
+                    "hex"
+                  ]
+                }
+              ]
+            },
+            "event": null,
+            "accepted_answers": [
+              [
+                "square",
+                "star",
+                "circle",
+                "circle"
+              ]
+            ],
+            "expected_confidence": 0.74,
+            "expected_rule": "index_offset",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_1_source_rule",
+            "answer": [
+              "square",
+              "star",
+              "circle",
+              "circle"
+            ],
+            "confidence": 0.74,
+            "rule_explanation": "index_offset",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [],
+            "metadata": {
+              "rule_tag": "index_offset"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_2_representation_shift",
+            "prompt": {
+              "probe_input": [
+                "ka",
+                "su",
+                "lo",
+                "ve"
+              ],
+              "request": "Apply the same latent rule in the new representation."
+            },
+            "event": {
+              "event_type": "representation_shift",
+              "message": "The symbols are remapped, but the latent structure is unchanged.",
+              "example": {
+                "phase": "representation_remap_example",
+                "input": [
+                  "ka",
+                  "ne",
+                  "ra",
+                  "lo"
+                ],
+                "output": [
+                  "zu",
+                  "zu",
+                  "pi",
+                  "ka"
+                ]
+              }
+            },
+            "accepted_answers": [
+              [
+                "zu",
+                "ka",
+                "ne",
+                "ne"
+              ]
+            ],
+            "expected_confidence": 0.8,
+            "expected_rule": "index_offset",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {},
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_2_representation_shift",
+            "answer": [
+              "ne",
+              "ne",
+              "ka",
+              "zu"
+            ],
+            "confidence": 0.8,
+            "rule_explanation": "index_offset",
+            "evidence_acknowledged": true,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "representation_remap"
+            ],
+            "metadata": {
+              "rule_tag": "index_offset"
+            }
+          },
+          "derived": {
+            "answer_correct": false,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": null,
+            "trust_top_correct": null,
+            "observed_trust_top": null
+          }
+        }
+      ],
+      "expected": {
+        "accepted_initial_targets": [
+          [
+            "square",
+            "star",
+            "circle",
+            "circle"
+          ]
+        ],
+        "accepted_revised_targets": [
+          [
+            "zu",
+            "ka",
+            "ne",
+            "ne"
+          ]
+        ],
+        "should_update": true,
+        "contradiction_expected": false,
+        "update_mode": "preserve_rule",
+        "canonical_initial_rule": "index_offset",
+        "canonical_revised_rule": "index_offset",
+        "expected_initial_confidence": 0.74,
+        "expected_revised_confidence": 0.8,
+        "cue_turn": 2
+      },
+      "response": {
+        "task_id": "shift_transfer_0000",
+        "initial_answer": [
+          "square",
+          "star",
+          "circle",
+          "circle"
+        ],
+        "initial_confidence": 0.74,
+        "initial_rule_explanation": "index_offset",
+        "revised_answer": [
+          "ne",
+          "ne",
+          "ka",
+          "zu"
+        ],
+        "revised_confidence": 0.8,
+        "revised_rule_explanation": "index_offset",
+        "evidence_acknowledged": true,
+        "contradiction_detected": false,
+        "turns": [
+          {
+            "turn_id": "turn_1_source_rule",
+            "answer": [
+              "square",
+              "star",
+              "circle",
+              "circle"
+            ],
+            "confidence": 0.74,
+            "rule_explanation": "index_offset",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [],
+            "metadata": {
+              "rule_tag": "index_offset"
+            }
+          },
+          {
+            "turn_id": "turn_2_representation_shift",
+            "answer": [
+              "ne",
+              "ne",
+              "ka",
+              "zu"
+            ],
+            "confidence": 0.8,
+            "rule_explanation": "index_offset",
+            "evidence_acknowledged": true,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {},
+            "inferred_agent_beliefs": {},
+            "revision_events": [
+              "representation_remap"
+            ],
+            "metadata": {
+              "rule_tag": "index_offset"
+            }
+          }
+        ],
+        "turn_confidences": [
+          0.74,
+          0.8
+        ],
+        "belief_state_trace": [],
+        "attended_signals": [
+          [],
+          []
+        ],
+        "ignored_signals": [
+          [],
+          []
+        ],
+        "trust_scores_by_agent": {},
+        "inferred_agent_beliefs": {},
+        "revision_events": [
+          "representation_remap"
+        ],
+        "metadata": {
+          "initial_rule_tag": "index_offset",
+          "revised_rule_tag": "index_offset",
+          "episode_type": "two_turn_representation_shift"
+        }
+      },
+      "derived": {
+        "initial_correct": true,
+        "revised_correct": false,
+        "turn_correctness": [
+          true,
+          false
+        ],
+        "answer_changed": true,
+        "rule_changed": false,
+        "belief_updated": true,
+        "num_turns": 2
+      }
+    },
+    {
+      "task_id": "social_miniworlds_0000",
+      "family": "social_miniworlds",
+      "episode_type": "false_belief_update",
+      "initial_context": {
+        "instruction": "Reason about who knows what, who has stale beliefs, and whose statement should be trusted.",
+        "setting": "A small group is trying to locate a badge.",
+        "agents": [
+          "Ben",
+          "Ava",
+          "Dax",
+          "Faye"
+        ]
+      },
+      "turns": [
+        {
+          "turn_spec": {
+            "turn_id": "turn_1_shared_observation",
+            "prompt": {
+              "request": "Track the initial world state for the badge.",
+              "question": "Where would each agent look for the badge right now?"
+            },
+            "event": {
+              "event_type": "shared_observation",
+              "location": "blue locker"
+            },
+            "accepted_answers": [
+              {
+                "actual_location": "blue locker",
+                "belief_of_false_belief_agent": "blue locker"
+              }
+            ],
+            "expected_confidence": 0.72,
+            "expected_rule": "belief_tracking",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "blue locker"
+            },
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_1_shared_observation",
+            "answer": {
+              "actual_location": "blue locker",
+              "belief_of_false_belief_agent": "blue locker"
+            },
+            "confidence": 0.72,
+            "rule_explanation": "social_reasoning",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {
+              "Ben": 0.4,
+              "Ava": 0.35,
+              "Dax": 0.4,
+              "Faye": 0.6
+            },
+            "inferred_agent_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "blue locker"
+            },
+            "revision_events": [],
+            "metadata": {
+              "rule_tag": "social_reasoning"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": 1.0,
+            "trust_top_correct": null,
+            "observed_trust_top": "Faye"
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_2_hidden_move",
+            "prompt": {
+              "request": "Update the world state and belief state after the hidden move.",
+              "question": "Where is the badge actually, and where does Dax still think it is?"
+            },
+            "event": {
+              "event_type": "hidden_move",
+              "message": "The badge moved to the green locker. Only Faye saw it."
+            },
+            "accepted_answers": [
+              {
+                "actual_location": "green locker",
+                "belief_of_false_belief_agent": "blue locker"
+              }
+            ],
+            "expected_confidence": 0.58,
+            "expected_rule": "belief_tracking",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "expected_trust_top": null,
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_2_hidden_move",
+            "answer": {
+              "actual_location": "green locker",
+              "belief_of_false_belief_agent": "blue locker"
+            },
+            "confidence": 0.58,
+            "rule_explanation": "social_reasoning",
+            "evidence_acknowledged": true,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {
+              "Ben": 0.4,
+              "Ava": 0.35,
+              "Dax": 0.4,
+              "Faye": 0.6
+            },
+            "inferred_agent_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "revision_events": [
+              "belief_update"
+            ],
+            "metadata": {
+              "rule_tag": "social_reasoning"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": 1.0,
+            "trust_top_correct": null,
+            "observed_trust_top": "Faye"
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_3_conflicting_testimony",
+            "prompt": {
+              "request": "Separate world state from stale belief state under conflicting testimony.",
+              "question": "Who should a newcomer trust, and where does Dax still believe the badge is?"
+            },
+            "event": {
+              "event_type": "conflicting_testimony",
+              "truthful_statement": {
+                "phase": "statement",
+                "agent": "Faye",
+                "content": "The badge is now in the green locker.",
+                "knowledge_access": "direct_observation",
+                "incentive": "help_the_search"
+              },
+              "deceptive_statement": {
+                "phase": "statement",
+                "agent": "Ava",
+                "content": "The badge is in the red locker.",
+                "knowledge_access": "no_direct_observation",
+                "incentive": "wins_if_others_search_the_wrong_place"
+              }
+            },
+            "accepted_answers": [
+              {
+                "actual_location": "green locker",
+                "belief_of_false_belief_agent": "blue locker",
+                "trusted_agent": "Faye"
+              }
+            ],
+            "expected_confidence": 0.7,
+            "expected_rule": "belief_tracking",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "expected_trust_top": "Faye",
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_3_conflicting_testimony",
+            "answer": {
+              "actual_location": "green locker",
+              "belief_of_false_belief_agent": "blue locker",
+              "trusted_agent": "Faye"
+            },
+            "confidence": 0.7,
+            "rule_explanation": "social_reasoning",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {
+              "Ben": 0.4,
+              "Ava": 0.1,
+              "Dax": 0.4,
+              "Faye": 0.9
+            },
+            "inferred_agent_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "revision_events": [
+              "belief_update",
+              "trust_revised"
+            ],
+            "metadata": {
+              "rule_tag": "social_reasoning"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": 1.0,
+            "trust_top_correct": true,
+            "observed_trust_top": "Faye"
+          }
+        },
+        {
+          "turn_spec": {
+            "turn_id": "turn_4_final_social_query",
+            "prompt": {
+              "request": "Give the final social inference summary.",
+              "question": "Where is the badge, where does Dax think it is, and who is most trustworthy?"
+            },
+            "event": {
+              "event_type": "final_query",
+              "message": "Answer with the current world state, stale belief, and best informant.",
+              "rumor_statement": {
+                "phase": "statement",
+                "agent": "Ben",
+                "content": "I did not see the move, but Faye says the badge is in the green locker.",
+                "knowledge_access": "second_hand_report",
+                "incentive": "neutral"
+              }
+            },
+            "accepted_answers": [
+              {
+                "actual_location": "green locker",
+                "belief_of_false_belief_agent": "blue locker",
+                "trusted_agent": "Faye"
+              }
+            ],
+            "expected_confidence": 0.82,
+            "expected_rule": "belief_tracking",
+            "expected_attended_signals": [],
+            "expected_ignored_signals": [],
+            "expected_beliefs": {
+              "Ben": "green locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "expected_trust_top": "Faye",
+            "notes": []
+          },
+          "model_response": {
+            "turn_id": "turn_4_final_social_query",
+            "answer": {
+              "actual_location": "green locker",
+              "belief_of_false_belief_agent": "blue locker",
+              "trusted_agent": "Faye"
+            },
+            "confidence": 0.82,
+            "rule_explanation": "social_reasoning",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {
+              "Ben": 0.4,
+              "Ava": 0.1,
+              "Dax": 0.4,
+              "Faye": 0.9
+            },
+            "inferred_agent_beliefs": {
+              "Ben": "green locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "revision_events": [
+              "belief_update",
+              "trust_revised"
+            ],
+            "metadata": {
+              "rule_tag": "social_reasoning"
+            }
+          },
+          "derived": {
+            "answer_correct": true,
+            "signal_focus_correct": null,
+            "ignored_distractor": null,
+            "belief_consistency": 1.0,
+            "trust_top_correct": true,
+            "observed_trust_top": "Faye"
+          }
+        }
+      ],
+      "expected": {
+        "accepted_initial_targets": [
+          {
+            "actual_location": "blue locker",
+            "belief_of_false_belief_agent": "blue locker"
+          }
+        ],
+        "accepted_revised_targets": [
+          {
+            "actual_location": "green locker",
+            "belief_of_false_belief_agent": "blue locker",
+            "trusted_agent": "Faye"
+          }
+        ],
+        "should_update": true,
+        "contradiction_expected": true,
+        "update_mode": "belief_track",
+        "canonical_initial_rule": "social_reasoning",
+        "canonical_revised_rule": "social_reasoning",
+        "expected_initial_confidence": 0.72,
+        "expected_revised_confidence": 0.82,
+        "cue_turn": 2,
+        "reliable_agent": "Faye",
+        "deceptive_agent": "Ava",
+        "false_belief_agent": "Dax",
+        "initial_location": "blue locker",
+        "actual_location": "green locker",
+        "social_episode_type": "false_belief_update"
+      },
+      "response": {
+        "task_id": "social_miniworlds_0000",
+        "initial_answer": {
+          "actual_location": "blue locker",
+          "belief_of_false_belief_agent": "blue locker"
+        },
+        "initial_confidence": 0.72,
+        "initial_rule_explanation": "social_reasoning",
+        "revised_answer": {
+          "actual_location": "green locker",
+          "belief_of_false_belief_agent": "blue locker",
+          "trusted_agent": "Faye"
+        },
+        "revised_confidence": 0.82,
+        "revised_rule_explanation": "social_reasoning",
+        "evidence_acknowledged": true,
+        "contradiction_detected": true,
+        "turns": [
+          {
+            "turn_id": "turn_1_shared_observation",
+            "answer": {
+              "actual_location": "blue locker",
+              "belief_of_false_belief_agent": "blue locker"
+            },
+            "confidence": 0.72,
+            "rule_explanation": "social_reasoning",
+            "evidence_acknowledged": false,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {
+              "Ben": 0.4,
+              "Ava": 0.35,
+              "Dax": 0.4,
+              "Faye": 0.6
+            },
+            "inferred_agent_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "blue locker"
+            },
+            "revision_events": [],
+            "metadata": {
+              "rule_tag": "social_reasoning"
+            }
+          },
+          {
+            "turn_id": "turn_2_hidden_move",
+            "answer": {
+              "actual_location": "green locker",
+              "belief_of_false_belief_agent": "blue locker"
+            },
+            "confidence": 0.58,
+            "rule_explanation": "social_reasoning",
+            "evidence_acknowledged": true,
+            "contradiction_detected": false,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {
+              "Ben": 0.4,
+              "Ava": 0.35,
+              "Dax": 0.4,
+              "Faye": 0.6
+            },
+            "inferred_agent_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "revision_events": [
+              "belief_update"
+            ],
+            "metadata": {
+              "rule_tag": "social_reasoning"
+            }
+          },
+          {
+            "turn_id": "turn_3_conflicting_testimony",
+            "answer": {
+              "actual_location": "green locker",
+              "belief_of_false_belief_agent": "blue locker",
+              "trusted_agent": "Faye"
+            },
+            "confidence": 0.7,
+            "rule_explanation": "social_reasoning",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {
+              "Ben": 0.4,
+              "Ava": 0.1,
+              "Dax": 0.4,
+              "Faye": 0.9
+            },
+            "inferred_agent_beliefs": {
+              "Ben": "blue locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "revision_events": [
+              "belief_update",
+              "trust_revised"
+            ],
+            "metadata": {
+              "rule_tag": "social_reasoning"
+            }
+          },
+          {
+            "turn_id": "turn_4_final_social_query",
+            "answer": {
+              "actual_location": "green locker",
+              "belief_of_false_belief_agent": "blue locker",
+              "trusted_agent": "Faye"
+            },
+            "confidence": 0.82,
+            "rule_explanation": "social_reasoning",
+            "evidence_acknowledged": true,
+            "contradiction_detected": true,
+            "attended_signals": [],
+            "ignored_signals": [],
+            "trust_scores_by_agent": {
+              "Ben": 0.4,
+              "Ava": 0.1,
+              "Dax": 0.4,
+              "Faye": 0.9
+            },
+            "inferred_agent_beliefs": {
+              "Ben": "green locker",
+              "Ava": "blue locker",
+              "Dax": "blue locker",
+              "Faye": "green locker"
+            },
+            "revision_events": [
+              "belief_update",
+              "trust_revised"
+            ],
+            "metadata": {
+              "rule_tag": "social_reasoning"
+            }
+          }
+        ],
+        "turn_confidences": [
+          0.72,
+          0.58,
+          0.7,
+          0.82
+        ],
+        "belief_state_trace": [
+          {
+            "Ben": "blue locker",
+            "Ava": "blue locker",
+            "Dax": "blue locker",
+            "Faye": "blue locker"
+          },
+          {
+            "Ben": "blue locker",
+            "Ava": "blue locker",
+            "Dax": "blue locker",
+            "Faye": "green locker"
+          },
+          {
+            "Ben": "blue locker",
+            "Ava": "blue locker",
+            "Dax": "blue locker",
+            "Faye": "green locker"
+          },
+          {
+            "Ben": "green locker",
+            "Ava": "blue locker",
+            "Dax": "blue locker",
+            "Faye": "green locker"
+          }
+        ],
+        "attended_signals": [
+          [],
+          [],
+          [],
+          []
+        ],
+        "ignored_signals": [
+          [],
+          [],
+          [],
+          []
+        ],
+        "trust_scores_by_agent": {
+          "Ben": 0.4,
+          "Ava": 0.1,
+          "Dax": 0.4,
+          "Faye": 0.9
+        },
+        "inferred_agent_beliefs": {
+          "Ben": "green locker",
+          "Ava": "blue locker",
+          "Dax": "blue locker",
+          "Faye": "green locker"
+        },
+        "revision_events": [
+          "belief_update",
+          "belief_update",
+          "trust_revised",
+          "belief_update",
+          "trust_revised"
+        ],
+        "metadata": {
+          "initial_rule_tag": "social_reasoning",
+          "revised_rule_tag": "social_reasoning",
+          "episode_type": "false_belief_update"
+        }
+      },
+      "derived": {
+        "initial_correct": true,
+        "revised_correct": true,
+        "turn_correctness": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "answer_changed": true,
+        "rule_changed": false,
+        "belief_updated": true,
+        "num_turns": 4,
+        "trust_trace": [
+          "Faye",
+          "Faye",
+          "Faye",
+          "Faye"
+        ],
+        "belief_consistency_trace": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    }
+  ],
+  "interactive_metrics": {
+    "hypothesis_update_score": 0.9333,
+    "contradiction_sensitivity": 1.0,
+    "confidence_recalibration_score": 0.9998,
+    "online_adaptation_gain": 0.6,
+    "belief_trajectory_quality": 0.8833,
+    "attention_recovery_score": 1.0,
+    "distractor_capture_rate": 1.0,
+    "cue_utilization_score": 1.0,
+    "trust_revision_score": 1.0,
+    "belief_state_consistency": 1.0,
+    "deception_sensitivity": 1.0,
+    "multi_turn_adaptation_score": 0.9167,
+    "episode_cognitive_flexibility_score": 0.8591,
+    "num_sessions": 5
+  }
+}

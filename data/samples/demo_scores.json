@@ -1,0 +1,24 @@
+{
+  "accuracy": 0.8929,
+  "family_accuracy": {
+    "hidden_rule": 0.8367,
+    "shift_transfer": 0.925,
+    "metacog_revision": 0.99,
+    "attention_distractors": 0.9,
+    "social_miniworlds": 0.9167
+  },
+  "num_scored_items": 1400,
+  "adaptation_speed": 0.755,
+  "transfer_score": 0.85,
+  "calibration_score": 0.987,
+  "revision_quality": 0.9933,
+  "distractor_robustness": 0.76,
+  "attention_accuracy_by_level": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 0.84,
+    "3": 0.76
+  },
+  "num_tasks": 500,
+  "num_predictions": 500
+}

@@ -1,0 +1,370 @@
+{
+  "total_tasks_processed": 500,
+  "family_summaries": {
+    "attention_distractors": {
+      "retention": {
+        "total": 100,
+        "kept": 0,
+        "reviewed": 51,
+        "rejected": 49,
+        "retention_rate": 0.0
+      },
+      "rejection_reasons": {
+        "shortcut_solvable": 34,
+        "too_templated": 30,
+        "too_easy": 11,
+        "weak_revision_signal": 11
+      },
+      "baseline_success_patterns": {
+        "solver_counts": {
+          "pattern_match_solver": 49,
+          "trust_naive_solver": 49,
+          "representation_anchor_solver": 49,
+          "no_revision_solver": 11
+        },
+        "solver_examples": {
+          "pattern_match_solver": [
+            {
+              "task_id": "attention_distractors_0000",
+              "session_score": 0.9333,
+              "reasons": [
+                "shortcut_solvable",
+                "too_templated"
+              ]
+            },
+            {
+              "task_id": "attention_distractors_0001",
+              "session_score": 0.9333,
+              "reasons": [
+                "too_templated"
+              ]
+            },
+            {
+              "task_id": "attention_distractors_0004",
+              "session_score": 0.9333,
+              "reasons": [
+                "shortcut_solvable",
+                "too_templated"
+              ]
+            }
+          ],
+          "trust_naive_solver": [
+            {
+              "task_id": "attention_distractors_0000",
+              "session_score": 0.9333,
+              "reasons": [
+                "shortcut_solvable",
+                "too_templated"
+              ]
+            },
+            {
+              "task_id": "attention_distractors_0001",
+              "session_score": 0.9333,
+              "reasons": [
+                "too_templated"
+              ]
+            },
+            {
+              "task_id": "attention_distractors_0004",
+              "session_score": 0.9333,
+              "reasons": [
+                "shortcut_solvable",
+                "too_templated"
+              ]
+            }
+          ],
+          "representation_anchor_solver": [
+            {
+              "task_id": "attention_distractors_0000",
+              "session_score": 0.9333,
+              "reasons": [
+                "shortcut_solvable",
+                "too_templated"
+              ]
+            },
+            {
+              "task_id": "attention_distractors_0001",
+              "session_score": 0.9333,
+              "reasons": [
+                "too_templated"
+              ]
+            },
+            {
+              "task_id": "attention_distractors_0004",
+              "session_score": 0.9333,
+              "reasons": [
+                "shortcut_solvable",
+                "too_templated"
+              ]
+            }
+          ],
+          "no_revision_solver": [
+            {
+              "task_id": "attention_distractors_0012",
+              "session_score": 0.8667,
+              "reasons": [
+                "too_easy",
+                "shortcut_solvable",
+                "too_templated",
+                "weak_revision_signal"
+              ]
+            },
+            {
+              "task_id": "attention_distractors_0016",
+              "session_score": 0.8667,
+              "reasons": [
+                "too_easy",
+                "shortcut_solvable",
+                "weak_revision_signal"
+              ]
+            },
+            {
+              "task_id": "attention_distractors_0020",
+              "session_score": 0.8667,
+              "reasons": [
+                "too_easy",
+                "shortcut_solvable",
+                "weak_revision_signal"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "hidden_rule": {
+      "retention": {
+        "total": 100,
+        "kept": 74,
+        "reviewed": 0,
+        "rejected": 26,
+        "retention_rate": 0.74
+      },
+      "rejection_reasons": {
+        "too_templated": 26
+      },
+      "baseline_success_patterns": {
+        "solver_counts": {
+          "majority_rule_solver": 7
+        },
+        "solver_examples": {
+          "majority_rule_solver": [
+            {
+              "task_id": "hidden_rule_0005",
+              "session_score": 0.9167,
+              "reasons": [
+                "too_templated"
+              ]
+            },
+            {
+              "task_id": "hidden_rule_0017",
+              "session_score": 0.9167,
+              "reasons": [
+                "too_templated"
+              ]
+            },
+            {
+              "task_id": "hidden_rule_0037",
+              "session_score": 0.9167,
+              "reasons": [
+                "too_templated"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "metacog_revision": {
+      "retention": {
+        "total": 100,
+        "kept": 100,
+        "reviewed": 0,
+        "rejected": 0,
+        "retention_rate": 1.0
+      },
+      "rejection_reasons": {},
+      "baseline_success_patterns": {
+        "solver_counts": {},
+        "solver_examples": {}
+      }
+    },
+    "shift_transfer": {
+      "retention": {
+        "total": 100,
+        "kept": 55,
+        "reviewed": 14,
+        "rejected": 31,
+        "retention_rate": 0.55
+      },
+      "rejection_reasons": {
+        "too_templated": 31
+      },
+      "baseline_success_patterns": {
+        "solver_counts": {},
+        "solver_examples": {}
+      }
+    },
+    "social_miniworlds": {
+      "retention": {
+        "total": 100,
+        "kept": 96,
+        "reviewed": 0,
+        "rejected": 4,
+        "retention_rate": 0.96
+      },
+      "rejection_reasons": {
+        "too_templated": 4
+      },
+      "baseline_success_patterns": {
+        "solver_counts": {},
+        "solver_examples": {}
+      }
+    }
+  },
+  "attention_distractors": {
+    "top_failure_modes": [
+      {
+        "failure_mode": "repeated_distractor_templates",
+        "evidence": 30,
+        "recommendation": "Increase distractor profile diversity and vary cue timing."
+      },
+      {
+        "failure_mode": "nearest_example_shortcuts",
+        "evidence": 49,
+        "recommendation": "Select adversarial query rows that are similar to examples but require different outputs."
+      },
+      {
+        "failure_mode": "cue_arrives_too_early",
+        "evidence": 11,
+        "recommendation": "Delay the disambiguating cue and force a temporary commitment under clutter."
+      }
+    ],
+    "shallow_solver_success_patterns": {
+      "solver_counts": {
+        "pattern_match_solver": 49,
+        "trust_naive_solver": 49,
+        "representation_anchor_solver": 49,
+        "no_revision_solver": 11
+      },
+      "solver_examples": {
+        "pattern_match_solver": [
+          {
+            "task_id": "attention_distractors_0000",
+            "session_score": 0.9333,
+            "reasons": [
+              "shortcut_solvable",
+              "too_templated"
+            ]
+          },
+          {
+            "task_id": "attention_distractors_0001",
+            "session_score": 0.9333,
+            "reasons": [
+              "too_templated"
+            ]
+          },
+          {
+            "task_id": "attention_distractors_0004",
+            "session_score": 0.9333,
+            "reasons": [
+              "shortcut_solvable",
+              "too_templated"
+            ]
+          }
+        ],
+        "trust_naive_solver": [
+          {
+            "task_id": "attention_distractors_0000",
+            "session_score": 0.9333,
+            "reasons": [
+              "shortcut_solvable",
+              "too_templated"
+            ]
+          },
+          {
+            "task_id": "attention_distractors_0001",
+            "session_score": 0.9333,
+            "reasons": [
+              "too_templated"
+            ]
+          },
+          {
+            "task_id": "attention_distractors_0004",
+            "session_score": 0.9333,
+            "reasons": [
+              "shortcut_solvable",
+              "too_templated"
+            ]
+          }
+        ],
+        "representation_anchor_solver": [
+          {
+            "task_id": "attention_distractors_0000",
+            "session_score": 0.9333,
+            "reasons": [
+              "shortcut_solvable",
+              "too_templated"
+            ]
+          },
+          {
+            "task_id": "attention_distractors_0001",
+            "session_score": 0.9333,
+            "reasons": [
+              "too_templated"
+            ]
+          },
+          {
+            "task_id": "attention_distractors_0004",
+            "session_score": 0.9333,
+            "reasons": [
+              "shortcut_solvable",
+              "too_templated"
+            ]
+          }
+        ],
+        "no_revision_solver": [
+          {
+            "task_id": "attention_distractors_0012",
+            "session_score": 0.8667,
+            "reasons": [
+              "too_easy",
+              "shortcut_solvable",
+              "too_templated",
+              "weak_revision_signal"
+            ]
+          },
+          {
+            "task_id": "attention_distractors_0016",
+            "session_score": 0.8667,
+            "reasons": [
+              "too_easy",
+              "shortcut_solvable",
+              "weak_revision_signal"
+            ]
+          },
+          {
+            "task_id": "attention_distractors_0020",
+            "session_score": 0.8667,
+            "reasons": [
+              "too_easy",
+              "shortcut_solvable",
+              "weak_revision_signal"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "shift_transfer": {
+    "top_failure_modes": [
+      {
+        "failure_mode": "clean_direct_remaps",
+        "evidence": 31,
+        "recommendation": "Compose codebook shifts and vary remap profiles."
+      }
+    ],
+    "shallow_solver_success_patterns": {
+      "solver_counts": {},
+      "solver_examples": {}
+    }
+  }
+}

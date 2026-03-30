@@ -1,0 +1,4076 @@
+{
+  "total_tasks_processed": 500,
+  "kept_count": 325,
+  "review_count": 65,
+  "rejected_count": 110,
+  "most_common_rejection_reasons": {
+    "too_templated": 91,
+    "borderline_signal": 65,
+    "shortcut_solvable": 34,
+    "too_easy": 11,
+    "weak_revision_signal": 11
+  },
+  "per_family_retention_rates": {
+    "attention_distractors": {
+      "total": 100,
+      "kept": 0,
+      "reviewed": 51,
+      "rejected": 49,
+      "retention_rate": 0.0
+    },
+    "hidden_rule": {
+      "total": 100,
+      "kept": 74,
+      "reviewed": 0,
+      "rejected": 26,
+      "retention_rate": 0.74
+    },
+    "metacog_revision": {
+      "total": 100,
+      "kept": 100,
+      "reviewed": 0,
+      "rejected": 0,
+      "retention_rate": 1.0
+    },
+    "shift_transfer": {
+      "total": 100,
+      "kept": 55,
+      "reviewed": 14,
+      "rejected": 31,
+      "retention_rate": 0.55
+    },
+    "social_miniworlds": {
+      "total": 100,
+      "kept": 96,
+      "reviewed": 0,
+      "rejected": 4,
+      "retention_rate": 0.96
+    }
+  },
+  "top_high_signal_tasks_by_family": {
+    "attention_distractors": [
+      {
+        "task_id": "attention_distractors_0010",
+        "decision": "review",
+        "benchmark_signal_score": 0.7546
+      },
+      {
+        "task_id": "attention_distractors_0018",
+        "decision": "review",
+        "benchmark_signal_score": 0.7546
+      },
+      {
+        "task_id": "attention_distractors_0030",
+        "decision": "review",
+        "benchmark_signal_score": 0.7546
+      },
+      {
+        "task_id": "attention_distractors_0034",
+        "decision": "review",
+        "benchmark_signal_score": 0.7546
+      },
+      {
+        "task_id": "attention_distractors_0038",
+        "decision": "review",
+        "benchmark_signal_score": 0.7546
+      }
+    ],
+    "hidden_rule": [
+      {
+        "task_id": "hidden_rule_0085",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8839
+      },
+      {
+        "task_id": "hidden_rule_0015",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8506
+      },
+      {
+        "task_id": "hidden_rule_0023",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8506
+      },
+      {
+        "task_id": "hidden_rule_0048",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8506
+      },
+      {
+        "task_id": "hidden_rule_0090",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8506
+      }
+    ],
+    "metacog_revision": [
+      {
+        "task_id": "metacog_revision_0000",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8839
+      },
+      {
+        "task_id": "metacog_revision_0001",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8839
+      },
+      {
+        "task_id": "metacog_revision_0002",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8839
+      },
+      {
+        "task_id": "metacog_revision_0003",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8839
+      },
+      {
+        "task_id": "metacog_revision_0004",
+        "decision": "keep",
+        "benchmark_signal_score": 0.8839
+      }
+    ],
+    "shift_transfer": [
+      {
+        "task_id": "shift_transfer_0002",
+        "decision": "keep",
+        "benchmark_signal_score": 0.7741
+      },
+      {
+        "task_id": "shift_transfer_0030",
+        "decision": "keep",
+        "benchmark_signal_score": 0.7741
+      },
+      {
+        "task_id": "shift_transfer_0036",
+        "decision": "keep",
+        "benchmark_signal_score": 0.7741
+      },
+      {
+        "task_id": "shift_transfer_0042",
+        "decision": "keep",
+        "benchmark_signal_score": 0.7741
+      },
+      {
+        "task_id": "shift_transfer_0048",
+        "decision": "keep",
+        "benchmark_signal_score": 0.7741
+      }
+    ],
+    "social_miniworlds": [
+      {
+        "task_id": "social_miniworlds_0006",
+        "decision": "keep",
+        "benchmark_signal_score": 0.9644
+      },
+      {
+        "task_id": "social_miniworlds_0009",
+        "decision": "keep",
+        "benchmark_signal_score": 0.9644
+      },
+      {
+        "task_id": "social_miniworlds_0012",
+        "decision": "keep",
+        "benchmark_signal_score": 0.9644
+      },
+      {
+        "task_id": "social_miniworlds_0015",
+        "decision": "keep",
+        "benchmark_signal_score": 0.9644
+      },
+      {
+        "task_id": "social_miniworlds_0027",
+        "decision": "keep",
+        "benchmark_signal_score": 0.9644
+      }
+    ]
+  },
+  "task_index": [
+    {
+      "task_id": "hidden_rule_0000",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0001",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.745,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0002",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0003",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0004",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8172,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0005",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6228,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0006",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0007",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8172,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0008",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0009",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0010",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6894,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0011",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6839,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0012",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0013",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7228,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0014",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6839,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0015",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0016",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6894,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0017",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6228,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0018",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0019",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0020",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0021",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7894,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0022",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0023",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0024",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0025",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0026",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0027",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0028",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7228,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0029",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6839,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0030",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0031",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.745,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0032",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0033",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0034",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0035",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7894,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0036",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6839,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0037",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6228,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0038",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7561,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0039",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7117,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0040",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6269,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0041",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0042",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7228,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0043",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0044",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0045",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0046",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0047",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7228,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0048",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0049",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0050",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0051",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8172,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0052",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0053",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0054",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0055",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0056",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0057",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0058",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0059",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0060",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0061",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0062",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.745,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0063",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6839,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0064",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7742,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0065",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0066",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6894,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0067",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0068",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6228,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0069",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0070",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0071",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0072",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6228,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0073",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0074",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0075",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0076",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0077",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6228,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0078",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7742,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0079",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0080",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0081",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6839,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0082",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7172,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0083",
+      "family": "hidden_rule",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6839,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "hidden_rule_0084",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7561,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0085",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0086",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0087",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8172,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0088",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7783,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0089",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8172,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0090",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0091",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.745,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0092",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0093",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0094",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0095",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7506,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0096",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7561,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0097",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8172,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0098",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.745,
+      "reasons": []
+    },
+    {
+      "task_id": "hidden_rule_0099",
+      "family": "hidden_rule",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7839,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0000",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0001",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0002",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7741,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0003",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0004",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0005",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0006",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0007",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0008",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0009",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0010",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0011",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0012",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0013",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0014",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0015",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0016",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0017",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0018",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0019",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0020",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0021",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0022",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0023",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0024",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0025",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0026",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0027",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0028",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0029",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0030",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7741,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0031",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0032",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0033",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0034",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0035",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0036",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7741,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0037",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0038",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0039",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0040",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0041",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0042",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7741,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0043",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0044",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0045",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0046",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0047",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0048",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7741,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0049",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0050",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0051",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0052",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0053",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0054",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0055",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0056",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0057",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0058",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7741,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0059",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0060",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0061",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0062",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7741,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0063",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0064",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7741,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0065",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0066",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0067",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0068",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0069",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0070",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0071",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0072",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0073",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0074",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0075",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0076",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0077",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0078",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0079",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0080",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0081",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0082",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0083",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0084",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0085",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0086",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6907,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0087",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0088",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0089",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0090",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0091",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0092",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0093",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6282,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0094",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0095",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.6699,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0096",
+      "family": "shift_transfer",
+      "decision": "review",
+      "benchmark_signal_score": 0.6491,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0097",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "shift_transfer_0098",
+      "family": "shift_transfer",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6074,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "shift_transfer_0099",
+      "family": "shift_transfer",
+      "decision": "keep",
+      "benchmark_signal_score": 0.7116,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0000",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0001",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0002",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0003",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0004",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0005",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0006",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0007",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0008",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0009",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0010",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0011",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0012",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0013",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0014",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0015",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8228,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0016",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0017",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0018",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0019",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0020",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0021",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8756,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0022",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0023",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8617,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0024",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0025",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0026",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0027",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0028",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0029",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0030",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0031",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0032",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0033",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0034",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0035",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0036",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0037",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0038",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8783,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0039",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0040",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0041",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8756,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0042",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0043",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0044",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0045",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0046",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0047",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8228,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0048",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0049",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0050",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0051",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0052",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0053",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0054",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0055",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0056",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0057",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0058",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8783,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0059",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8589,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0060",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0061",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8617,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0062",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0063",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0064",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0065",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0066",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0067",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0068",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0069",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0070",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0071",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0072",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0073",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0074",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8783,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0075",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0076",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0077",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0078",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0079",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8756,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0080",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0081",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0082",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0083",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0084",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0085",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0086",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8783,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0087",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0088",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0089",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0090",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0091",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0092",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8783,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0093",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0094",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0095",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0096",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0097",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0098",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8783,
+      "reasons": []
+    },
+    {
+      "task_id": "metacog_revision_0099",
+      "family": "metacog_revision",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8839,
+      "reasons": []
+    },
+    {
+      "task_id": "attention_distractors_0000",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.5667,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0001",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0002",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0003",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0004",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.5667,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0005",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0006",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0007",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0008",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.5606,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0009",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0010",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7546,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0011",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0012",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4338,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "too_templated",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0013",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7296,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0014",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.563,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0015",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6072,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0016",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4058,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0017",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0018",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7546,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0019",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0020",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4755,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0021",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7296,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0022",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4822,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0023",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0024",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4755,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0025",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0026",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4822,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0027",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0028",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4755,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0029",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0030",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7546,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0031",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6072,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0032",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4058,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0033",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0034",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7546,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0035",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0036",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.5667,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0037",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0038",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7546,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0039",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.688,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0040",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4755,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0041",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0042",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4822,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0043",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0044",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7333,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0045",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0046",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0047",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0048",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.5667,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0049",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7296,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0050",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0051",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0052",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4755,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0053",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7296,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0054",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7546,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0055",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0056",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4058,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0057",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0058",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.563,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0059",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.688,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0060",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7333,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0061",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0062",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.563,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0063",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.688,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0064",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.5667,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0065",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0066",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4822,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0067",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0068",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.5667,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0069",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0070",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.563,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0071",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0072",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4338,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "too_templated",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0073",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0074",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0075",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0076",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7333,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0077",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0078",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0079",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0080",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.5667,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0081",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6488,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0082",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0083",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0084",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7333,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0085",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7296,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0086",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.563,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0087",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.688,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0088",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7333,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0089",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0090",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.7546,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0091",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0092",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7333,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0093",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0094",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4822,
+      "reasons": [
+        "shortcut_solvable",
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0095",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.6713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0096",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.4755,
+      "reasons": [
+        "too_easy",
+        "shortcut_solvable",
+        "weak_revision_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0097",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6296,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0098",
+      "family": "attention_distractors",
+      "decision": "review",
+      "benchmark_signal_score": 0.713,
+      "reasons": [
+        "borderline_signal"
+      ]
+    },
+    {
+      "task_id": "attention_distractors_0099",
+      "family": "attention_distractors",
+      "decision": "reject",
+      "benchmark_signal_score": 0.6072,
+      "reasons": [
+        "shortcut_solvable"
+      ]
+    },
+    {
+      "task_id": "social_miniworlds_0000",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0001",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8006,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0002",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0003",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9088,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0004",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0005",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9118,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0006",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0007",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0008",
+      "family": "social_miniworlds",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7451,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "social_miniworlds_0009",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0010",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0011",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9118,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0012",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0013",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9118,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0014",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0015",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0016",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0017",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0018",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0019",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0020",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0021",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9088,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0022",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0023",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0024",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0025",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0026",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0027",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0028",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0029",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0030",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0031",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0032",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8562,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0033",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0034",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0035",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0036",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0037",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0038",
+      "family": "social_miniworlds",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7451,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "social_miniworlds_0039",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0040",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9118,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0041",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0042",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0043",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0044",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0045",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0046",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0047",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0048",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0049",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0050",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9118,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0051",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0052",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0053",
+      "family": "social_miniworlds",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7451,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "social_miniworlds_0054",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0055",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8562,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0056",
+      "family": "social_miniworlds",
+      "decision": "reject",
+      "benchmark_signal_score": 0.7451,
+      "reasons": [
+        "too_templated"
+      ]
+    },
+    {
+      "task_id": "social_miniworlds_0057",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8718,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0058",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8006,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0059",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0060",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8718,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0061",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0062",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8562,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0063",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0064",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0065",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0066",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0067",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0068",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9118,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0069",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0070",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9118,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0071",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8562,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0072",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9088,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0073",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8377,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0074",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0075",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0076",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0077",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0078",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0079",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0080",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0081",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9088,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0082",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9118,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0083",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0084",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0085",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0086",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0087",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0088",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0089",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0090",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0091",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0092",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0093",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0094",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0095",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0096",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9273,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0097",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.8932,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0098",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9488,
+      "reasons": []
+    },
+    {
+      "task_id": "social_miniworlds_0099",
+      "family": "social_miniworlds",
+      "decision": "keep",
+      "benchmark_signal_score": 0.9644,
+      "reasons": []
+    }
+  ]
+}
