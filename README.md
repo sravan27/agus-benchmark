@@ -259,9 +259,7 @@ Run a balanced smoke test across families:
 PYTHONPATH=. python -m src.cli.run_model_eval \
   --adapter mock-noisy \
   --run-name mock_balanced_smoke \
-  --balanced \
-  --max-tasks 25 \
-  --per-family-max 5
+  --profile balanced25
 ```
 
 Run against a local Ollama model:
@@ -271,8 +269,17 @@ PYTHONPATH=. python -m src.cli.run_model_eval \
   --adapter ollama \
   --model llama3.1:8b \
   --run-name ollama_llama31 \
+  --keep-alive 30m \
   --resume
 ```
+
+Available convenience profiles:
+
+- `smoke`
+- `balanced25`
+- `overnight100`
+
+Profiles only prefill existing options such as `--max-tasks`, `--balanced`, and `--per-family-max`. Direct flags still work normally.
 
 Each run writes a dedicated folder under `data/evals/<run_name>/` with:
 
@@ -286,6 +293,21 @@ Each run writes a dedicated folder under `data/evals/<run_name>/` with:
 - `progress.json`
 
 Balanced runs report planned and completed work by family, and `progress.json` is driven by real completed static evaluations plus real completed interactive sessions. This keeps the benchmark usable on an M2 Max for overnight local runs while preserving a clean path for future optional API adapters.
+
+Compare completed runs:
+
+```bash
+PYTHONPATH=. python -m src.cli.compare_eval_runs \
+  data/evals/mock_noisy_full \
+  data/evals/mock_shallow_full \
+  --comparison-name mock_noisy_vs_shallow
+```
+
+Comparison artifacts are written to `data/evals/comparisons/<name>/`:
+
+- `comparison_summary.json`
+- `comparison_table.md`
+- `top_insights.md`
 
 Supported interactive families now include:
 

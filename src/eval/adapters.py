@@ -456,12 +456,14 @@ class OllamaAdapter(ModelAdapter):
         host: str = "http://127.0.0.1:11434",
         temperature: float = 0.0,
         timeout_seconds: int = 120,
+        keep_alive: str | None = "30m",
     ) -> None:
         super().__init__(name=f"ollama:{model}")
         self.model = model
         self.host = host.rstrip("/")
         self.temperature = temperature
         self.timeout_seconds = timeout_seconds
+        self.keep_alive = keep_alive
 
     def describe(self) -> dict[str, Any]:
         payload = super().describe()
@@ -471,11 +473,12 @@ class OllamaAdapter(ModelAdapter):
                 "host": self.host,
                 "temperature": self.temperature,
                 "timeout_seconds": self.timeout_seconds,
+                "keep_alive": self.keep_alive,
             }
         )
         return payload
 
-    def _request_json(self, prompt: str) -> dict[str, Any]:
+    def _build_request_payload(self, prompt: str) -> dict[str, Any]:
         payload = {
             "model": self.model,
             "prompt": prompt,
@@ -483,6 +486,12 @@ class OllamaAdapter(ModelAdapter):
             "format": "json",
             "options": {"temperature": self.temperature},
         }
+        if self.keep_alive is not None:
+            payload["keep_alive"] = self.keep_alive
+        return payload
+
+    def _request_json(self, prompt: str) -> dict[str, Any]:
+        payload = self._build_request_payload(prompt)
         request = urllib.request.Request(
             url=f"{self.host}/api/generate",
             data=json.dumps(payload).encode("utf-8"),
@@ -531,6 +540,7 @@ def build_adapter(
     host: str = "http://127.0.0.1:11434",
     temperature: float = 0.0,
     timeout_seconds: int = 120,
+    keep_alive: str | None = "30m",
 ) -> ModelAdapter:
     """Instantiate an adapter from CLI-style arguments."""
     if adapter_name.startswith("mock-"):
@@ -546,5 +556,6 @@ def build_adapter(
             host=host,
             temperature=temperature,
             timeout_seconds=timeout_seconds,
+            keep_alive=keep_alive,
         )
     raise ValueError(f"Unsupported adapter: {adapter_name}")
