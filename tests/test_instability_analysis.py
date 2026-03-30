@@ -87,3 +87,7 @@ def test_cross_run_instability_comparison(tmp_path: Path):
     assert (output_dir / "instability_comparison.json").exists()
     assert (output_dir / "instability_insights.md").exists()
     assert summary["most_brittle_model"] in {"noisy_run", "shallow_run"}
+    assert summary["least_contradiction_blind_model"] == "noisy_run"
+    insights = (output_dir / "instability_insights.md").read_text(encoding="utf-8")
+    assert "Least contradiction-blind" in insights
+    assert "lower is better" in insights

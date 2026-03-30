@@ -26,7 +26,7 @@ def main() -> None:
         comparison = compare_run_instability(args.run_dirs, comparison_dir)
         payload["comparison_dir"] = str(comparison_dir)
         payload["most_brittle_model"] = comparison["most_brittle_model"]
-        payload["most_stable_under_contradiction"] = comparison["most_stable_under_contradiction"]
+        payload["least_contradiction_blind_model"] = comparison["least_contradiction_blind_model"]
 
     print(payload)
 

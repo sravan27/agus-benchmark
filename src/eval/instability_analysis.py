@@ -8,6 +8,16 @@ from typing import Any
 
 from src.utils.io_utils import load_json, load_jsonl, save_json
 
+INSTABILITY_METRIC_DIRECTIONS = {
+    "confidence_volatility": "higher_is_worse",
+    "unnecessary_revision_rate": "higher_is_worse",
+    "contradiction_blindness_rate": "higher_is_worse",
+    "brittle_reversal_rate": "higher_is_worse",
+    "attention_instability_score": "higher_is_worse",
+    "belief_state_drift": "higher_is_worse",
+    "trajectory_instability_index": "higher_is_worse",
+}
+
 
 def _mean(values: list[float]) -> float:
     return round(sum(values) / len(values), 4) if values else 0.0
@@ -165,6 +175,7 @@ def analyze_run_instability(run_dir: Path) -> dict[str, Any]:
         "run_name": run_dir.name,
         "adapter": aggregate_summary["adapter"],
         "num_sessions": len(session_rows),
+        "metric_directions": INSTABILITY_METRIC_DIRECTIONS,
         "confidence_volatility": _mean([row["confidence_volatility"] for row in session_rows]),
         "unnecessary_revision_rate": _mean([1.0 if row["unnecessary_revision"] else 0.0 for row in session_rows]),
         "contradiction_blindness_rate": _mean([1.0 if row["contradiction_blindness"] else 0.0 for row in session_rows]),
@@ -205,6 +216,14 @@ def analyze_run_instability(run_dir: Path) -> dict[str, Any]:
     return summary
 
 
+def _blindness_qualifier(rate: float) -> str:
+    if rate >= 0.5:
+        return "still high"
+    if rate >= 0.25:
+        return "moderate"
+    return "relatively low"
+
+
 def compare_run_instability(run_dirs: list[Path], output_dir: Path) -> dict[str, Any]:
     """Compare instability metrics across multiple runs."""
     per_run = [analyze_run_instability(run_dir) for run_dir in run_dirs]
@@ -216,17 +235,18 @@ def compare_run_instability(run_dirs: list[Path], output_dir: Path) -> dict[str,
     }
 
     most_brittle = max(per_run, key=lambda item: (item["trajectory_instability_index"], item["run_name"])) if per_run else None
-    most_stable_under_contradiction = min(
+    least_contradiction_blind = min(
         per_run,
         key=lambda item: (item["contradiction_blindness_rate"], item["run_name"]),
     ) if per_run else None
 
     summary = {
         "runs": per_run,
+        "metric_directions": INSTABILITY_METRIC_DIRECTIONS,
         "family_instability_comparison": family_comparison,
         "most_brittle_model": most_brittle["run_name"] if most_brittle else None,
-        "most_stable_under_contradiction": (
-            most_stable_under_contradiction["run_name"] if most_stable_under_contradiction else None
+        "least_contradiction_blind_model": (
+            least_contradiction_blind["run_name"] if least_contradiction_blind else None
         ),
     }
 
@@ -239,10 +259,11 @@ def compare_run_instability(run_dirs: list[Path], output_dir: Path) -> dict[str,
             f"- Most brittle overall: `{most_brittle['run_name']}` with trajectory_instability_index "
             f"{most_brittle['trajectory_instability_index']}."
         )
-    if most_stable_under_contradiction:
+    if least_contradiction_blind:
         lines.append(
-            f"- Most stable under contradiction: `{most_stable_under_contradiction['run_name']}` with "
-            f"contradiction_blindness_rate {most_stable_under_contradiction['contradiction_blindness_rate']}."
+            f"- Least contradiction-blind: `{least_contradiction_blind['run_name']}` with "
+            f"contradiction_blindness_rate {least_contradiction_blind['contradiction_blindness_rate']}"
+            f" (lower is better, but this is {_blindness_qualifier(least_contradiction_blind['contradiction_blindness_rate'])})."
         )
     lines.append("")
     lines.append("## Families That Trigger The Most Instability")
