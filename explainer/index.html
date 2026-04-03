@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGUS Benchmark — Adaptive Generalization Under Shift</title>
+  <meta name="description" content="AGUS evaluates whether language models can adapt coherently when rules, evidence, representations, or social beliefs change." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 1. HERO / OPENING STATEMENT -->
+  <header class="section-hero">
+    <div class="hero-content">
+      <div class="hero-line-grow"></div>
+      <div class="hero-title-clip">
+        <h1 class="hero-title">AGUS</h1>
+      </div>
+      <div class="hero-title-clip">
+        <p class="hero-subtitle">Adaptive Generalization Under Shift</p>
+      </div>
+      <div class="hero-title-clip">
+        <p class="hero-thesis">
+          A benchmark measuring whether language models adapt coherently when rules, evidence, representations, or social beliefs shift.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. WHY AGUS EXISTS -->
+    <section id="why-agus" class="stagger-section">
+      <div class="section-container">
+        <h2 class="stagger-item">The Diagnostic Gap</h2>
+        <div class="prose stagger-item">
+          <p class="prose-lead">
+            Static benchmarks heavily index frozen-task correctness. A model can achieve superlative accuracy on zero-shot benchmarks, yet collapse entirely when underlying facts or rules are perturbed dynamically.
+          </p>
+          <p>
+            This fails to capture the true architecture of reasoning. AGUS drops the pretense of the frozen prompt, explicitly measuring <strong>adaptation</strong>, <strong>instability</strong>, <strong>belief revision</strong>, and <strong>coherence under change</strong> in extended multi-turn environments.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. AGUS V1 -->
+    <section id="agus-v1" class="section-gray stagger-section staggered-grid-reveal">
+      <div class="section-container section-wide">
+        <div class="header-split stagger-item">
+          <h2>AGUS v1</h2>
+          <span class="header-label">Static vs. Dynamic Reasoning</span>
+        </div>
+        
+        <div class="v1-grid">
+          <div class="card-v1 stagger-card">
+            <div class="v1-index">01</div>
+            <h3>hidden_rule</h3>
+            <p>Inducing and adhering to novel explicit rules that override static priors mid-generation.</p>
+          </div>
+          <div class="card-v1 stagger-card">
+            <div class="v1-index">02</div>
+            <h3>shift_transfer</h3>
+            <p>Applying changing task distributions and continuous rule-swaps across multiple steps.</p>
+          </div>
+          <div class="card-v1 stagger-card">
+            <div class="v1-index">03</div>
+            <h3>metacog_revision</h3>
+            <p>Correcting an established reasoning trajectory when confronted with new valid evidence.</p>
+          </div>
+          <div class="card-v1 stagger-card">
+            <div class="v1-index">04</div>
+            <h3>attention_distractors</h3>
+            <p>Maintaining primary task focus against dynamically inserted adversarial semantic noise.</p>
+          </div>
+          <div class="card-v1 stagger-card">
+            <div class="v1-index">05</div>
+            <h3>social_miniworlds</h3>
+            <p>Tracking independent agent beliefs that explicitly counter the real underlying world state.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. AGUS V2 -->
+    <section id="agus-v2" class="stagger-section svg-draw-section">
+      <div class="section-container section-wide">
+        <div class="header-split stagger-item">
+          <h2>AGUS v2</h2>
+          <span class="header-label">Branching Counterfactual Coherence</span>
+        </div>
+        
+        <div class="v2-narrative stagger-item">
+          <p class="prose-lead">Can the model preserve coherent beliefs across minimally changed futures?</p>
+          <p>AGUS v2 measures invariant preservation. From a shared base state, we evaluate models across nearby alternate futures to measure structural update fidelity without reverting to base-state defaults.</p>
+        </div>
+
+        <div class="diagram-canvas stagger-item">
+          <svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="branching-svg">
+            <g class="svg-base">
+              <circle cx="100" cy="150" r="6" />
+              <text x="100" y="125" text-anchor="middle">Base State</text>
+              <line class="path-draw" x1="106" y1="150" x2="300" y2="150" />
+              <circle cx="306" cy="150" r="6" />
+              <text x="306" y="175" text-anchor="middle" class="label-soft">Event Horizon</text>
+              <line class="horizon-line path-draw" x1="306" y1="40" x2="306" y2="260" stroke-dasharray="2 6"/>
+            </g>
+
+            <g class="svg-branch branch-1">
+              <path class="path-draw" d="M 312 150 C 400 150 420 60 550 60" />
+              <circle cx="556" cy="60" r="6" />
+              <text x="575" y="65">Future A</text>
+            </g>
+
+            <g class="svg-branch branch-2">
+              <path class="path-draw" d="M 312 150 C 400 150 420 150 550 150" />
+              <circle cx="556" cy="150" r="6" />
+              <text x="575" y="155">Future B</text>
+            </g>
+
+            <g class="svg-branch branch-3">
+              <path class="path-draw" d="M 312 150 C 400 150 420 240 550 240" />
+              <circle cx="556" cy="240" r="6" />
+              <text x="575" y="245">Future C</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. THE BIG RESULT (Cinematic Dark Shift) -->
+    <section id="big-result" class="section-dark stagger-section">
+      <div class="section-container section-wide">
+        <h2 class="dark-header stagger-item">The Big Result</h2>
+        
+        <!-- Scorecards -->
+        <div class="hero-scorecards stagger-item">
+          <div class="scorecard llama-card">
+            <div class="scorecard-label">Static Accuracy Winner</div>
+            <div class="scorecard-model">Llama 3.1 8B</div>
+            <div class="scorecard-metric" id="metric-llama-static">--</div>
+            <div class="scorecard-desc">Dominates frozen-task correctness but struggles with temporal spacing.</div>
+          </div>
+
+          <div class="scorecard qwen-card">
+            <div class="scorecard-label">Adaptive Reasoning Winner</div>
+            <div class="scorecard-model">Qwen 2.5 7B</div>
+            <div class="scorecard-metric" id="metric-qwen-traj">--</div>
+            <div class="scorecard-desc">Exhibits the strongest structural belief trajectory with lowest instability.</div>
+          </div>
+
+          <div class="scorecard mistral-card">
+            <div class="scorecard-label">Counterfactual Coherence Winner</div>
+            <div class="scorecard-model">Mistral NeMo 12B</div>
+            <div class="scorecard-metric" id="metric-mistral-cf">--</div>
+            <div class="scorecard-desc">Achieves unparalleled invariant preservation across branched realities.</div>
+          </div>
+        </div>
+
+        <!-- Data Precision Table -->
+        <div class="table-container stagger-item dark-table-container">
+          <table id="results-table" class="dark-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Static Accuracy</th>
+                <th>Belief Traj. Quality</th>
+                <th>Instability Index</th>
+                <th>CF Update Fidelity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Filled via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. WHAT AGUS REVEALS -->
+    <section id="insights" class="stagger-section">
+      <div class="section-container section-wide">
+        <h2 class="stagger-item">What AGUS Reveals</h2>
+        <div class="insight-grid stagger-item" id="insights-grid">
+          <!-- Filled via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FAILURE MODES -->
+    <section id="failure-modes" class="section-gray stagger-section">
+      <div class="section-container section-wide">
+        <h2 class="stagger-item">Diagnostic Failure Modes</h2>
+        <p class="section-subtext stagger-item">Signatures of structural fragility masked by static accuracy.</p>
+        <div class="failure-grid stagger-item" id="failure-modes-grid">
+          <!-- Filled via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CAVEATS -->
+    <section id="caveats" class="stagger-section">
+      <div class="section-container">
+        <h2 class="stagger-item">Caveats</h2>
+        <div class="caveats-box stagger-item">
+          <ul>
+            <li>Results are drawn from three local open-weight models (7B–12B). They demonstrate comparative signal, not universal ranking truth against frontier closed-models.</li>
+            <li>All models remain highly contradiction-blind in absolute terms. E.g., Mistral NeMo 12B exhibits a 0.56 absolute contradiction blindness rate.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 9. FOOTER -->
+  <footer class="stagger-section">
+    <div class="footer-container stagger-item">
+      <div class="footer-brand">AGUS</div>
+      <div class="footer-nav">
+        <a href="#">GitHub Repository</a>
+        <a href="#">Benchmark Documentation</a>
+        <a href="#">Technical Report</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

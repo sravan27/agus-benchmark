@@ -34,11 +34,13 @@ These are intended to measure whether a model carries a coherent task model acro
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `llama3.1:8b` | 0.7222 | 0.7500 | 0.7037 | 1.0000 | 0.9561 |
 | `qwen2.5:7b` | 0.8333 | 0.8438 | 0.8542 | 1.0000 | 0.9717 |
+| `mistral-nemo:12b` | 0.8889 | 0.9375 | 0.8333 | 1.0000 | 0.9697 |
 
-The current AGUS v2 pattern is consistent with AGUS v1:
+The current AGUS v2 pattern is related to AGUS v1, but not identical:
 
 - Llama remains stronger on frozen-task accuracy
-- Qwen remains stronger on adaptive and coherence-oriented metrics
+- Qwen is strongest on branch belief coherence and confidence calibration
+- Mistral is strongest on update fidelity and invariant preservation
 
 ## Why This Matters
 
@@ -52,6 +54,6 @@ That is a tighter test of coherent adaptive reasoning.
 
 ## Limitations
 
-- These are still local-model results from a small two-model comparison.
+- These are still local-model results from a small three-model comparison.
 - The AGUS v2 result set should be used as evidence of benchmark promise, not as a broad leaderboard claim.
-- `cross_branch_consistency` being `1.0` for both models is encouraging, but it should not be read as proof that the branching problem is solved. The more informative differences are in update fidelity, invariant preservation, and branch belief coherence.
+- `cross_branch_consistency` being `1.0` for all three models is encouraging, but it should not be read as proof that the branching problem is solved. The more informative differences are in update fidelity, invariant preservation, and branch belief coherence.

@@ -4,9 +4,9 @@
 
 AGUS is designed to measure **adaptive generalization under shift**, not just frozen-task correctness. The key question is whether a model can stay coherent when the task changes, new evidence arrives, or a previously successful strategy stops working.
 
-The first local-model result set already supports a clear benchmark claim:
+The current local-model result set already supports a stronger benchmark claim:
 
-**static accuracy and dynamic reasoning quality can come apart sharply.**
+**static correctness, adaptive reasoning quality, and counterfactual coherence do not collapse to one ranking.**
 
 ## Model Comparison Summary
 
@@ -14,57 +14,78 @@ Current local runs compare:
 
 - `llama3.1:8b` via Ollama
 - `qwen2.5:7b` via Ollama
+- `mistral-nemo:12b` via Ollama
 
-Both were evaluated on balanced 100-task AGUS runs with static and interactive settings.
+All three were evaluated on balanced 100-task AGUS runs with static and interactive settings.
 
-| Model Run | Static Accuracy | Belief Trajectory Quality | Episode Cognitive Flexibility | Trajectory Instability Index |
-| --- | ---: | ---: | ---: | ---: |
-| `llama31_balanced_interactive100` | 0.6179 | 0.5434 | 0.6348 | 0.3348 |
-| `qwen25_balanced_interactive100` | 0.3000 | 0.7281 | 0.7361 | 0.2626 |
+| Model | Static Accuracy | Belief Trajectory Quality | Episode Cognitive Flexibility | Contradiction Blindness Rate | Trajectory Instability Index |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `llama3.1:8b` | 0.6179 | 0.5434 | 0.6348 | 0.66 | 0.3348 |
+| `qwen2.5:7b` | 0.3000 | 0.7281 | 0.7361 | 0.64 | 0.2626 |
+| `mistral-nemo:12b` | 0.2714 | 0.5828 | 0.6982 | 0.56 | 0.2513 |
+
+## Fresh-Slice Replication
+
+The main Llama-versus-Qwen AGUS pattern also held on a **fresh deterministic balanced slice**, which matters because it reduces the strongest obvious dismissal risk: that the result is only a one-slice artifact.
+
+| Slice | Model | Static Accuracy | Belief Trajectory Quality |
+| --- | --- | ---: | ---: |
+| original | `llama3.1:8b` | 0.6179 | 0.5434 |
+| original | `qwen2.5:7b` | 0.3000 | 0.7281 |
+| replication | `llama3.1:8b` | 0.4857 | 0.5606 |
+| replication | `qwen2.5:7b` | 0.2857 | 0.7494 |
+
+What replicated:
+
+- static accuracy ranking replicated: Llama stayed ahead of Qwen
+- `belief_trajectory_quality` ranking replicated: Qwen stayed ahead of Llama
+- the core static-versus-dynamic divergence replicated
+- the main weakness-proxy directions also replicated
+
+This is still a lightweight robustness check, not a large multi-seed study. But it is enough to support the narrower claim that the central AGUS signal is **not just one lucky balanced slice**.
 
 ## Strongest Quantitative Findings
 
-1. `llama3.1:8b` led on static accuracy: `0.6179` versus `0.3000` for `qwen2.5:7b`.
-2. `qwen2.5:7b` led on dynamic reasoning quality:
-   - `belief_trajectory_quality`: `0.7281` versus `0.5434`
-   - `episode_cognitive_flexibility_score`: `0.7361` versus `0.6348`
-   - `online_adaptation_gain`: `0.525` versus `0.315`
-   - `hypothesis_update_score`: `0.81` versus `0.58`
-3. `qwen2.5:7b` was less brittle overall on AGUS interactive traces:
-   - `trajectory_instability_index`: `0.2626` versus `0.3348`
-   - `unnecessary_revision_rate`: `0.11` versus `0.30`
-   - `brittle_reversal_rate`: `0.11` versus `0.32`
-4. The largest separating weakness categories in the current local runs were:
-   - `overconfident_error`: `89` for Llama versus `68` for Qwen
-   - `static_dynamic_gap`: `20` for Llama versus `1` for Qwen
-   - `social_belief_confusion`: `13` for Llama versus `1` for Qwen
+1. `llama3.1:8b` is still the strongest frozen-task model in the current local set, with static accuracy `0.6179` versus `0.3000` for Qwen and `0.2714` for Mistral.
+2. `qwen2.5:7b` is still the strongest adaptive-trajectory model:
+   - `belief_trajectory_quality`: `0.7281`
+   - `episode_cognitive_flexibility_score`: `0.7361`
+3. `mistral-nemo:12b` reinforces the static-versus-dynamic separation rather than collapsing it:
+   - static accuracy is only `0.2714`
+   - but `belief_trajectory_quality` is `0.5828`
+   - and `episode_cognitive_flexibility_score` is `0.6982`
+4. Mistral also has the lowest current contradiction blindness and overall instability:
+   - `contradiction_blindness_rate`: `0.56` versus `0.64` for Qwen and `0.66` for Llama
+   - `trajectory_instability_index`: `0.2513` versus `0.2626` for Qwen and `0.3348` for Llama
 
 ## Key Interpretation
 
-AGUS is already surfacing a non-trivial tradeoff:
+The three-model evidence makes the AGUS story much stronger than a simple Llama-versus-Qwen contrast:
 
-- `llama3.1:8b` is much stronger on frozen-task correctness
-- `qwen2.5:7b` is meaningfully stronger on interactive revision, belief tracking, and adaptation quality
+- Llama leads on frozen-task correctness
+- Qwen leads on interactive adaptation quality
+- Mistral adds a third anchor by showing weak static accuracy but materially stronger dynamic behavior than its static score would predict
+- and the original Llama-versus-Qwen split also survives a fresh deterministic balanced slice
 
 That is exactly the kind of separation AGUS was built to expose. A benchmark focused only on static accuracy would rank these models very differently from a benchmark that also measures hypothesis revision, confidence recalibration, and multi-turn cognitive flexibility.
 
 ## Why AGUS Reveals What Static Accuracy Misses
 
-Several AGUS interactive metrics move in Qwen's favor despite its much lower static score:
+The clearest example is Mistral. If we only looked at its static score, we would classify it as the weakest model in the set. AGUS shows a more nuanced picture:
 
-- `attention_recovery_score`: `0.7812` versus `0.575`
-- `belief_state_consistency`: `0.951` versus `0.7937`
-- `confidence_recalibration_score`: `0.865` versus `0.5995`
-- `hypothesis_update_score`: `0.81` versus `0.58`
+- Mistral static accuracy: `0.2714`
+- Mistral `belief_trajectory_quality`: `0.5828`
+- Mistral `episode_cognitive_flexibility_score`: `0.6982`
+- Mistral `contradiction_blindness_rate`: `0.56`, the lowest of the three
 
-At the same time, AGUS preserves nuance rather than collapsing everything into one winner:
+Qwen shows a different version of the same pattern:
 
-- Llama remained stronger on `trust_revision_score`: `0.7667` versus `0.7333`
-- Llama also led on `deception_sensitivity`: `0.4667` versus `0.3000`
+- much lower static accuracy than Llama
+- but clearly stronger trajectory quality and lower overall brittleness
 
-So the current evidence is not "Qwen is simply better." The stronger claim is:
+So the current evidence is not that one model is simply better. The stronger claim is:
 
-**AGUS exposes different cognitive strengths than static accuracy does, and those strengths do not align perfectly with frozen-task performance.**
+**AGUS exposes multiple learning-relevant axes that static accuracy compresses away.**
 
 ## AGUS v2: Counterfactual Branching
 
@@ -82,11 +103,13 @@ This matters because a model can sometimes look competent on a single trajectory
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `llama3.1:8b` | 0.7222 | 0.7500 | 0.7037 | 1.0000 | 0.9561 |
 | `qwen2.5:7b` | 0.8333 | 0.8438 | 0.8542 | 1.0000 | 0.9717 |
+| `mistral-nemo:12b` | 0.8889 | 0.9375 | 0.8333 | 1.0000 | 0.9697 |
 
-The pattern is consistent with AGUS v1:
+AGUS v2 adds another separable axis:
 
-- Qwen remains stronger on adaptive coherence metrics
-- Llama remains stronger on frozen-task correctness
+- Mistral is strongest on current `counterfactual_update_fidelity` and `invariant_preservation_score`
+- Qwen is strongest on current `branch_belief_coherence` and `counterfactual_confidence_calibration`
+- Llama remains strongest on frozen-task accuracy
 
 That makes AGUS more compelling as a Learning-track benchmark. It now measures not only revision along one path, but also whether revision behavior stays coherent across tightly controlled alternate continuations.
 
@@ -102,20 +125,17 @@ That is a more AGI-relevant notion of coherence than answer quality on one path 
 
 ## Important Caveats
 
-- These are local-model results from two open models, not frontier closed-model evaluations.
-- Both models still show high `contradiction_blindness_rate`:
-  - Llama: `0.66`
-  - Qwen: `0.64`
-- Qwen is less brittle overall, but not uniformly more stable on every submetric. Its `confidence_volatility` is higher: `0.2772` versus `0.1012`.
-- AGUS v2 is promising, but the current counterfactual evidence still comes from the same two local models. It should be framed as a stronger benchmark design signal, not as a broad model ranking claim.
+- These are local-model results from three open models, not a broad frontier-model comparison.
+- The replication evidence is one fresh deterministic balanced slice, not a broad multi-seed robustness study.
+- All three models are still substantially contradiction-blind in absolute terms. Even the best current value, Mistral's `0.56`, is still high.
+- Qwen and Mistral are less brittle overall than Llama, but that does not mean they are uniformly more stable on every submetric. Qwen's `confidence_volatility`, for example, is still the highest of the three at `0.2772`.
+- AGUS v2 currently uses a compact counterfactual bundle set, so those metrics are useful evidence but not yet a large-scale leaderboard.
 
 ## Recommended Use In A Submission
 
 The safest headline for AGUS today is:
 
-**AGUS distinguishes static competence from adaptive reasoning quality, and the first local-model runs already reveal a measurable tradeoff between them.**
-
-AGUS v2 strengthens that claim by showing that the same local models also differ in **counterfactual coherence across nearby alternate futures**, not just on one interactive trajectory.
+**Across three local models, AGUS shows that frozen-task accuracy, adaptive reasoning quality, and counterfactual coherence are separable dimensions, and the core static-versus-dynamic split replicates on a fresh balanced slice.**
 
 Supporting materials:
 

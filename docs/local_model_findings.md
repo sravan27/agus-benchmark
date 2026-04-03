@@ -8,87 +8,115 @@ This note summarizes the current AGUS evidence from the local Ollama runs:
 - `llama31_balanced_interactive100`
 - `qwen25_balanced_static100`
 - `qwen25_balanced_interactive100`
+- `llama31_balanced_interactive25_replication_fixed`
+- `qwen25_balanced_interactive25_replication_fixed`
+- `mistralnemo_balanced_static100`
+- `mistralnemo_balanced_interactive100`
+- `llama31_counterfactual_v2`
+- `qwen25_counterfactual_v2`
+- `mistralnemo_counterfactual_v2`
 
 The goal is not to make sweeping model-quality claims. The goal is to show what AGUS measures that static accuracy alone would miss.
 
 ## Top-Line Comparison
 
-| Model | Static Accuracy | Belief Trajectory Quality | Episode Cognitive Flexibility | Online Adaptation Gain |
-| --- | ---: | ---: | ---: | ---: |
-| `llama3.1:8b` | 0.6179 | 0.5434 | 0.6348 | 0.3150 |
-| `qwen2.5:7b` | 0.3000 | 0.7281 | 0.7361 | 0.5250 |
+| Model | Static Accuracy | Belief Trajectory Quality | Episode Cognitive Flexibility | Contradiction Blindness Rate | Trajectory Instability Index |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `llama3.1:8b` | 0.6179 | 0.5434 | 0.6348 | 0.66 | 0.3348 |
+| `qwen2.5:7b` | 0.3000 | 0.7281 | 0.7361 | 0.64 | 0.2626 |
+| `mistral-nemo:12b` | 0.2714 | 0.5828 | 0.6982 | 0.56 | 0.2513 |
 
-The important pattern is the inversion:
+The important pattern is no longer a simple two-model inversion. It is a three-model separation:
 
 - Llama wins clearly on static accuracy
-- Qwen wins clearly on dynamic revision quality
+- Qwen wins clearly on adaptive trajectory quality
+- Mistral is weak on static accuracy but stronger on dynamic and instability metrics than that score alone would predict
 
-## Static Versus Interactive Gap
+## Fresh-Slice Replication
 
-AGUS interactive metrics widen the difference between the two models in ways that static accuracy does not predict.
+The central AGUS result also held on a fresh deterministic balanced slice for the main Llama-versus-Qwen comparison.
 
-Qwen leads on:
+| Slice | Model | Static Accuracy | Belief Trajectory Quality |
+| --- | --- | ---: | ---: |
+| original | `llama3.1:8b` | 0.6179 | 0.5434 |
+| original | `qwen2.5:7b` | 0.3000 | 0.7281 |
+| replication | `llama3.1:8b` | 0.4857 | 0.5606 |
+| replication | `qwen2.5:7b` | 0.2857 | 0.7494 |
 
-- `belief_trajectory_quality`: `0.7281` versus `0.5434`
-- `hypothesis_update_score`: `0.81` versus `0.58`
-- `belief_state_consistency`: `0.951` versus `0.7937`
-- `confidence_recalibration_score`: `0.865` versus `0.5995`
-- `attention_recovery_score`: `0.7812` versus `0.575`
+What replicated:
 
-Llama still retains some dynamic strengths:
+- static accuracy ranking: Llama remained ahead of Qwen
+- `belief_trajectory_quality` ranking: Qwen remained ahead of Llama
+- the main static-versus-dynamic divergence persisted
+- the main weakness-proxy directions remained the same:
+  - `overconfident_error`
+  - `static_dynamic_gap`
+  - `social_belief_confusion`
 
-- `trust_revision_score`: `0.7667` versus `0.7333`
-- `deception_sensitivity`: `0.4667` versus `0.3000`
+This does not prove broad robustness. It does support a narrower and important claim: the core AGUS signal is not just a one-slice accident in the current local-model setup.
+
+## Static Versus Dynamic Separation
+
+AGUS interactive metrics produce a different ranking than static accuracy.
+
+Qwen leads on the main adaptive-trajectory metrics:
+
+- `belief_trajectory_quality`: `0.7281`
+- `episode_cognitive_flexibility_score`: `0.7361`
+
+Mistral lands in between on those same trajectory metrics:
+
+- `belief_trajectory_quality`: `0.5828`
+- `episode_cognitive_flexibility_score`: `0.6982`
+
+Llama remains the static leader:
+
+- `accuracy`: `0.6179`
 
 This is a useful AGUS result because it suggests that dynamic cognition is not a thin wrapper around static correctness.
 
 ## Instability Findings
 
-Overall instability favors Qwen:
+Instability adds another ranking:
+
+- Mistral is least contradiction-blind and least unstable overall
+- Qwen is close behind and still much less brittle than Llama
+- Llama is the most brittle overall despite its static lead
 
 | Model | Trajectory Instability Index | Unnecessary Revision Rate | Brittle Reversal Rate | Contradiction Blindness Rate |
 | --- | ---: | ---: | ---: | ---: |
 | `llama3.1:8b` | 0.3348 | 0.30 | 0.32 | 0.66 |
 | `qwen2.5:7b` | 0.2626 | 0.11 | 0.11 | 0.64 |
+| `mistral-nemo:12b` | 0.2513 | 0.13 | 0.14 | 0.56 |
 
 The cleanest safe interpretation is:
 
 - Llama is more brittle overall under AGUS interactive conditions
-- Qwen is less brittle overall, but both models remain highly contradiction-blind
+- Qwen and Mistral are both less brittle overall, but all three models remain highly contradiction-blind in absolute terms
 
 One nuance should stay visible in any writeup:
 
-- Qwen has higher `confidence_volatility`: `0.2772` versus `0.1012`
+- Qwen has the highest `confidence_volatility`: `0.2772` versus `0.1167` for Mistral and `0.1012` for Llama
 
 So "less brittle overall" should not be rewritten as "uniformly more stable on every dimension."
 
-## Strongest Separating Weaknesses
+## AGUS v2 Counterfactual Coherence
 
-The clearest category-level differences in the current local runs are:
+Counterfactual branching adds a second dynamic layer beyond ordinary interactive revision.
 
-| Weakness Type | Llama Count | Qwen Count | Separation |
-| --- | ---: | ---: | ---: |
-| `overconfident_error` | 89 | 68 | +21 Llama |
-| `static_dynamic_gap` | 20 | 1 | +19 Llama |
-| `social_belief_confusion` | 13 | 1 | +12 Llama |
+| Model | Counterfactual Update Fidelity | Invariant Preservation Score | Branch Belief Coherence | Cross-Branch Consistency | Counterfactual Confidence Calibration |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `llama3.1:8b` | 0.7222 | 0.7500 | 0.7037 | 1.0000 | 0.9561 |
+| `qwen2.5:7b` | 0.8333 | 0.8438 | 0.8542 | 1.0000 | 0.9717 |
+| `mistral-nemo:12b` | 0.8889 | 0.9375 | 0.8333 | 1.0000 | 0.9697 |
 
-These are useful because they are legible to judges:
+The current v2 pattern is:
 
-- `overconfident_error` shows harmful certainty, not just wrongness
-- `static_dynamic_gap` shows failure only when adaptation is required
-- `social_belief_confusion` shows trouble separating world state from agent belief state
+- Mistral is strongest on update fidelity and invariant preservation
+- Qwen is strongest on branch belief coherence and confidence calibration
+- Llama still leads only on the frozen-task axis, not the counterfactual one
 
-## Family-Level Pattern
-
-Interactive family averages show a broad Qwen advantage except in some socially targeted submetrics:
-
-- `attention_distractors`: `0.8125` versus `0.525`
-- `hidden_rule`: `0.9000` versus `0.675`
-- `shift_transfer`: `1.0000` versus `0.8000`
-- `social_miniworlds`: `1.0000` versus `0.9500`
-- `metacog_revision`: Llama leads `0.6500` versus `0.4500`
-
-This suggests the current benchmark is measuring more than a single generic capability. Different modules expose different strengths.
+All three models reached `cross_branch_consistency` of `1.0`, so the more discriminative branch metrics are update fidelity, invariant preservation, branch belief coherence, and confidence calibration.
 
 ## Why These Findings Matter For AGUS
 
@@ -97,6 +125,8 @@ AGUS is already doing useful scientific work if it can separate:
 - frozen-task correctness
 - online revision quality
 - instability under new evidence
+- contradiction blindness
+- counterfactual coherence
 - social belief tracking
 - confidence behavior under contradiction
 

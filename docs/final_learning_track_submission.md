@@ -79,36 +79,43 @@ AGUS v2 adds branch-aware metrics including:
 
 ## Results, Insights, and Conclusions
 
-The first local-model comparisons already support the main AGUS claim.
+The current local-model comparisons already support the main AGUS claim.
 
-Balanced 100-task runs on local Ollama models show:
+Balanced 100-task runs on three local Ollama models show:
 
 - **Llama 3.1 8B** static accuracy: `0.6179`
 - **Qwen 2.5 7B** static accuracy: `0.3000`
+- **Mistral NeMo 12B** static accuracy: `0.2714`
 
-But on adaptive reasoning metrics:
+But the adaptive metrics do not follow that same ordering:
 
 - Qwen `belief_trajectory_quality`: `0.7281` versus Llama `0.5434`
-- Qwen `episode_cognitive_flexibility_score`: `0.7361` versus Llama `0.6348`
-- Qwen `online_adaptation_gain`: `0.525` versus Llama `0.315`
-- Qwen `trajectory_instability_index`: `0.2626` versus Llama `0.3348` lower is better
+- Qwen `episode_cognitive_flexibility_score`: `0.7361` versus Mistral `0.6982` versus Llama `0.6348`
+- Mistral `belief_trajectory_quality`: `0.5828`, despite static accuracy of only `0.2714`
+- Mistral `contradiction_blindness_rate`: `0.56` versus Qwen `0.64` versus Llama `0.66`, lower is better
+- Mistral `trajectory_instability_index`: `0.2513` versus Qwen `0.2626` versus Llama `0.3348`, lower is better
 
-The strongest separating weakness types in the current local runs are:
+A small but important robustness check also succeeded on a **fresh deterministic balanced slice** for the main Llama-versus-Qwen comparison. On the original slice, Llama led static accuracy (`0.6179` vs `0.3000`) while Qwen led `belief_trajectory_quality` (`0.7281` vs `0.5434`). On the replication slice, Llama still led static accuracy (`0.4857` vs `0.2857`) while Qwen still led `belief_trajectory_quality` (`0.7494` vs `0.5606`). So the central AGUS signal is not just a one-slice artifact, even though this remains a local-model robustness check rather than a broad frontier study.
+
+This is the most important AGUS result so far: **across three local models, frozen-task correctness, adaptive reasoning quality, and reasoning stability do not collapse to one ranking.**
+
+Llama is clearly strongest on frozen-task correctness. Qwen is strongest on adaptive trajectory quality. Mistral adds a third anchor by showing that a model can look weak on static accuracy yet still look materially better on dynamic revision and contradiction handling than its static score would predict.
+
+The most judge-legible weakness patterns in the distilled traces remain:
 
 - `overconfident_error`
 - `static_dynamic_gap`
 - `social_belief_confusion`
 
-This is the most important result from AGUS so far: **a model can look much stronger on static accuracy while looking weaker on adaptive reasoning quality, revision, and brittleness under changing evidence.**
+AGUS v2 strengthens that story. On counterfactual branching episodes:
 
-AGUS v2 strengthens that story. On counterfactual branching episodes, Qwen again outperforms Llama on coherence-oriented metrics:
+- Mistral `counterfactual_update_fidelity`: `0.8889`
+- Mistral `invariant_preservation_score`: `0.9375`
+- Qwen `branch_belief_coherence`: `0.8542`
+- Qwen `counterfactual_confidence_calibration`: `0.9717`
+- Llama remains lower on the core branch metrics despite leading static accuracy
 
-- `counterfactual_update_fidelity`: `0.8333` versus `0.7222`
-- `invariant_preservation_score`: `0.8438` versus `0.7500`
-- `branch_belief_coherence`: `0.8542` versus `0.7037`
-- `counterfactual_confidence_calibration`: `0.9717` versus `0.9561`
-
-Both models reached `cross_branch_consistency` of `1.0`, which is encouraging but should not be overstated. The safer interpretation is that AGUS v2 shows promise as a coherence benchmark and that the same general pattern from AGUS v1 persists: Qwen looks weaker on frozen-task accuracy but stronger on adaptive and counterfactual reasoning quality.
+All three models reached `cross_branch_consistency` of `1.0`, which is encouraging but should not be overstated. The safer interpretation is that AGUS v2 adds a second non-static axis of comparison: not just "can the model revise," but "can it stay coherent across nearby alternate futures."
 
 That is exactly why AGUS fits the Learning track. It measures whether a model can acquire and update task-relevant structure efficiently, not only whether it can answer familiar-looking tasks correctly.
 
@@ -130,7 +137,11 @@ Together they help validate that AGUS is measuring **adaptive learning behavior*
 2. Burnell, Yamamori, Firat, et al. *Measuring Progress Toward AGI: A Cognitive Framework.* 2026. [https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf)
 3. Kaggle competition page. *Measuring Progress Toward AGI - Cognitive Abilities.* [https://www.kaggle.com/competitions/kaggle-measuring-agi](https://www.kaggle.com/competitions/kaggle-measuring-agi)
 4. AGUS local result artifacts in this repository:
-   - `data/evals/comparisons/llama_vs_qwen_100/comparison_summary.json`
-   - `data/evals/comparisons/llama_vs_qwen_100_instability/instability_comparison.json`
+   - `data/evals/comparisons/local_model_triplet_final/comparison_summary.json`
+   - `data/evals/comparisons/local_model_triplet_instability_final/instability_comparison.json`
+   - `data/evals/comparisons/llama_qwen_replication_v2/replication_summary.json`
    - `data/evals/llama31_balanced_interactive100/distilled_failures.json`
    - `data/evals/qwen25_balanced_interactive100/distilled_failures.json`
+   - `data/evals/llama31_counterfactual_v2/counterfactual_summary.json`
+   - `data/evals/qwen25_counterfactual_v2/counterfactual_summary.json`
+   - `data/evals/mistralnemo_counterfactual_v2/counterfactual_summary.json`

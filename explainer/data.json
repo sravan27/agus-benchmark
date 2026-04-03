@@ -1,0 +1,71 @@
+{
+  "models": [
+    {
+      "name": "Llama 3.1 8B",
+      "static_accuracy": 0.6179,
+      "belief_trajectory_quality": 0.5434,
+      "trajectory_instability_index": 0.3348,
+      "counterfactual_update_fidelity": 0.7222,
+      "contradiction_blindness_rate": null,
+      "invariant_preservation_score": null
+    },
+    {
+      "name": "Qwen 2.5 7B",
+      "static_accuracy": 0.3000,
+      "belief_trajectory_quality": 0.7281,
+      "trajectory_instability_index": 0.2626,
+      "counterfactual_update_fidelity": 0.8333,
+      "contradiction_blindness_rate": null,
+      "invariant_preservation_score": null
+    },
+    {
+      "name": "Mistral NeMo 12B",
+      "static_accuracy": 0.2714,
+      "belief_trajectory_quality": 0.5828,
+      "trajectory_instability_index": null,
+      "counterfactual_update_fidelity": 0.8889,
+      "contradiction_blindness_rate": 0.56,
+      "invariant_preservation_score": 0.9375
+    }
+  ],
+  "insights": [
+    {
+      "title": "Separability of Capabilities",
+      "description": "Frozen-task accuracy and adaptive reasoning quality are entirely separable dimensions. High static performance provides limited signal for multi-turn adaptability."
+    },
+    {
+      "title": "Instability as a Core Axis",
+      "description": "Trajectory instability is a distinct axis of model behavior. Models can exhibit varied levels of internal oscillation when traversing belief states, regardless of their final correctness."
+    },
+    {
+      "title": "Beyond Standard Interactive Eval",
+      "description": "Counterfactual coherence forms a third orthogonal capability axis. A model's ability to selectively update structural beliefs while preserving invariants reveals deeper cognitive robustness than simple conversational adaptability."
+    }
+  ],
+  "failureModes": [
+    {
+      "id": "overconfident_error",
+      "label": "Overconfident Error",
+      "description": "The model rigidly clings to a prior static belief despite encountering explicit overriding rules within the context window.",
+      "implication": "Demonstrates structural rigidity masking as high conviction."
+    },
+    {
+      "id": "static_dynamic_gap",
+      "label": "Static/Dynamic Gap",
+      "description": "The model correctly parses the facts in a frozen zero-shot pass, but entirely loses the plot when the same facts are metered out across multiple shifting turns.",
+      "implication": "Exposes fragile representations that cannot withstand temporal spacing."
+    },
+    {
+      "id": "social_belief_confusion",
+      "label": "Social Belief Confusion",
+      "description": "The model involuntarily adopts false beliefs expressed by characters in a mini-world, overwriting its own authoritative world state.",
+      "implication": "Reveals poor separation between semantic grounding and agentic simulation."
+    },
+    {
+      "id": "missed_contradiction",
+      "label": "Missed Contradiction",
+      "description": "The model silently accepts structurally contradictory evidence in parallel futures without flagging the impossibility.",
+      "implication": "Highlights fundamental 'contradiction blindness' in base context processing."
+    }
+  ]
+}

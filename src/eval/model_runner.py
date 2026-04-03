@@ -14,6 +14,8 @@ from src.scoring.evaluator import evaluate_interactive_sessions, evaluate_predic
 from src.scoring.metrics import exact_match
 from src.utils.io_utils import append_jsonl, load_json, load_jsonl, save_json
 
+BALANCED_SLICE_INDEX = {"original": 0, "replication": 1}
+
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -54,6 +56,55 @@ def _bucket_tasks(tasks: list[dict[str, Any]], family_order: list[str]) -> dict[
     return buckets
 
 
+def _resolve_balanced_slice_index(balanced_slice: str) -> int:
+    if balanced_slice not in BALANCED_SLICE_INDEX:
+        raise ValueError(f"Unsupported balanced slice: {balanced_slice}")
+    return BALANCED_SLICE_INDEX[balanced_slice]
+
+
+def _planned_balanced_counts(
+    buckets: dict[str, list[dict[str, Any]]],
+    family_order: list[str],
+    *,
+    max_tasks: int | None,
+    per_family_max: int | None,
+) -> dict[str, int]:
+    counts = {family: 0 for family in family_order}
+    available = {
+        family: min(len(buckets.get(family, [])), per_family_max) if per_family_max is not None else len(buckets.get(family, []))
+        for family in family_order
+    }
+    selected = 0
+    while True:
+        added = False
+        for family in family_order:
+            if counts[family] >= available[family]:
+                continue
+            counts[family] += 1
+            selected += 1
+            added = True
+            if max_tasks is not None and selected >= max_tasks:
+                return {family: count for family, count in counts.items() if count}
+        if not added:
+            return {family: count for family, count in counts.items() if count}
+
+
+def _slice_family_window(
+    family_tasks: list[dict[str, Any]],
+    *,
+    offset: int,
+    count: int,
+) -> list[dict[str, Any]]:
+    if not family_tasks or count <= 0:
+        return []
+    task_count = len(family_tasks)
+    if count >= task_count:
+        offset = offset % task_count
+        return family_tasks[offset:] + family_tasks[:offset]
+    offset = offset % task_count
+    return [family_tasks[(offset + index) % task_count] for index in range(count)]
+
+
 def _round_robin_take(
     buckets: dict[str, list[dict[str, Any]]],
     family_order: list[str],
@@ -84,18 +135,34 @@ def select_evaluation_tasks(
     max_tasks: int | None = None,
     balanced: bool = False,
     per_family_max: int | None = None,
+    balanced_slice: str = "original",
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Select a deterministic evaluation subset."""
     filtered = _family_filter(tasks, families)
     source_family_order = _family_order(filtered)
     source_counts = _count_tasks_by_family(filtered)
+    balanced_slice_index = _resolve_balanced_slice_index(balanced_slice)
+
+    if balanced_slice_index and not balanced:
+        raise ValueError("Non-original balanced slices require balanced sampling.")
 
     if balanced:
         buckets = _bucket_tasks(filtered, source_family_order)
-        if per_family_max is not None:
-            for family in source_family_order:
-                buckets[family] = buckets[family][:per_family_max]
-        selected = _round_robin_take(buckets, source_family_order, max_tasks)
+        target_counts = _planned_balanced_counts(
+            buckets,
+            source_family_order,
+            max_tasks=max_tasks,
+            per_family_max=per_family_max,
+        )
+        sliced_buckets = {
+            family: _slice_family_window(
+                buckets.get(family, []),
+                offset=target_counts.get(family, 0) * balanced_slice_index,
+                count=target_counts.get(family, 0),
+            )
+            for family in source_family_order
+        }
+        selected = _round_robin_take(sliced_buckets, source_family_order, max_tasks)
     else:
         selected = []
         family_counts: dict[str, int] = defaultdict(int)
@@ -114,6 +181,8 @@ def select_evaluation_tasks(
     families_skipped = [family for family in source_family_order if selected_counts.get(family, 0) == 0]
     selection_meta = {
         "balanced": balanced,
+        "balanced_slice_name": balanced_slice,
+        "balanced_slice_index": balanced_slice_index,
         "per_family_max": per_family_max,
         "max_tasks": max_tasks,
         "families_requested": requested_families,
@@ -413,6 +482,8 @@ def _build_progress_payload(
         "resume_mode": resume,
         "include_interactive": include_interactive and adapter.supports_interactive,
         "balanced_sampling": selection_meta["balanced"],
+        "balanced_slice_name": selection_meta["balanced_slice_name"],
+        "balanced_slice_index": selection_meta["balanced_slice_index"],
         "per_family_max": selection_meta["per_family_max"],
         "max_tasks": selection_meta["max_tasks"],
         "last_task_id": last_task_id,
@@ -446,6 +517,7 @@ def run_model_evaluation(
     resume: bool = True,
     balanced: bool = False,
     per_family_max: int | None = None,
+    balanced_slice: str = "original",
 ) -> dict[str, Any]:
     """Run a resumable local-first evaluation over AGUS tasks."""
     all_tasks = load_json(tasks_path)
@@ -455,6 +527,7 @@ def run_model_evaluation(
         max_tasks=max_tasks,
         balanced=balanced,
         per_family_max=per_family_max,
+        balanced_slice=balanced_slice,
     )
 
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -486,6 +559,7 @@ def run_model_evaluation(
             "include_interactive": include_interactive,
             "resume": resume,
             "balanced": balanced,
+            "balanced_slice": balanced_slice,
             "per_family_max": per_family_max,
             "selection": selection_meta,
         },
@@ -618,6 +692,8 @@ def run_model_evaluation(
         "families_planned": run_composition["families_planned"],
         "families_skipped": run_composition["families_skipped"],
         "families_absent": run_composition["families_absent"],
+        "balanced_slice_name": run_composition["balanced_slice_name"],
+        "balanced_slice_index": run_composition["balanced_slice_index"],
         "tasks_planned_per_family": run_composition["tasks_planned_per_family"],
         "tasks_completed_per_family": run_composition["tasks_completed_per_family"],
     }
@@ -627,6 +703,8 @@ def run_model_evaluation(
         "families_planned": run_composition["families_planned"],
         "families_skipped": run_composition["families_skipped"],
         "families_absent": run_composition["families_absent"],
+        "balanced_slice_name": run_composition["balanced_slice_name"],
+        "balanced_slice_index": run_composition["balanced_slice_index"],
         "interactive_sessions_planned_per_family": run_composition["interactive_sessions_planned_per_family"],
         "interactive_sessions_completed_per_family": run_composition["interactive_sessions_completed_per_family"],
     }

@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 
 from src.eval.adapters import build_adapter
-from src.eval.model_runner import run_model_evaluation
+from src.eval.model_runner import BALANCED_SLICE_INDEX, run_model_evaluation
 from src.eval.run_profiles import RUN_PROFILES, resolve_run_profile
 
 
@@ -25,6 +25,7 @@ def main() -> None:
     parser.add_argument("--profile", type=str, choices=sorted(RUN_PROFILES), default=None)
     parser.add_argument("--max-tasks", type=int, default=None)
     parser.add_argument("--balanced", action="store_true", default=None)
+    parser.add_argument("--balanced-slice", type=str, choices=sorted(BALANCED_SLICE_INDEX), default="original")
     parser.add_argument("--per-family-max", type=int, default=None)
     parser.add_argument("--family", action="append", default=None)
     parser.add_argument("--no-interactive", action="store_true")
@@ -59,12 +60,14 @@ def main() -> None:
         resume=not args.no_resume,
         balanced=profile_settings["balanced"],
         per_family_max=profile_settings["per_family_max"],
+        balanced_slice=args.balanced_slice,
     )
     print(
         {
             "run_dir": str(run_dir),
             "adapter": adapter.describe(),
             "profile": profile_settings["profile_name"],
+            "balanced_slice": results["run_composition"]["balanced_slice_name"],
             "families_planned": results["run_composition"]["families_planned"],
             "tasks_planned_per_family": results["run_composition"]["tasks_planned_per_family"],
             "interactive_sessions_planned_per_family": results["run_composition"]["interactive_sessions_planned_per_family"],

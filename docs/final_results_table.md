@@ -2,41 +2,30 @@
 
 ## Core Comparison
 
-| Model | Static Accuracy | Belief Trajectory Quality | Episode Cognitive Flexibility | Trajectory Instability Index |
-| --- | ---: | ---: | ---: | ---: |
-| `llama3.1:8b` | 0.6179 | 0.5434 | 0.6348 | 0.3348 |
-| `qwen2.5:7b` | 0.3000 | 0.7281 | 0.7361 | 0.2626 |
+| Model | Static Accuracy | Belief Trajectory Quality | Episode Cognitive Flexibility | Contradiction Blindness Rate | Trajectory Instability Index |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `llama3.1:8b` | 0.6179 | 0.5434 | 0.6348 | 0.66 | 0.3348 |
+| `qwen2.5:7b` | 0.3000 | 0.7281 | 0.7361 | 0.64 | 0.2626 |
+| `mistral-nemo:12b` | 0.2714 | 0.5828 | 0.6982 | 0.56 | 0.2513 |
 
-`trajectory_instability_index` is lower-is-better.
-
-## Most Separating Weakness Types
-
-| Weakness Type | Llama Count | Qwen Count | Separation |
-| --- | ---: | ---: | ---: |
-| `overconfident_error` | 89 | 68 | +21 Llama |
-| `static_dynamic_gap` | 20 | 1 | +19 Llama |
-| `social_belief_confusion` | 13 | 1 | +12 Llama |
-
-## Supporting Dynamic Metrics
-
-| Metric | Llama | Qwen | Direction |
-| --- | ---: | ---: | --- |
-| `online_adaptation_gain` | 0.3150 | 0.5250 | higher is better |
-| `hypothesis_update_score` | 0.5800 | 0.8100 | higher is better |
-| `belief_state_consistency` | 0.7937 | 0.9510 | higher is better |
-| `confidence_recalibration_score` | 0.5995 | 0.8650 | higher is better |
-| `attention_recovery_score` | 0.5750 | 0.7812 | higher is better |
+`contradiction_blindness_rate` and `trajectory_instability_index` are lower-is-better.
 
 ## AGUS v2 Counterfactual Coherence
 
-| Metric | Llama | Qwen | Direction |
-| --- | ---: | ---: | --- |
-| `counterfactual_update_fidelity` | 0.7222 | 0.8333 | higher is better |
-| `invariant_preservation_score` | 0.7500 | 0.8438 | higher is better |
-| `branch_belief_coherence` | 0.7037 | 0.8542 | higher is better |
-| `cross_branch_consistency` | 1.0000 | 1.0000 | higher is better |
-| `counterfactual_confidence_calibration` | 0.9561 | 0.9717 | higher is better |
+| Model | Counterfactual Update Fidelity | Invariant Preservation Score | Branch Belief Coherence | Cross-Branch Consistency | Counterfactual Confidence Calibration |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `llama3.1:8b` | 0.7222 | 0.7500 | 0.7037 | 1.0000 | 0.9561 |
+| `qwen2.5:7b` | 0.8333 | 0.8438 | 0.8542 | 1.0000 | 0.9717 |
+| `mistral-nemo:12b` | 0.8889 | 0.9375 | 0.8333 | 1.0000 | 0.9697 |
+
+## Current Judge-Facing Failure Types
+
+The most legible AGUS failure categories in the current distilled evidence are:
+
+- `overconfident_error`
+- `static_dynamic_gap`
+- `social_belief_confusion`
 
 ## Takeaway
 
-Llama is stronger on frozen-task accuracy. Qwen is stronger on adaptive reasoning quality, less brittle overall, and stronger on the first AGUS v2 counterfactual coherence metrics. AGUS is valuable because it makes that tradeoff visible at both the interactive and counterfactual levels.
+Llama is strongest on frozen-task accuracy. Qwen is strongest on adaptive trajectory quality. Mistral reinforces the AGUS thesis by pairing weak static accuracy with lower contradiction blindness, lower overall instability, and the strongest current counterfactual update and invariant-preservation metrics. AGUS is valuable because it makes those separable dimensions visible instead of collapsing them into one score.
