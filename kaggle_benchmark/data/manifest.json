@@ -1,0 +1,22 @@
+{
+  "package_name": "agus_kaggle_benchmark_v1",
+  "benchmark_name": "agus_learning_track_v1",
+  "slice_name": "learning_core_v1",
+  "families": [
+    "hidden_rule",
+    "metacog_revision",
+    "shift_transfer"
+  ],
+  "per_family_counts": {
+    "hidden_rule": 10,
+    "metacog_revision": 10,
+    "shift_transfer": 10
+  },
+  "total_rows": 30,
+  "data_file": "data/learning_core_v1.jsonl",
+  "source_files": {
+    "hidden_rule": "data/generated/hidden_rule.json",
+    "shift_transfer": "data/generated/shift_transfer.json",
+    "metacog_revision": "data/generated/metacog_revision.json"
+  }
+}

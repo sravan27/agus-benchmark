@@ -22,6 +22,12 @@ Submission-oriented docs:
 - [final_submission_checklist.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_submission_checklist.md)
 - [final_requirements_audit.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_requirements_audit.md)
 
+Kaggle benchmark packaging:
+
+- [kaggle_benchmark/README.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
+- [kaggle_benchmark/agus_learning_track_notebook.py](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/agus_learning_track_notebook.py)
+- [kaggle_benchmark/KAGGLE_UI_CHECKLIST.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/KAGGLE_UI_CHECKLIST.md)
+
 The design goal is to test **dynamic cognition**, not static recall.
 
 Instead of rewarding benchmark familiarity, AGUS asks whether a model can:
