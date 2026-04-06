@@ -95,7 +95,13 @@ But the adaptive metrics do not follow that same ordering:
 - Mistral `contradiction_blindness_rate`: `0.56` versus Qwen `0.64` versus Llama `0.66`, lower is better
 - Mistral `trajectory_instability_index`: `0.2513` versus Qwen `0.2626` versus Llama `0.3348`, lower is better
 
-A small but important robustness check also succeeded on a **fresh deterministic balanced slice** for the main Llama-versus-Qwen comparison. On the original slice, Llama led static accuracy (`0.6179` vs `0.3000`) while Qwen led `belief_trajectory_quality` (`0.7281` vs `0.5434`). On the replication slice, Llama still led static accuracy (`0.4857` vs `0.2857`) while Qwen still led `belief_trajectory_quality` (`0.7494` vs `0.5606`). So the central AGUS signal is not just a one-slice artifact, even though this remains a local-model robustness check rather than a broad frontier study.
+A lightweight but meaningful robustness package also succeeded across **three fresh deterministic balanced replication slices** for the main Llama-versus-Qwen comparison. On every replication slice, Llama remained ahead on static accuracy while Qwen remained ahead on `belief_trajectory_quality`:
+
+- replication: Llama static `0.4857` vs Qwen `0.2857`; Qwen BTQ `0.7494` vs Llama `0.5606`
+- replication_2: Llama static `0.6429` vs Qwen `0.3143`; Qwen BTQ `0.7257` vs Llama `0.5767`
+- replication_3: Llama static `0.6429` vs Qwen `0.3286`; Qwen BTQ `0.7329` vs Llama `0.4879`
+
+So the central AGUS signal is not just a one-slice artifact in the current local-model setting. The ranking split and the main weakness-proxy directions held on `3/3` replication slices, even though this remains a local-model robustness check rather than a broad frontier study.
 
 This is the most important AGUS result so far: **across three local models, frozen-task correctness, adaptive reasoning quality, and reasoning stability do not collapse to one ranking.**
 
@@ -117,6 +123,13 @@ AGUS v2 strengthens that story. On counterfactual branching episodes:
 
 All three models reached `cross_branch_consistency` of `1.0`, which is encouraging but should not be overstated. The safer interpretation is that AGUS v2 adds a second non-static axis of comparison: not just "can the model revise," but "can it stay coherent across nearby alternate futures."
 
+A focused AGUS v2 expansion also now exists for the main Llama-versus-Qwen pair. On an expanded branch set with `12` bundles and `24` branches per model, Qwen remained ahead of Llama on every discriminative counterfactual metric:
+
+- Llama: update fidelity `0.7222`, invariant preservation `0.6875`, branch belief coherence `0.6157`, confidence calibration `0.9511`
+- Qwen: update fidelity `0.8611`, invariant preservation `0.8281`, branch belief coherence `0.8090`, confidence calibration `0.9681`
+
+That does not make AGUS v2 a mature leaderboard on its own, but it does make the counterfactual result look less like a one-off demo.
+
 That is exactly why AGUS fits the Learning track. It measures whether a model can acquire and update task-relevant structure efficiently, not only whether it can answer familiar-looking tasks correctly.
 
 Supporting modules matter here, but they are secondary to the main claim:
@@ -126,6 +139,8 @@ Supporting modules matter here, but they are secondary to the main claim:
 - social cognition shows whether belief updates remain coherent when multiple agents and incentives are involved
 
 Together they help validate that AGUS is measuring **adaptive learning behavior** rather than a narrow synthetic trick.
+
+One compact validation bundle also supports that interpretation. It shows that adversarial refinement improved retained tasks from `325` to `423`, that the largest benchmark-signal gain came in `attention_distractors` (`+0.2195`), and that static versus interactive rankings diverge on matched-composition runs. On that same matched 100-task slice, a `mock_shallow` baseline reached high static accuracy (`0.7214`) but only middling adaptive quality (`belief_trajectory_quality` `0.5943`), which is exactly the kind of static-versus-dynamic mismatch AGUS is meant to surface.
 
 ## Organizational Affiliations
 
@@ -139,9 +154,11 @@ Together they help validate that AGUS is measuring **adaptive learning behavior*
 4. AGUS local result artifacts in this repository:
    - `data/evals/comparisons/local_model_triplet_final/comparison_summary.json`
    - `data/evals/comparisons/local_model_triplet_instability_final/instability_comparison.json`
-   - `data/evals/comparisons/llama_qwen_replication_v2/replication_summary.json`
+   - `data/evals/comparisons/llama_qwen_multi_slice_robustness_v1/robustness_summary.json`
+   - `data/evals/comparisons/validation_bundle_v1/validation_summary.json`
    - `data/evals/llama31_balanced_interactive100/distilled_failures.json`
    - `data/evals/qwen25_balanced_interactive100/distilled_failures.json`
    - `data/evals/llama31_counterfactual_v2/counterfactual_summary.json`
    - `data/evals/qwen25_counterfactual_v2/counterfactual_summary.json`
    - `data/evals/mistralnemo_counterfactual_v2/counterfactual_summary.json`
+   - `data/evals/comparisons/llama_qwen_counterfactual_expanded_v1/counterfactual_comparison.json`

@@ -25,7 +25,16 @@ def main() -> None:
     parser.add_argument("--profile", type=str, choices=sorted(RUN_PROFILES), default=None)
     parser.add_argument("--max-tasks", type=int, default=None)
     parser.add_argument("--balanced", action="store_true", default=None)
-    parser.add_argument("--balanced-slice", type=str, choices=sorted(BALANCED_SLICE_INDEX), default="original")
+    parser.add_argument(
+        "--balanced-slice",
+        type=str,
+        default="original",
+        help=(
+            "Deterministic balanced-slice selector. "
+            f"Built-in aliases: {', '.join(sorted(BALANCED_SLICE_INDEX))}. "
+            "Also supports replication_2, replication_3, or slice_2."
+        ),
+    )
     parser.add_argument("--per-family-max", type=int, default=None)
     parser.add_argument("--family", action="append", default=None)
     parser.add_argument("--no-interactive", action="store_true")

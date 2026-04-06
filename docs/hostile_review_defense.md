@@ -141,16 +141,18 @@ Counterfactual branching is the most novel part, but it may not yet have enough 
 
 **Why that criticism is plausible**
 
-The current branch bundle set is compact, and `cross_branch_consistency` saturates at `1.0` for all three models.
+The original branch bundle set was compact, and `cross_branch_consistency` saturates at `1.0` for all three models.
 
 **Best available defense from our current benchmark and evidence**
 
-We should present AGUS v2 as an extension that strengthens the benchmark thesis, not as a fully mature standalone benchmark. Even with the compact bundle set, AGUS v2 already separates models on:
+We should present AGUS v2 as an extension that strengthens the benchmark thesis, not as a fully mature standalone benchmark. Even with the compact three-model bundle set, AGUS v2 already separates models on:
 
 - `counterfactual_update_fidelity`
 - `invariant_preservation_score`
 - `branch_belief_coherence`
 - `counterfactual_confidence_calibration`
+
+Also, the main Llama-versus-Qwen pair has now been rerun on an expanded branch set with `12` bundles and `24` branches per model, and Qwen still leads Llama on every discriminative branch metric. That makes the v2 evidence meaningfully less preliminary than it was before.
 
 That is enough to argue benchmark promise and conceptual novelty, not enough to claim v2 is fully validated.
 
@@ -158,7 +160,9 @@ That is enough to argue benchmark promise and conceptual novelty, not enough to 
 
 Partially answered.
 
-This is one of the clearest remaining weaknesses.
+Partially answered.
+
+The critique is weaker now, but it is not gone. The expanded branch evidence is only pairwise, and the full three-model branch comparison remains compact.
 
 ## 7. "The writeup overstates what the evidence supports."
 
@@ -207,11 +211,13 @@ The repo does a meaningful amount to reduce accidental instability:
 - adversarial curation
 - refinement and search-conditioned refinement to reduce weak templates
 
-The benchmark also now has a direct lightweight replication result on a **fresh deterministic balanced slice** for the main Llama-versus-Qwen comparison:
+The benchmark now has a direct lightweight robustness package on **three deterministic balanced replication slices** for the main Llama-versus-Qwen comparison:
 
 - original slice: Llama static accuracy `0.6179` versus Qwen `0.3000`; Qwen `belief_trajectory_quality` `0.7281` versus Llama `0.5434`
-- replication slice: Llama static accuracy `0.4857` versus Qwen `0.2857`; Qwen `belief_trajectory_quality` `0.7494` versus Llama `0.5606`
-- the main weakness-proxy directions also replicated
+- replication: Llama static `0.4857` versus Qwen `0.2857`; Qwen `belief_trajectory_quality` `0.7494` versus Llama `0.5606`
+- replication_2: Llama static `0.6429` versus Qwen `0.3143`; Qwen `belief_trajectory_quality` `0.7257` versus Llama `0.5767`
+- replication_3: Llama static `0.6429` versus Qwen `0.3286`; Qwen `belief_trajectory_quality` `0.7329` versus Llama `0.4879`
+- the main weakness-proxy directions also replicated on `3/3` slices
 
 Also, the main result is not "Qwen beats Llama" or "Mistral beats Qwen." The main result is that **different metrics induce different rankings**. That claim is more robust to local rank swapping than a single leaderboard claim would be.
 
@@ -219,7 +225,7 @@ Also, the main result is not "Qwen beats Llama" or "Mistral beats Qwen." The mai
 
 Mostly answered for the one-slice-fluke criticism.
 
-This is still not a full robustness story. We only have one fresh deterministic replication slice, and the evidence remains local-model-scoped.
+This is still not a full robustness story. We now have three deterministic replication slices rather than one, but the evidence remains local-model-scoped and not multi-stack.
 
 ## 9. "This is mostly engineering, not science."
 

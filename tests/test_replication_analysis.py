@@ -54,6 +54,37 @@ def test_replication_slice_is_deterministic_and_distinct():
     ]
 
 
+def test_additional_replication_slice_is_deterministic_and_distinct():
+    tasks = _sample_tasks_many()
+    replication_selected, replication_meta = select_evaluation_tasks(
+        tasks,
+        balanced=True,
+        max_tasks=10,
+        balanced_slice="replication",
+    )
+    replication_2_selected, replication_2_meta = select_evaluation_tasks(
+        tasks,
+        balanced=True,
+        max_tasks=10,
+        balanced_slice="replication_2",
+    )
+    replication_2_selected_repeat, _ = select_evaluation_tasks(
+        tasks,
+        balanced=True,
+        max_tasks=10,
+        balanced_slice="replication_2",
+    )
+
+    assert replication_meta["tasks_planned_per_family"] == replication_2_meta["tasks_planned_per_family"]
+    assert replication_2_meta["balanced_slice_name"] == "replication_2"
+    assert {task["task_id"] for task in replication_selected}.isdisjoint(
+        {task["task_id"] for task in replication_2_selected}
+    )
+    assert [task["task_id"] for task in replication_2_selected] == [
+        task["task_id"] for task in replication_2_selected_repeat
+    ]
+
+
 def test_run_model_evaluation_records_slice_metadata(tmp_path: Path):
     tasks_path = tmp_path / "tasks.json"
     save_json(tasks_path, _sample_tasks_many())

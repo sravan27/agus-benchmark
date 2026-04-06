@@ -8,7 +8,10 @@ In the current local-model results:
 
 - `llama3.1:8b` scores higher on static accuracy: `0.6179`
 - `qwen2.5:7b` scores higher on `belief_trajectory_quality`: `0.7281` versus `0.5434`
+- `mistral-nemo:12b` has the lowest `contradiction_blindness_rate`: `0.56`
 - `qwen2.5:7b` is also less brittle overall on `trajectory_instability_index`: `0.2626` versus `0.3348`, lower is better
+
+That core Llama-versus-Qwen static/dynamic split now holds on `3/3` fresh deterministic replication slices, and AGUS v2 also adds a branching counterfactual layer where coherence across nearby alternate futures becomes a separate axis of comparison.
 
 AGUS is not just another static reasoning dataset. It is designed to test **adaptive generalization under shift**: whether a model can infer a rule, detect change, revise its hypothesis, recalibrate confidence, resist distractors, and maintain coherent belief updates across short interactive episodes.
 

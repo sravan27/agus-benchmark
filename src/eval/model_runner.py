@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from datetime import datetime, timezone
+import re
 import time
 from pathlib import Path
 from typing import Any
@@ -56,10 +57,26 @@ def _bucket_tasks(tasks: list[dict[str, Any]], family_order: list[str]) -> dict[
     return buckets
 
 
+def _normalize_balanced_slice_name(balanced_slice: str) -> str:
+    return balanced_slice.strip().lower().replace("-", "_")
+
+
 def _resolve_balanced_slice_index(balanced_slice: str) -> int:
-    if balanced_slice not in BALANCED_SLICE_INDEX:
-        raise ValueError(f"Unsupported balanced slice: {balanced_slice}")
-    return BALANCED_SLICE_INDEX[balanced_slice]
+    normalized = _normalize_balanced_slice_name(balanced_slice)
+    if normalized in BALANCED_SLICE_INDEX:
+        return BALANCED_SLICE_INDEX[normalized]
+
+    if normalized.isdigit():
+        return int(normalized)
+
+    match = re.fullmatch(r"(?:replication|slice)_?(\d+)", normalized)
+    if match:
+        return int(match.group(1))
+
+    raise ValueError(
+        "Unsupported balanced slice: "
+        f"{balanced_slice}. Use `original`, `replication`, `replication_2`, `replication_3`, or `slice_2`."
+    )
 
 
 def _planned_balanced_counts(
@@ -141,7 +158,8 @@ def select_evaluation_tasks(
     filtered = _family_filter(tasks, families)
     source_family_order = _family_order(filtered)
     source_counts = _count_tasks_by_family(filtered)
-    balanced_slice_index = _resolve_balanced_slice_index(balanced_slice)
+    balanced_slice_name = _normalize_balanced_slice_name(balanced_slice)
+    balanced_slice_index = _resolve_balanced_slice_index(balanced_slice_name)
 
     if balanced_slice_index and not balanced:
         raise ValueError("Non-original balanced slices require balanced sampling.")
@@ -181,7 +199,7 @@ def select_evaluation_tasks(
     families_skipped = [family for family in source_family_order if selected_counts.get(family, 0) == 0]
     selection_meta = {
         "balanced": balanced,
-        "balanced_slice_name": balanced_slice,
+        "balanced_slice_name": balanced_slice_name,
         "balanced_slice_index": balanced_slice_index,
         "per_family_max": per_family_max,
         "max_tasks": max_tasks,

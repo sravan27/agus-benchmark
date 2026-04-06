@@ -32,9 +32,9 @@ The important pattern is no longer a simple two-model inversion. It is a three-m
 - Qwen wins clearly on adaptive trajectory quality
 - Mistral is weak on static accuracy but stronger on dynamic and instability metrics than that score alone would predict
 
-## Fresh-Slice Replication
+## Multi-Slice Robustness
 
-The central AGUS result also held on a fresh deterministic balanced slice for the main Llama-versus-Qwen comparison.
+The central AGUS result now holds across three fresh deterministic balanced replication slices for the main Llama-versus-Qwen comparison.
 
 | Slice | Model | Static Accuracy | Belief Trajectory Quality |
 | --- | --- | ---: | ---: |
@@ -42,8 +42,12 @@ The central AGUS result also held on a fresh deterministic balanced slice for th
 | original | `qwen2.5:7b` | 0.3000 | 0.7281 |
 | replication | `llama3.1:8b` | 0.4857 | 0.5606 |
 | replication | `qwen2.5:7b` | 0.2857 | 0.7494 |
+| replication_2 | `llama3.1:8b` | 0.6429 | 0.5767 |
+| replication_2 | `qwen2.5:7b` | 0.3143 | 0.7257 |
+| replication_3 | `llama3.1:8b` | 0.6429 | 0.4879 |
+| replication_3 | `qwen2.5:7b` | 0.3286 | 0.7329 |
 
-What replicated:
+What held on `3/3` replication slices:
 
 - static accuracy ranking: Llama remained ahead of Qwen
 - `belief_trajectory_quality` ranking: Qwen remained ahead of Llama
@@ -53,7 +57,7 @@ What replicated:
   - `static_dynamic_gap`
   - `social_belief_confusion`
 
-This does not prove broad robustness. It does support a narrower and important claim: the core AGUS signal is not just a one-slice accident in the current local-model setup.
+This still does not prove broad robustness. It does support a stronger local-model claim: the core AGUS signal is not just a one-slice accident in the current setup.
 
 ## Static Versus Dynamic Separation
 
@@ -117,6 +121,39 @@ The current v2 pattern is:
 - Llama still leads only on the frozen-task axis, not the counterfactual one
 
 All three models reached `cross_branch_consistency` of `1.0`, so the more discriminative branch metrics are update fidelity, invariant preservation, branch belief coherence, and confidence calibration.
+
+### Expanded Llama-Versus-Qwen Branch Set
+
+AGUS v2 is also now backed by a larger focused pairwise check. The main Llama-versus-Qwen comparison was rerun on `12` bundles and `24` branches per model:
+
+| Model | Bundles | Branches | Counterfactual Update Fidelity | Invariant Preservation Score | Branch Belief Coherence | Counterfactual Confidence Calibration |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `llama3.1:8b` | 12 | 24 | 0.7222 | 0.6875 | 0.6157 | 0.9511 |
+| `qwen2.5:7b` | 12 | 24 | 0.8611 | 0.8281 | 0.8090 | 0.9681 |
+
+That expanded pairwise result matters because it keeps the main v2 story intact on a larger branch set: Qwen still leads Llama on every discriminative counterfactual metric.
+
+## Validation Bundle
+
+AGUS now also has one compact validation bundle aimed at the “this is just metric engineering” criticism.
+
+On matched-composition runs it shows:
+
+- manual refinement improved retained tasks from `325` to `423`
+- rejected tasks fell from `110` to `77`
+- the largest benchmark-signal gain came in `attention_distractors` at `+0.2195`
+- static and interactive rankings diverged on the same balanced 100-task composition
+
+It also produces a useful sanity check from a matched shallow baseline:
+
+| Run | Accuracy | Belief Trajectory Quality | Episode Cognitive Flexibility |
+| --- | ---: | ---: | ---: |
+| `mock_shallow_balanced_interactive100` | 0.7214 | 0.5943 | 0.7165 |
+| `llama31_balanced_interactive100` | 0.6179 | 0.5434 | 0.6348 |
+| `qwen25_balanced_interactive100` | 0.3000 | 0.7281 | 0.7361 |
+| `mistralnemo_balanced_interactive100` | 0.2714 | 0.5828 | 0.6982 |
+
+That is not meant as a model leaderboard. It is a sanity check that AGUS can separate shallow frozen-task performance from adaptive behavior on the same task composition.
 
 ## Why These Findings Matter For AGUS
 
