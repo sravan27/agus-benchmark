@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from kaggle_benchmark import benchmark_tasks
 from kaggle_benchmark.packaging import (
     LEARNING_CORE_FAMILIES,
     build_manifest,
@@ -54,3 +55,13 @@ def test_prompt_renderers_include_family_specific_context():
     assert "Induction examples" in hidden_prompt
     assert "Transfer query" in shift_prompt
     assert "contradiction_detected" in metacog_prompt
+
+
+def test_kaggle_task_functions_use_bool_return_type_for_sdk_inference():
+    source = Path(benchmark_tasks.__file__).read_text(encoding="utf-8")
+
+    assert "def hidden_rule_episode(" in source
+    assert "def shift_transfer_episode(" in source
+    assert "def metacog_revision_episode(" in source
+    assert ") -> bool:" in source
+    assert source.count("return True") >= 3

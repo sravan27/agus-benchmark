@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import json
 from pathlib import Path
 from typing import Any
@@ -84,7 +82,7 @@ if kbench is not None:
         symbol_space: list[int],
         difficulty: str,
         slice_name: str,
-    ) -> None:
+    ) -> bool:
         row = {
             "task_id": task_id,
             "family": family,
@@ -112,6 +110,7 @@ if kbench is not None:
             revised.predictions,
             expectation="Revised predictions should exactly match the shifted hidden-rule targets.",
         )
+        return True
 
 
     @kbench.task(
@@ -134,7 +133,7 @@ if kbench is not None:
         transfer_representation: str,
         difficulty: str,
         slice_name: str,
-    ) -> None:
+    ) -> bool:
         row = {
             "task_id": task_id,
             "family": family,
@@ -163,6 +162,7 @@ if kbench is not None:
             transfer.prediction,
             expectation="Transfer-representation prediction should exactly match the remapped target sequence.",
         )
+        return True
 
 
     @kbench.task(
@@ -186,7 +186,7 @@ if kbench is not None:
         instruction: str,
         difficulty: str,
         slice_name: str,
-    ) -> None:
+    ) -> bool:
         row = {
             "task_id": task_id,
             "family": family,
@@ -220,6 +220,7 @@ if kbench is not None:
                 revised.contradiction_detected,
                 expectation="The model should explicitly acknowledge the contradiction when corrective evidence arrives.",
             )
+        return True
 
 
     @kbench.task(
@@ -280,4 +281,3 @@ def run_learning_track_benchmark(slice_path: str | Path | None = None):
         )
     resolved = Path(slice_path) if slice_path else default_slice_path()
     return agus_learning_track_v1.run(llm=kbench.llm, slice_path=str(resolved))
-
