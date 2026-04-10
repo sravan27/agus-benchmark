@@ -1,10 +1,16 @@
 from pathlib import Path
+import shutil
+import subprocess
+import sys
 
 from kaggle_benchmark import benchmark_tasks
+from kaggle_benchmark.agus_learning_track_notebook import resolve_slice_path, run_notebook_entrypoint
 from kaggle_benchmark.packaging import (
     LEARNING_CORE_FAMILIES,
+    PACKAGED_SLICE_FILE,
     build_manifest,
     build_slice,
+    load_jsonl,
     write_jsonl,
 )
 from kaggle_benchmark.prompts import (
@@ -65,3 +71,84 @@ def test_kaggle_task_functions_use_bool_return_type_for_sdk_inference():
     assert "def metacog_revision_episode(" in source
     assert ") -> bool:" in source
     assert source.count("return True") >= 3
+
+
+def test_packaged_jsonl_matches_family_task_columns():
+    rows = load_jsonl(PACKAGED_SLICE_FILE)
+    task_map = {
+        "hidden_rule": benchmark_tasks.hidden_rule_episode,
+        "shift_transfer": benchmark_tasks.shift_transfer_episode,
+        "metacog_revision": benchmark_tasks.metacog_revision_episode,
+    }
+
+    for family, task_fn in task_map.items():
+        row = next(record for record in rows if record["family"] == family)
+        expected_columns = set(benchmark_tasks._task_parameter_names(task_fn))
+        assert set(row.keys()) == expected_columns
+
+
+def test_prepare_family_evaluation_data_filters_extra_columns():
+    rows = build_slice(per_family=1)
+    import pandas as pd
+
+    df = pd.DataFrame(rows)
+    df["extra_column"] = "ignore_me"
+    prepared = benchmark_tasks._prepare_family_evaluation_data(
+        df,
+        "hidden_rule",
+        benchmark_tasks.hidden_rule_episode,
+    )
+
+    assert "extra_column" not in prepared.columns
+    assert list(prepared.columns) == benchmark_tasks._task_parameter_names(
+        benchmark_tasks.hidden_rule_episode
+    )
+
+
+def test_notebook_entrypoint_is_callable_without_argparse(monkeypatch):
+    payload = {}
+
+    class DummyRun:
+        result = 0.75
+
+    def _fake_runner(slice_path):
+        payload["slice_path"] = str(slice_path)
+        return DummyRun()
+
+    monkeypatch.setattr(
+        "kaggle_benchmark.agus_learning_track_notebook.run_learning_track_benchmark",
+        _fake_runner,
+    )
+
+    resolved = resolve_slice_path()
+    result = run_notebook_entrypoint()
+
+    assert payload["slice_path"] == str(resolved)
+    assert result["benchmark_name"] == "agus_learning_track_v1"
+    assert result["score"] == 0.75
+
+
+def test_package_only_import_works_without_repo_generated_sources(tmp_path: Path):
+    package_src = Path("kaggle_benchmark")
+    package_copy = tmp_path / "kaggle_benchmark"
+    shutil.copytree(package_src, package_copy)
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "import sys; "
+                f"sys.path.insert(0, {str(tmp_path)!r}); "
+                "from kaggle_benchmark.packaging import build_slice; "
+                "rows = build_slice(per_family=1, slice_name='kaggle_test'); "
+                "assert len(rows) == 3; "
+                "assert sorted({row['family'] for row in rows}) == ['hidden_rule','metacog_revision','shift_transfer']; "
+                "assert all(row['slice_name'] == 'kaggle_test' for row in rows)"
+            ),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr

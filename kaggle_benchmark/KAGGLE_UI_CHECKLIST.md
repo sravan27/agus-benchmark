@@ -4,17 +4,11 @@
 
 1. Open a benchmark notebook from:
    [https://www.kaggle.com/benchmarks/tasks/new](https://www.kaggle.com/benchmarks/tasks/new)
-2. Add the AGUS package files to the notebook workspace:
-   - `agus_learning_track_notebook.py`
-   - `benchmark_tasks.py`
-   - `packaging.py`
-   - `prompts.py`
-   - `data/learning_core_v1.jsonl`
-   - `data/manifest.json`
-3. Run the notebook script:
+2. Attach the Kaggle dataset that contains the `kaggle_benchmark/` folder.
+3. Run the canonical notebook entrypoint directly from the mounted dataset:
 
 ```python
-!python kaggle_benchmark/agus_learning_track_notebook.py
+!python /kaggle/input/<your-dataset-slug>/kaggle_benchmark/agus_learning_track_notebook.py
 ```
 
 4. Keep the main benchmark artifact:
@@ -33,7 +27,7 @@
 ## What Is Still Manual
 
 - Creating the Kaggle benchmark notebook
-- Uploading/copying the package into Kaggle
+- Uploading the `kaggle_benchmark/` package as a Kaggle dataset
 - Publishing the benchmark through Kaggle’s UI
 - Attaching the benchmark project link to the writeup
 - Final UI verification before submission
@@ -42,6 +36,6 @@
 
 - The AGUS benchmark notebook ran without errors
 - `agus_learning_track_v1` is the selected benchmark artifact
-- The task data matches the packaged Learning-track slice
+- The task data came from the packaged Learning-track slice in `kaggle_benchmark/data/learning_core_v1.jsonl`
 - The writeup links to the correct benchmark project
 - The writeup and benchmark are both published/visible as required by Kaggle

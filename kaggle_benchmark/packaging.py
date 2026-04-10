@@ -9,6 +9,8 @@ from typing import Any
 PACKAGE_ROOT = Path(__file__).resolve().parent
 REPO_ROOT = PACKAGE_ROOT.parent
 DATA_ROOT = PACKAGE_ROOT / "data"
+PACKAGED_SLICE_FILE = DATA_ROOT / "learning_core_v1.jsonl"
+PACKAGED_MANIFEST_FILE = DATA_ROOT / "manifest.json"
 
 LEARNING_CORE_FAMILIES = (
     "hidden_rule",
@@ -35,6 +37,33 @@ def _load_family_source(family: str) -> list[dict[str, Any]]:
     path = FAMILY_SOURCE_FILES[family]
     with open(path, "r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def _has_source_files(families: tuple[str, ...]) -> bool:
+    return all(FAMILY_SOURCE_FILES[family].exists() for family in families)
+
+
+def _load_packaged_rows() -> list[dict[str, Any]]:
+    return load_jsonl(PACKAGED_SLICE_FILE)
+
+
+def _build_from_packaged_slice(
+    families: tuple[str, ...],
+    *,
+    per_family: int,
+    offset: int,
+    slice_name: str,
+) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    packaged_rows = _load_packaged_rows()
+    for family in families:
+        family_rows = [row for row in packaged_rows if row["family"] == family]
+        selected_rows = family_rows[offset : offset + per_family]
+        for row in selected_rows:
+            payload = dict(row)
+            payload["slice_name"] = slice_name
+            records.append(payload)
+    return records
 
 
 def _normalize_hidden_rule(task: dict[str, Any], slice_name: str) -> dict[str, Any]:
@@ -119,6 +148,14 @@ def build_slice(
     offset: int = 0,
     slice_name: str = "learning_core_v1",
 ) -> list[dict[str, Any]]:
+    if not _has_source_files(families):
+        return _build_from_packaged_slice(
+            families,
+            per_family=per_family,
+            offset=offset,
+            slice_name=slice_name,
+        )
+
     records: list[dict[str, Any]] = []
     for family in families:
         items = _load_family_source(family)[offset : offset + per_family]
@@ -173,4 +210,3 @@ def write_default_package() -> dict[str, Any]:
     with open(manifest_path, "w", encoding="utf-8") as handle:
         json.dump(manifest, handle, indent=2)
     return manifest
-

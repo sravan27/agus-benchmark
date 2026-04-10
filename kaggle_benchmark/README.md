@@ -38,6 +38,7 @@ That slice is the right first package because it is the cleanest expression of t
   - metacognitive revision
 - Added an aggregate benchmark task named `agus_learning_track_v1`.
 - Added a notebook-ready script that runs the benchmark and produces the Kaggle task/run files.
+- Made the package self-contained so it can run from a mounted Kaggle dataset/input without needing the repo-level `data/generated/` sources.
 
 ## What Must Still Be Done In Kaggle
 
@@ -47,14 +48,22 @@ That slice is the right first package because it is the cleanest expression of t
 - Publish the benchmark notebook / benchmark entity in Kaggle.
 - Attach the resulting benchmark project link to the competition writeup.
 
-## Minimal Kaggle Workflow
+## Canonical Kaggle Workflow
+
+The canonical path is:
+
+1. Upload this `kaggle_benchmark/` folder as a Kaggle dataset.
+2. Attach that dataset to a notebook created from [https://www.kaggle.com/benchmarks/tasks/new](https://www.kaggle.com/benchmarks/tasks/new).
+3. Run the notebook entrypoint directly from the mounted dataset path.
+
+This is the least fragile path because it does not require copying files into the workspace or manually patching imports.
 
 1. In Kaggle, open [https://www.kaggle.com/benchmarks/tasks/new](https://www.kaggle.com/benchmarks/tasks/new).
-2. Upload or copy this `kaggle_benchmark/` folder into the notebook workspace.
+2. Attach the dataset that contains this `kaggle_benchmark/` folder.
 3. Run:
 
 ```python
-!python kaggle_benchmark/agus_learning_track_notebook.py
+!python /kaggle/input/<your-dataset-slug>/kaggle_benchmark/agus_learning_track_notebook.py
 ```
 
 4. After the run completes, keep the main benchmark artifact:
@@ -66,6 +75,18 @@ That slice is the right first package because it is the cleanest expression of t
 5. Verify that the notebook run produced the AGUS `.task.json` and `.run.json` files in the working directory.
 6. Publish the notebook/benchmark through Kaggle’s UI.
 7. Copy the Kaggle benchmark project link and attach it to the AGUS writeup submission.
+
+## Alternate Notebook Import Path
+
+If you intentionally copy `kaggle_benchmark/` into the notebook workspace instead of mounting it from a dataset, you can also run:
+
+```python
+from kaggle_benchmark import run_notebook_entrypoint
+
+run_notebook_entrypoint()
+```
+
+This works because the package now exposes a notebook-safe callable entrypoint and falls back to the packaged JSONL slice when repo-level source files are unavailable.
 
 ## Notes
 

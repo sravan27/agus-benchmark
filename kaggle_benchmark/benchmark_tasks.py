@@ -1,4 +1,5 @@
 import json
+import inspect
 from pathlib import Path
 from typing import Any
 
@@ -32,6 +33,29 @@ def _assert_unit_interval(value: float) -> None:
         0.0 <= value <= 1.0,
         expectation="Confidence must be a real number between 0.0 and 1.0.",
     )
+
+
+def _task_parameter_names(task_fn) -> list[str]:
+    target = getattr(task_fn, "func", task_fn)
+    return [
+        parameter.name
+        for parameter in inspect.signature(target).parameters.values()
+        if parameter.name != "llm"
+    ]
+
+
+def _prepare_family_evaluation_data(df, family: str, task_fn):
+    family_df = df[df["family"] == family].reset_index(drop=True)
+    if family_df.empty:
+        return family_df
+
+    required_columns = _task_parameter_names(task_fn)
+    missing = [column for column in required_columns if column not in family_df.columns]
+    if missing:
+        raise ValueError(
+            f"Packaged AGUS slice is missing required columns for family `{family}`: {', '.join(missing)}"
+        )
+    return family_df.loc[:, required_columns].copy()
 
 
 if kbench is not None:
@@ -244,7 +268,7 @@ if kbench is not None:
         family_scores: dict[str, dict[str, float | int]] = {}
 
         for family, task_fn in family_task_map.items():
-            family_df = df[df["family"] == family].reset_index(drop=True)
+            family_df = _prepare_family_evaluation_data(df, family, task_fn)
             if family_df.empty:
                 continue
             runs = task_fn.evaluate(
