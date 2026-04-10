@@ -11,7 +11,12 @@
 
 - Confirm the public repo link is correct and accessible.
 - Confirm the repo landing page points clearly to the final submission docs.
+- Confirm the Kaggle benchmark package in `kaggle_benchmark/` is the one you intend to publish.
+- Create the benchmark notebook from Kaggle’s benchmark entrypoint.
+- Run the AGUS package in Kaggle and keep `agus_learning_track_v1`.
+- Publish the Kaggle benchmark and copy the benchmark project link.
 - Confirm benchmark artifacts referenced in the writeup exist and are named consistently.
+- Confirm the Kaggle benchmark project link is attached to the writeup submission.
 
 ## Visuals
 
@@ -35,6 +40,6 @@
 ## Submit
 
 - Paste the final writeup into the Kaggle submission form.
-- Attach the repo link and any optional notebook link.
+- Attach the repo link, the Kaggle benchmark link, and any optional notebook link.
 - Perform one last preview check in Kaggle’s UI.
 - Submit before the deadline.

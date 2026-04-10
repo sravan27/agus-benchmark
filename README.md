@@ -15,6 +15,16 @@ That core Llama-versus-Qwen static/dynamic split now holds on `3/3` fresh determ
 
 AGUS is not just another static reasoning dataset. It is designed to test **adaptive generalization under shift**: whether a model can infer a rule, detect change, revise its hypothesis, recalibrate confidence, resist distractors, and maintain coherent belief updates across short interactive episodes.
 
+## Start Here
+
+If you are opening the repo for submission or review, the fastest path is:
+
+1. Read [final_submission_summary.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_submission_summary.md)
+2. Read [final_learning_track_submission.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
+3. Check [final_results_table.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_results_table.md) and [results_packet.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/results_packet.md)
+4. Use [kaggle_benchmark/README.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md) and [KAGGLE_UI_CHECKLIST.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/KAGGLE_UI_CHECKLIST.md) to create and publish the mandatory Kaggle benchmark
+5. Use [final_submission_checklist.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_submission_checklist.md) for the final Kaggle-side submission pass
+
 Submission-oriented docs:
 
 - [final_learning_track_submission.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
@@ -65,29 +75,40 @@ The repo also includes:
 ## Project Structure
 
 ```text
-measuring_agi_project/
+Kaggle-benchmarks/
   README.md
   requirements.txt
   pyproject.toml
   .gitignore
   data/
-    samples/
     generated/
+    samples/
+    evals/
   docs/
+    final_learning_track_submission.md
+    final_submission_summary.md
+    final_results_table.md
+    results_packet.md
+    hostile_review_defense.md
     benchmark_design.md
-    research_note.md
+  kaggle_benchmark/
+    README.md
+    KAGGLE_UI_CHECKLIST.md
+    agus_learning_track_notebook.py
+    benchmark_tasks.py
+    data/
   notebooks/
     01_task_preview.ipynb
     02_scoring_demo.ipynb
   src/
-    config.py
-    utils/
-    generators/
-    curation/
-    scoring/
-    eval/
-    schemas/
     cli/
+    curation/
+    eval/
+    generators/
+    schemas/
+    scoring/
+    search/
+    utils/
   tests/
 ```
 

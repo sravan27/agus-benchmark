@@ -4,10 +4,12 @@
 
 - AGUS benchmark repo with generation, interactive evaluation, adversarial curation, refinement, search, local evaluation, failure distillation, and instability analysis
 - Judge-facing results docs and Learning-track framing
+- Kaggle benchmark packaging bundle in `kaggle_benchmark/` for the mandatory benchmark attachment requirement
 - Clean local empirical result story with named artifacts
 - Clear headline supported by current evidence:
   - Llama higher static accuracy
   - Qwen higher adaptive reasoning quality
+  - the Llama-versus-Qwen split holds on `3/3` deterministic replication slices
   - AGUS reveals the divergence
 - Failure examples that are legible and interpretable
 
@@ -21,8 +23,12 @@
 
 - Fill in final team name
 - Fill in final organizational affiliation
+- Create the Kaggle benchmark notebook from the benchmark entrypoint
+- Run and publish the AGUS benchmark package in Kaggle
+- Copy the published Kaggle benchmark project link
 - Paste or adapt the final writeup into Kaggle’s submission form
 - Attach the correct public repo link
+- Attach the Kaggle benchmark project link to the writeup
 - Add any optional cover image
 - Add any optional public notebook link if desired
 - Perform the final UI review inside Kaggle before submission
@@ -36,4 +42,4 @@
 
 ## Submission-Readiness Verdict
 
-The repository is ready for a final packaging commit from a documentation and evidence standpoint. The remaining steps are mostly manual Kaggle submission actions rather than benchmark-development blockers.
+The repository is ready for a final packaging commit from a documentation, evidence, and benchmark-packaging standpoint. The remaining steps are mainly Kaggle-side publication and submission actions rather than repo-development blockers.
