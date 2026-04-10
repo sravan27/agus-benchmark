@@ -12,6 +12,7 @@ from kaggle_benchmark.prompts import (
     render_shift_transfer_source_prompt,
     render_shift_transfer_transfer_prompt,
 )
+from kaggle_benchmark.structured_output import prompt_for_schema
 
 try:
     import pandas as pd
@@ -120,14 +121,22 @@ if kbench is not None:
             "difficulty": difficulty,
             "slice_name": slice_name,
         }
-        initial = llm.prompt(render_hidden_rule_initial_prompt(row), schema=SequenceBatchResponse)
+        initial = prompt_for_schema(
+            llm,
+            render_hidden_rule_initial_prompt(row),
+            SequenceBatchResponse,
+        )
         _assert_unit_interval(initial.confidence)
         kbench.assertions.assert_equal(
             induction_targets,
             initial.predictions,
             expectation="Initial induction predictions should exactly match the hidden-rule targets.",
         )
-        revised = llm.prompt(render_hidden_rule_revision_prompt(row), schema=SequenceBatchResponse)
+        revised = prompt_for_schema(
+            llm,
+            render_hidden_rule_revision_prompt(row),
+            SequenceBatchResponse,
+        )
         _assert_unit_interval(revised.confidence)
         kbench.assertions.assert_equal(
             shift_targets,
@@ -170,15 +179,21 @@ if kbench is not None:
             "difficulty": difficulty,
             "slice_name": slice_name,
         }
-        source = llm.prompt(render_shift_transfer_source_prompt(row), schema=TokenSequenceResponse)
+        source = prompt_for_schema(
+            llm,
+            render_shift_transfer_source_prompt(row),
+            TokenSequenceResponse,
+        )
         _assert_unit_interval(source.confidence)
         kbench.assertions.assert_equal(
             source_target,
             source.prediction,
             expectation="Source-representation prediction should exactly match the target sequence.",
         )
-        transfer = llm.prompt(
-            render_shift_transfer_transfer_prompt(row), schema=TokenSequenceResponse
+        transfer = prompt_for_schema(
+            llm,
+            render_shift_transfer_transfer_prompt(row),
+            TokenSequenceResponse,
         )
         _assert_unit_interval(transfer.confidence)
         kbench.assertions.assert_equal(
@@ -222,7 +237,11 @@ if kbench is not None:
             "difficulty": difficulty,
             "slice_name": slice_name,
         }
-        initial = llm.prompt(render_metacog_initial_prompt(row), schema=MetacogInitialResponse)
+        initial = prompt_for_schema(
+            llm,
+            render_metacog_initial_prompt(row),
+            MetacogInitialResponse,
+        )
         _assert_unit_interval(initial.confidence)
         kbench.assertions.assert_true(
             initial.answer in acceptable_initial_targets,
@@ -232,7 +251,11 @@ if kbench is not None:
             initial.confidence <= max(expected_initial_certainty + 0.35, 0.75),
             expectation="Initial confidence should stay moderate under ambiguous evidence.",
         )
-        revised = llm.prompt(render_metacog_revision_prompt(row), schema=MetacogRevisedResponse)
+        revised = prompt_for_schema(
+            llm,
+            render_metacog_revision_prompt(row),
+            MetacogRevisedResponse,
+        )
         _assert_unit_interval(revised.confidence)
         kbench.assertions.assert_equal(
             revised_target,

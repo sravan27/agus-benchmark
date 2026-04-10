@@ -3,6 +3,8 @@ import shutil
 import subprocess
 import sys
 
+import pytest
+
 from kaggle_benchmark import benchmark_tasks
 from kaggle_benchmark.agus_learning_track_notebook import resolve_slice_path, run_notebook_entrypoint
 from kaggle_benchmark.packaging import (
@@ -18,6 +20,7 @@ from kaggle_benchmark.prompts import (
     render_metacog_revision_prompt,
     render_shift_transfer_transfer_prompt,
 )
+from kaggle_benchmark.structured_output import parse_structured_response, prompt_for_schema
 
 
 def test_build_slice_is_balanced_for_learning_core():
@@ -152,3 +155,75 @@ def test_package_only_import_works_without_repo_generated_sources(tmp_path: Path
         text=True,
     )
     assert result.returncode == 0, result.stderr
+
+
+class _DummyLLM:
+    def __init__(self, responses):
+        self._responses = list(responses)
+        self.calls = []
+
+    def prompt(self, prompt, schema=str):
+        self.calls.append({"prompt": prompt, "schema": schema})
+        return self._responses.pop(0)
+
+
+def test_parse_structured_response_recovers_leading_reasoning_then_json():
+    raw = (
+        "I will think briefly and then answer.\n"
+        '{"rule_hypothesis":"reverse the sequence","confidence":0.5,"predictions":[[3,2,1]]}'
+    )
+
+    parsed = parse_structured_response(raw, benchmark_tasks.SequenceBatchResponse)
+
+    assert parsed.rule_hypothesis == "reverse the sequence"
+    assert parsed.confidence == 0.5
+    assert parsed.predictions == [[3, 2, 1]]
+
+
+def test_parse_structured_response_recovers_code_fenced_json():
+    raw = (
+        "```json\n"
+        '{"rule_hypothesis":"copy odd positions","confidence":0.75,"prediction":["A","C"]}'
+        "\n```"
+    )
+
+    parsed = parse_structured_response(raw, benchmark_tasks.TokenSequenceResponse)
+
+    assert parsed.rule_hypothesis == "copy odd positions"
+    assert parsed.confidence == 0.75
+    assert parsed.prediction == ["A", "C"]
+
+
+def test_parse_structured_response_strips_control_characters():
+    raw = (
+        "\x00\x1f"
+        '{"answer":[1,0,1],"confidence":0.4,"rule_hypothesis":"alternating","contradiction_detected":true}'
+        "\x07"
+    )
+
+    parsed = parse_structured_response(raw, benchmark_tasks.MetacogRevisedResponse)
+
+    assert parsed.answer == [1, 0, 1]
+    assert parsed.confidence == 0.4
+    assert parsed.contradiction_detected is True
+
+
+def test_parse_structured_response_fails_cleanly_on_unrecoverable_output():
+    raw = "analysis: maybe reverse it\nnot actually json at all"
+
+    with pytest.raises(ValueError, match="Could not recover a valid JSON object"):
+        parse_structured_response(raw, benchmark_tasks.SequenceBatchResponse)
+
+
+def test_prompt_for_schema_uses_raw_text_prompt_then_recovers_json():
+    llm = _DummyLLM(
+        [
+            'Reasoning omitted.\n{"answer":[2,2],"confidence":0.6,"rule_hypothesis":"repeat value"}'
+        ]
+    )
+
+    parsed = prompt_for_schema(llm, "prompt text", benchmark_tasks.MetacogInitialResponse)
+
+    assert llm.calls[0]["schema"] is str
+    assert parsed.answer == [2, 2]
+    assert parsed.confidence == 0.6
