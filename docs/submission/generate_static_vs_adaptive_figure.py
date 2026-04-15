@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from textwrap import wrap
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -52,9 +53,31 @@ def map_y(value: float, plot_y: int, plot_h: int) -> float:
     return plot_y + plot_h - value * plot_h
 
 
+def add_multiline_text(
+    parts: list[str],
+    *,
+    x: float,
+    y: float,
+    lines: list[str],
+    font_size: int,
+    fill: str,
+    font_weight: str | None = None,
+    line_height: int = 18,
+) -> None:
+    weight = f' font-weight="{font_weight}"' if font_weight else ""
+    parts.append(
+        f'<text x="{x}" y="{y}" font-family="Helvetica, Arial, sans-serif" '
+        f'font-size="{font_size}"{weight} fill="{fill}">'
+    )
+    for index, line in enumerate(lines):
+        dy = 0 if index == 0 else line_height
+        parts.append(f'<tspan x="{x}" dy="{dy}">{line}</tspan>')
+    parts.append("</text>")
+
+
 def build_svg(points):
     width = 980
-    height = 640
+    height = 680
     plot_x = 120
     plot_y = 120
     plot_w = 720
@@ -125,14 +148,45 @@ def build_svg(points):
             f'<text x="{cx + dx:.1f}" y="{cy + dy + 18:.1f}" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#4b5563">accuracy {point["static_accuracy"]:.4f}, BTQ {point["belief_trajectory_quality"]:.4f}</text>'
         )
 
-    parts.extend(
-        [
-            '<text x="120" y="548" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Interpretation</text>',
-            '<text x="120" y="574" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#374151">Llama is strongest on frozen-task correctness, Qwen is strongest on adaptive trajectory quality, and Mistral lands between them on dynamic quality despite weak static accuracy.</text>',
-            '<text x="120" y="604" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280">Sources: data/evals/llama31_balanced_interactive100/aggregate_summary.json, data/evals/qwen25_balanced_interactive100/aggregate_summary.json, data/evals/mistralnemo_balanced_interactive100/aggregate_summary.json</text>',
-            '</svg>',
-        ]
+    add_multiline_text(
+        parts,
+        x=120,
+        y=548,
+        lines=["Interpretation"],
+        font_size=15,
+        font_weight="700",
+        fill="#111827",
     )
+    interpretation = (
+        "Llama is strongest on frozen-task correctness, Qwen is strongest on adaptive "
+        "trajectory quality, and Mistral lands between them on dynamic quality despite "
+        "weak static accuracy."
+    )
+    add_multiline_text(
+        parts,
+        x=120,
+        y=574,
+        lines=wrap(interpretation, width=92),
+        font_size=14,
+        fill="#374151",
+        line_height=20,
+    )
+    source_lines = [
+        "Sources:",
+        "data/evals/llama31_balanced_interactive100/aggregate_summary.json",
+        "data/evals/qwen25_balanced_interactive100/aggregate_summary.json",
+        "data/evals/mistralnemo_balanced_interactive100/aggregate_summary.json",
+    ]
+    add_multiline_text(
+        parts,
+        x=120,
+        y=628,
+        lines=source_lines,
+        font_size=12,
+        fill="#6b7280",
+        line_height=16,
+    )
+    parts.append("</svg>")
 
     return "\n".join(parts)
 
