@@ -77,7 +77,7 @@ def add_multiline_text(
 
 def build_svg(points):
     width = 980
-    height = 760
+    height = 784
     plot_x = 120
     plot_y = 120
     plot_w = 720
@@ -152,7 +152,7 @@ def build_svg(points):
         '<line x1="120" y1="580" x2="840" y2="580" stroke="#ded6c8" stroke-width="1.5"/>'
     )
     parts.append(
-        '<rect x="120" y="600" width="438" height="116" rx="14" fill="#fffaf0" stroke="#dfd4bf" stroke-width="1.2"/>'
+        '<rect x="120" y="600" width="450" height="136" rx="14" fill="#fffaf0" stroke="#dfd4bf" stroke-width="1.2"/>'
     )
     parts.append(
         '<text x="144" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#7c5c1b">MAIN FINDING</text>'
@@ -160,7 +160,7 @@ def build_svg(points):
     add_multiline_text(
         parts,
         x=144,
-        y=652,
+        y=650,
         lines=[
             "The ranking changes across axes: Llama leads on static",
             "accuracy, Qwen leads on belief trajectory quality,",
@@ -169,13 +169,13 @@ def build_svg(points):
         ],
         font_size=14,
         fill="#374151",
-        line_height=22,
+        line_height=21,
     )
     parts.append(
-        '<rect x="584" y="600" width="256" height="116" rx="14" fill="#fffdf8" stroke="#d6d3d1" stroke-width="1.2"/>'
+        '<rect x="594" y="600" width="246" height="136" rx="14" fill="#fffdf8" stroke="#d6d3d1" stroke-width="1.2"/>'
     )
     parts.append(
-        '<text x="608" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#4b5563">REPO ARTIFACTS</text>'
+        '<text x="618" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#4b5563">REPO ARTIFACTS</text>'
     )
     source_lines = [
         "aggregate_summary.json sources",
@@ -185,12 +185,12 @@ def build_svg(points):
     ]
     add_multiline_text(
         parts,
-        x=608,
+        x=618,
         y=650,
         lines=source_lines,
         font_size=11,
         fill="#6b7280",
-        line_height=16,
+        line_height=17,
     )
     parts.append("</svg>")
 
