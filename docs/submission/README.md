@@ -6,7 +6,7 @@ This folder is the **canonical reviewer path** for the current submission.
 
 1. [Executive Summary](./executive_summary.md)
 2. [Key Results](./key_results.md)
-3. [static_vs_adaptive_divergence.svg](./static_vs_adaptive_divergence.svg)
+3. [static_vs_adaptive_divergence.png](./static_vs_adaptive_divergence.png)
 
 ## If You Have 10 Minutes
 
@@ -18,6 +18,7 @@ This folder is the **canonical reviewer path** for the current submission.
 
 1. [Kaggle benchmark package](../../kaggle_benchmark/README.md)
 2. [Kaggle submission audit](../kaggle_submission_audit.md)
+3. [Figure source (SVG)](./static_vs_adaptive_divergence.svg)
 
 ## Scope Reminder
 

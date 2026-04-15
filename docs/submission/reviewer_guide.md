@@ -4,7 +4,7 @@
 
 1. [Executive Summary](./executive_summary.md)
 2. [Key Results](./key_results.md)
-3. [static_vs_adaptive_divergence.svg](./static_vs_adaptive_divergence.svg)
+3. [static_vs_adaptive_divergence.png](./static_vs_adaptive_divergence.png)
 
 ## If You Want To Check Scope First
 

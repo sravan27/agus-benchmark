@@ -43,14 +43,14 @@
 <text x="144" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#7c5c1b">MAIN FINDING</text>
 <text x="144" y="652" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#374151">
 <tspan x="144" dy="0">The ranking changes across axes: Llama leads on static</tspan>
-<tspan x="144" dy="22">accuracy, Qwen leads on belief_trajectory_quality, and</tspan>
-<tspan x="144" dy="22">Mistral is dynamically stronger than its static score</tspan>
-<tspan x="144" dy="22">suggests.</tspan>
+<tspan x="144" dy="22">accuracy, Qwen leads on belief trajectory quality,</tspan>
+<tspan x="144" dy="22">and Mistral is dynamically stronger than its static</tspan>
+<tspan x="144" dy="22">score alone suggests.</tspan>
 </text>
 <rect x="584" y="600" width="256" height="116" rx="14" fill="#fffdf8" stroke="#d6d3d1" stroke-width="1.2"/>
 <text x="608" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#4b5563">REPO ARTIFACTS</text>
 <text x="608" y="650" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#6b7280">
-<tspan x="608" dy="0">data/evals/<run>/aggregate_summary.json</tspan>
+<tspan x="608" dy="0">aggregate_summary.json sources</tspan>
 <tspan x="608" dy="16">llama31_balanced_interactive100</tspan>
 <tspan x="608" dy="16">qwen25_balanced_interactive100</tspan>
 <tspan x="608" dy="16">mistralnemo_balanced_interactive100</tspan>

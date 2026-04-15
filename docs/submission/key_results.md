@@ -60,7 +60,8 @@ That means the static-vs-dynamic separation does not just appear in one interact
 
 The clearest single visual summary is:
 
-- [static_vs_adaptive_divergence.svg](./static_vs_adaptive_divergence.svg)
+- [static_vs_adaptive_divergence.png](./static_vs_adaptive_divergence.png)
+- [Figure source (SVG)](./static_vs_adaptive_divergence.svg)
 
 It plots static accuracy against `belief_trajectory_quality` using the existing Learning Core run artifacts:
 

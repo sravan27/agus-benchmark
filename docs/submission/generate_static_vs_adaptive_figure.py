@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from html import escape
 import json
 from pathlib import Path
-from textwrap import wrap
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -71,7 +71,7 @@ def add_multiline_text(
     )
     for index, line in enumerate(lines):
         dy = 0 if index == 0 else line_height
-        parts.append(f'<tspan x="{x}" dy="{dy}">{line}</tspan>')
+        parts.append(f'<tspan x="{x}" dy="{dy}">{escape(line)}</tspan>')
     parts.append("</text>")
 
 
@@ -100,7 +100,7 @@ def build_svg(points):
             f'<line x1="{x:.1f}" y1="{plot_y}" x2="{x:.1f}" y2="{plot_y + plot_h}" stroke="#ece7df" stroke-width="1"/>'
         )
         parts.append(
-            f'<text x="{x:.1f}" y="{plot_y + plot_h + 26}" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#6b7280">{tick:.1f}</text>'
+            f'<text x="{x:.1f}" y="{plot_y + plot_h + 26}" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#6b7280">{escape(f"{tick:.1f}")}</text>'
         )
 
     for tick in y_ticks:
@@ -109,7 +109,7 @@ def build_svg(points):
             f'<line x1="{plot_x}" y1="{y:.1f}" x2="{plot_x + plot_w}" y2="{y:.1f}" stroke="#ece7df" stroke-width="1"/>'
         )
         parts.append(
-            f'<text x="{plot_x - 18}" y="{y + 4:.1f}" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#6b7280">{tick:.1f}</text>'
+            f'<text x="{plot_x - 18}" y="{y + 4:.1f}" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#6b7280">{escape(f"{tick:.1f}")}</text>'
         )
 
     parts.extend(
@@ -125,7 +125,7 @@ def build_svg(points):
         f'<line x1="{plot_x}" y1="{map_y(0.6, plot_y, plot_h):.1f}" x2="{plot_x + plot_w}" y2="{map_y(0.6, plot_y, plot_h):.1f}" stroke="#cbd5e1" stroke-dasharray="6,6" stroke-width="1.5"/>'
     )
     parts.append(
-        f'<text x="{plot_x + plot_w + 10}" y="{map_y(0.6, plot_y, plot_h) + 4:.1f}" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#64748b">BTQ = 0.6 reference</text>'
+        f'<text x="{plot_x + plot_w + 10}" y="{map_y(0.6, plot_y, plot_h) + 4:.1f}" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#64748b">{escape("BTQ = 0.6 reference")}</text>'
     )
 
     label_offsets = {
@@ -142,10 +142,10 @@ def build_svg(points):
         )
         dx, dy = label_offsets[point["label"]]
         parts.append(
-            f'<text x="{cx + dx:.1f}" y="{cy + dy:.1f}" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">{point["label"]}</text>'
+            f'<text x="{cx + dx:.1f}" y="{cy + dy:.1f}" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">{escape(point["label"])}</text>'
         )
         parts.append(
-            f'<text x="{cx + dx:.1f}" y="{cy + dy + 18:.1f}" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#4b5563">accuracy {point["static_accuracy"]:.4f}, BTQ {point["belief_trajectory_quality"]:.4f}</text>'
+            f'<text x="{cx + dx:.1f}" y="{cy + dy + 18:.1f}" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#4b5563">{escape(f"accuracy {point['static_accuracy']:.4f}, BTQ {point['belief_trajectory_quality']:.4f}")}</text>'
         )
 
     parts.append(
@@ -157,16 +157,16 @@ def build_svg(points):
     parts.append(
         '<text x="144" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#7c5c1b">MAIN FINDING</text>'
     )
-    interpretation = (
-        "The ranking changes across axes: Llama leads on static accuracy, Qwen leads on "
-        "belief_trajectory_quality, and Mistral is dynamically stronger than its static "
-        "score suggests."
-    )
     add_multiline_text(
         parts,
         x=144,
         y=652,
-        lines=wrap(interpretation, width=61),
+        lines=[
+            "The ranking changes across axes: Llama leads on static",
+            "accuracy, Qwen leads on belief trajectory quality,",
+            "and Mistral is dynamically stronger than its static",
+            "score alone suggests.",
+        ],
         font_size=14,
         fill="#374151",
         line_height=22,
@@ -178,7 +178,7 @@ def build_svg(points):
         '<text x="608" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#4b5563">REPO ARTIFACTS</text>'
     )
     source_lines = [
-        "data/evals/<run>/aggregate_summary.json",
+        "aggregate_summary.json sources",
         "llama31_balanced_interactive100",
         "qwen25_balanced_interactive100",
         "mistralnemo_balanced_interactive100",

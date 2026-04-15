@@ -10,7 +10,7 @@ It is the umbrella benchmark identity for this repository. The **current Kaggle 
 - [Final writeup draft](docs/final_learning_track_submission.md)
 - [Submission overview](docs/submission/README.md)
 - [Key results](docs/submission/key_results.md)
-- [Key figure](docs/submission/static_vs_adaptive_divergence.svg)
+- [Key figure](docs/submission/static_vs_adaptive_divergence.png)
 - [Reviewer guide](docs/submission/reviewer_guide.md)
 
 ## Main Finding
@@ -34,7 +34,9 @@ That split is not confined to the original slice. On the first fresh determinist
 
 And the same Llama-vs-Qwen pattern held on **3/3 deterministic replication slices**.
 
-![AGUS Learning Core static-vs-adaptive divergence](docs/submission/static_vs_adaptive_divergence.svg)
+![AGUS Learning Core static-vs-adaptive divergence](docs/submission/static_vs_adaptive_divergence.png)
+
+Source figure file: [SVG](docs/submission/static_vs_adaptive_divergence.svg)
 
 ## Submission Scope
 
@@ -70,7 +72,7 @@ AGUS is designed to measure that adaptive layer directly. Learning Core is the n
 
 - [Executive summary](docs/submission/executive_summary.md)
 - [Key results](docs/submission/key_results.md)
-- [Key figure](docs/submission/static_vs_adaptive_divergence.svg)
+- [Key figure](docs/submission/static_vs_adaptive_divergence.png)
 
 **10 minutes**
 
