@@ -31,6 +31,10 @@ The main Llama-versus-Qwen split was checked on three fresh deterministic balanc
 | `replication_2` | 0.6429 | 0.5767 | 0.3143 | 0.7257 | Yes |
 | `replication_3` | 0.6429 | 0.4879 | 0.3286 | 0.7329 | Yes |
 
+Most important replication point:
+
+- On the first fresh deterministic slice, Llama still led on static accuracy (`0.4857` vs `0.2857`) while Qwen still led on `belief_trajectory_quality` (`0.7494` vs `0.5606`).
+
 Replication summary:
 
 - static accuracy ranking held on `3/3`

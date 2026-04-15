@@ -2,7 +2,7 @@
 
 ## What AGUS Is
 
-AGUS, **Adaptive Generalization Under Shift**, is a Learning-track benchmark for measuring whether a model can infer new rules, notice when its current strategy stops working, and adapt after contradiction, distractors, or representation shifts.
+AGUS, **Adaptive Generalization Under Shift**, is the umbrella benchmark identity in this repository. The current Kaggle submission packages the **Learning Core** slice: `hidden_rule`, `shift_transfer`, and `metacog_revision`.
 
 ## Why It Matters
 
@@ -17,7 +17,7 @@ The clearest result from the current local-model runs is that **static accuracy,
 - `mistral-nemo:12b` contradiction blindness rate: `0.56`, lower than Qwen `0.64` and Llama `0.66`
 - `mistral-nemo:12b` also posts the strongest current `counterfactual_update_fidelity`: `0.8889`
 
-That central AGUS signal also survived a three-slice deterministic robustness check. On the original slice, Llama beat Qwen on static accuracy (`0.6179` vs `0.3000`) while Qwen beat Llama on `belief_trajectory_quality` (`0.7281` vs `0.5434`). The same directional split held on `replication`, `replication_2`, and `replication_3`.
+That central AGUS signal also survived a three-slice deterministic robustness check. On the original slice, Llama beat Qwen on static accuracy (`0.6179` vs `0.3000`) while Qwen beat Llama on `belief_trajectory_quality` (`0.7281` vs `0.5434`). On the first fresh replication slice, Llama still led on static accuracy (`0.4857` vs `0.2857`) while Qwen still led on `belief_trajectory_quality` (`0.7494` vs `0.5606`). The same directional split held on `replication_2` and `replication_3` as well.
 
 That result is now stronger than a one-off replication. Across `replication`, `replication_2`, and `replication_3`, the same Llama-versus-Qwen split held on `3/3` deterministic balanced slices, and the main weakness-proxy directions held on `3/3` as well.
 
@@ -42,3 +42,9 @@ If we only looked at static accuracy, we would conclude that Llama is the strong
 The validation bundle reinforces that this is not just a custom-score trick. On matched-composition runs, static and interactive rankings diverge, adversarial refinement improves retained tasks from `325` to `423`, and even a matched `mock_shallow` baseline can post high static accuracy (`0.7214`) without leading the adaptive metrics.
 
 That is the central value proposition of AGUS: it measures a learning-relevant dimension that static evaluation compresses away, and the core signal is not just a one-slice fluke inside the current local-model scope.
+
+## Why This Submission Exists In This Form
+
+This benchmark was developed under tight practical constraints: I built and evaluated it locally on a **MacBook Pro M2 Max** and did not have budget for paid API tokens, so the first serious empirical pass had to be done with open-source local models. That constraint pushed AGUS toward a benchmark that is light enough to run, reproducible enough to inspect, and transparent enough to verify in Kaggle and GitHub rather than only in proprietary evaluation stacks.
+
+Questions or clarifications: `sridharsravan@icloud.com`

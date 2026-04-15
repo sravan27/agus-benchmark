@@ -2,96 +2,95 @@
 
 **AGUS** stands for **Adaptive Generalization Under Shift**.
 
-It is the umbrella benchmark identity for this repository: a research benchmark family for testing whether models can infer rules, detect change, revise hypotheses, and stay coherent when evidence shifts.
+It is the umbrella benchmark identity for this repository. The **current Kaggle submission** is the **Learning Core** slice: a narrow, submission-ready benchmark for the Learning track.
 
-## Current Kaggle Submission: Learning Core
+## Start Here
 
-The **currently submitted Kaggle benchmark slice** is **Learning Core**.
+- [Kaggle benchmark package](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
+- [Final writeup draft](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
+- [Submission overview](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/README.md)
+- [Key results](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/key_results.md)
+- [Key figure](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/static_vs_adaptive_divergence.svg)
+- [Reviewer guide](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/reviewer_guide.md)
 
-Learning Core packages exactly **three** AGUS task families:
+## Main Finding
 
-- `hidden_rule`
-- `shift_transfer`
-- `metacog_revision`
+**Static correctness and adaptive reasoning quality can diverge sharply.**
 
-These three families are the current Kaggle benchmark because they are the cleanest expression of the Learning-track thesis: **can a model learn from sparse evidence, notice when its current strategy is no longer enough, and adapt after new evidence or a representation shift?**
+Learning Core results from existing repo artifacts:
 
-## Core Empirical Claim
+| Model | Static accuracy | Belief trajectory quality |
+| --- | ---: | ---: |
+| `llama3.1:8b` | 0.6179 | 0.5434 |
+| `qwen2.5:7b` | 0.3000 | 0.7281 |
+| `mistral-nemo:12b` | 0.2714 | 0.5828 |
 
-AGUS’s main empirical claim is:
+That split is not confined to the original slice. On the first fresh deterministic replication slice:
 
-**static correctness and adaptive reasoning quality can diverge sharply.**
+- Llama static accuracy: `0.4857`
+- Qwen static accuracy: `0.2857`
+- Llama `belief_trajectory_quality`: `0.5606`
+- Qwen `belief_trajectory_quality`: `0.7494`
 
-In the current local Learning Core results:
+And the same Llama-vs-Qwen pattern held on **3/3 deterministic replication slices**.
 
-- `llama3.1:8b` leads on static accuracy: `0.6179`
-- `qwen2.5:7b` leads on `belief_trajectory_quality`: `0.7281` versus Llama `0.5434`
-- `mistral-nemo:12b` reinforces the split with weak static accuracy (`0.2714`) but stronger adaptive quality (`belief_trajectory_quality 0.5828`)
-
-That central Llama-versus-Qwen split also held on **3/3 deterministic replication slices**:
-
-- Llama stayed ahead on static accuracy
-- Qwen stayed ahead on `belief_trajectory_quality`
-- the main weakness-proxy directions also replicated
-
-AGUS v2 adds a supporting counterfactual layer where coherence across nearby alternate futures becomes another separable axis.
+![AGUS Learning Core static-vs-adaptive divergence](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/static_vs_adaptive_divergence.svg)
 
 ## Submission Scope
 
-**Kaggle submission scope:** Learning Core only.
+- **AGUS** = the umbrella benchmark identity.
+- **Learning Core** = the currently submitted Kaggle slice.
+- Learning Core packages exactly:
+  - `hidden_rule`
+  - `shift_transfer`
+  - `metacog_revision`
 
-That means the Kaggle benchmark package currently includes:
-
-- `hidden_rule`
-- `shift_transfer`
-- `metacog_revision`
-
-The broader repository still contains the wider AGUS research program as **supporting or extended scope**, including:
+Broader AGUS materials remain in the repo as **supporting or extended scope**, not as the current Kaggle benchmark package. That broader scope includes:
 
 - `attention_distractors`
 - `social_miniworlds`
 - AGUS v2 counterfactual branching
-- adversarial curation and refinement tooling
-- local-model evaluation, replication, and failure-analysis artifacts
+- adversarial curation and refinement
+- replication, instability, and failure-analysis artifacts
 
-Those broader materials stay in the repo because they strengthen the research story, but they are **not** the same thing as the currently submitted Kaggle benchmark package.
+## Why AGUS Matters
 
-## Start Here
+Static benchmarks are good at telling you whether a model can answer a frozen task. They are much worse at telling you whether the model can:
 
-If you are reviewing the submission, start in this order:
+- infer a rule from sparse evidence
+- notice that the old rule no longer fits
+- revise after corrective evidence
+- keep structure stable across a representation shift
 
-1. [Submission Overview](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/README.md)
-2. [Executive Summary](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/executive_summary.md)
-3. [Benchmark Scope](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/benchmark_scope.md)
-4. [Key Results](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/key_results.md)
-5. [Reviewer Guide](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/reviewer_guide.md)
-6. [Kaggle Benchmark Package](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
+AGUS is designed to measure that adaptive layer directly. Learning Core is the narrowest version of that claim that is still strong enough to matter.
+
+## Review Paths
+
+**3 minutes**
+
+- [Executive summary](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/executive_summary.md)
+- [Key results](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/key_results.md)
+- [Key figure](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/static_vs_adaptive_divergence.svg)
+
+**10 minutes**
+
+- [Submission overview](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/README.md)
+- [Benchmark scope](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/benchmark_scope.md)
+- [Reviewer guide](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/reviewer_guide.md)
+- [Final writeup draft](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
+
+**Deeper review**
+
+- [Kaggle benchmark package](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
+- [Kaggle submission audit](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/kaggle_submission_audit.md)
+- [Hostile review defense](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/hostile_review_defense.md)
+- [Broader docs folder](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs)
 
 ## Repo Map
 
-- [docs/submission/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission)
-  Submission-facing reading set for judges and reviewers.
-- [kaggle_benchmark/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark)
-  Canonical Kaggle benchmark package for the Learning Core slice.
-- [data/evals/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals)
-  Local-model result artifacts, replication outputs, and comparison summaries.
-- [docs/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs)
-  Broader AGUS design notes, results packet drafts, audits, and supporting research materials.
-- [src/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/src)
-  Benchmark generation, scoring, evaluation, curation, refinement, and analysis code.
-- [tests/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/tests)
-  Unit and regression tests.
-
-## Reviewer Notes
-
-- The **canonical submission-facing docs** are now under [docs/submission/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission).
-- Older docs elsewhere in [docs/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs) may describe the broader AGUS research scope, including five-family and AGUS v2 materials.
-- The **submitted Kaggle benchmark package** remains the **Learning Core** slice only.
-
-## Validation
-
-Repo tests currently pass with:
-
-```bash
-PYTHONPATH=. pytest -q
-```
+- [docs/submission/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission): canonical reviewer path
+- [kaggle_benchmark/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark): submitted Learning Core package
+- [data/evals/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals): result and replication artifacts
+- [docs/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs): writeups, audits, and supporting research materials
+- [src/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/src): benchmark generation and evaluation code
+- [tests/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/tests): regression and unit tests

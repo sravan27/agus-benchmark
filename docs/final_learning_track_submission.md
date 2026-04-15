@@ -4,166 +4,183 @@
 
 ## Your Team
 
-**To fill at submission time:** replace this line with the official Kaggle team name and member list.
+**Sridhar Sravan**  
+Independent submission
 
 ## Problem Statement
 
-Most reasoning benchmarks are static. They test whether a model can answer a frozen task, but they often miss a more AGI-relevant question: can the model **learn, detect change, revise its hypothesis, and remain coherent after new evidence arrives**?
+I came to this competition with a simple frustration: many model benchmarks are static. They tell us whether a model can answer a frozen task, but they often fail to tell us whether the model can **learn, detect that its old strategy is no longer valid, revise after new evidence, and stay coherent while doing so**.
 
-AGUS is a **Learning-track benchmark** for the Kaggle competition *Measuring Progress Toward AGI - Cognitive Abilities*. Its core thesis is that **static correctness and adaptive reasoning quality can diverge sharply**, so a benchmark for general intelligence should measure both.
+That frustration lined up directly with the official framing of this competition. Google DeepMind’s cognitive framework explicitly calls out abilities like **learning, metacognition, attention, executive function, and social cognition**, and the Kaggle Community Benchmarks platform exists to let the research community build evaluations around those harder-to-measure abilities instead of only relying on older frozen benchmarks.  
+Sources: [DeepMind cognitive framework](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/), [Kaggle Community Benchmarks](https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-community-benchmarks/), [competition page](https://www.kaggle.com/competitions/kaggle-measuring-agi)
+
+So the core idea behind AGUS was to benchmark models **dynamically, not statically**.
+
+The main thesis is narrow and testable:
+
+**static correctness and adaptive reasoning quality can diverge sharply.**
 
 ## Task & Benchmark Construction
 
-AGUS centers Learning as the primary faculty and uses metacognition, attention, and social cognition as supporting evidence for whether learning is genuinely adaptive rather than shallow.
+**AGUS** is the umbrella benchmark identity for the repository.  
+The **submitted Kaggle benchmark slice** is **Learning Core**.
 
-In this repository, **AGUS** is the broader benchmark identity, while the **currently submitted Kaggle benchmark slice** is **Learning Core**.
-
-The submitted Learning Core slice contains three synthetic, human-inspectable task families:
+Learning Core contains exactly three task families:
 
 1. `hidden_rule`: infer a latent rule from sparse examples, then adapt after a rule shift.
 2. `shift_transfer`: preserve a learned rule across a representation shift.
 3. `metacog_revision`: give an answer, confidence, and rule hypothesis, then revise after corrective evidence.
 
-Two additional AGUS families remain in the repo as broader supporting research modules rather than part of the current Kaggle benchmark package:
+I chose these three because they are the cleanest expression of the Learning-track claim. Together they test whether a model can:
 
-4. `attention_distractors`
-5. `social_miniworlds`
+- infer task structure from minimal evidence
+- notice that previous structure no longer explains the data
+- maintain latent structure while revising surface form
+- express a hypothesis and then update it when contradiction appears
 
-AGUS includes both static tasks and lightweight interactive episodes. In the interactive setting, the model must:
-
-1. observe examples
-2. state an initial answer, hypothesis, and confidence
-3. receive new evidence, contradiction, or a rule/representation shift
-4. revise its answer and hypothesis
-5. continue through a short micro-episode when belief tracking or attention recovery matters
-
-This makes the benchmark more diagnostic of **adaptive generalization under shift**, not just one-shot problem solving.
-
-AGUS v2 adds a focused extension: **counterfactual branching episodes**. For selected interactive tasks, one base episode is expanded into 2-4 nearby alternate continuations where one decisive factor changes, such as whether contradiction appears, which representation remap is used, or whether one agent has private information. This allows AGUS to test coherence across nearby alternate futures rather than only performance along one observed trajectory.
+The broader AGUS repository also contains `attention_distractors`, `social_miniworlds`, adversarial curation, refinement loops, instability analysis, and AGUS v2 counterfactual branching. Those broader materials are part of the research program, but they are not the same thing as the submitted Kaggle slice.
 
 ## Dataset
 
-AGUS is generated synthetically with deterministic seeds and a shared schema. Current benchmark components include:
+The benchmark is synthetic, deterministic, and human-inspectable.
 
-- balanced task exports across five families
-- interactive traces for supported task families
-- adversarial curation to filter out shallow or shortcut-solvable items
-- refinement and search-conditioned refinement loops to improve weak generators over time
+For the submitted Kaggle package, Learning Core contains:
 
-The benchmark-development pipeline does not stop at generation. Candidate tasks are challenged by weak baseline probes designed to simulate shallow strategies such as pattern matching, distractor-following, no-revision behavior, and representation anchoring.
+- `10` `hidden_rule` tasks
+- `10` `shift_transfer` tasks
+- `10` `metacog_revision` tasks
+
+That gives a total submitted Kaggle slice of **30 Learning Core benchmark rows**, packaged in the Kaggle benchmark implementation here:
+
+- benchmark project: [agus-learning-core-v1](https://www.kaggle.com/benchmarks/sravansridhar27/agus-learning-core-v1)
+- underlying task: [agus-learning-track-v1 task](https://www.kaggle.com/benchmarks/tasks/sravansridhar27/agus-learning-track-v1/1)
+
+The wider repository also includes larger generated pools, interactive traces, curation artifacts, refinement outputs, and local-model evaluation artifacts. Those are supporting materials that make the benchmark easier to inspect and stress-test.
 
 ## Technical Details
 
-AGUS evaluates more than final accuracy. Key metrics include:
+AGUS measures more than final accuracy. The most important Learning Core metrics in the current evidence are:
 
 - `accuracy`
 - `belief_trajectory_quality`
 - `episode_cognitive_flexibility_score`
-- `online_adaptation_gain`
-- `hypothesis_update_score`
-- `attention_recovery_score`
-- `belief_state_consistency`
+
+Supporting analyses in the repo also track:
+
 - `trajectory_instability_index`
+- `contradiction_blindness_rate`
+- failure types such as `static_dynamic_gap`, `overconfident_error`, and `social_belief_confusion`
+- AGUS v2 counterfactual metrics such as `counterfactual_update_fidelity` and `branch_belief_coherence`
 
-The benchmark also extracts failure categories such as:
+There is also a personal reason the benchmark took this shape. I built and evaluated AGUS on a **MacBook Pro M2 Max** and did not have budget for paid API tokens, so the first full empirical pass had to be done with **open-source local models**. That constraint mattered. It pushed the benchmark toward:
 
-- `static_dynamic_gap`
-- `overconfident_error`
-- `failed_hypothesis_update`
-- `social_belief_confusion`
+- lightweight but meaningful interactive episodes
+- deterministic generation and reproducible slices
+- transparent artifacts that can be verified in GitHub and Kaggle
+- model-agnostic evaluation rather than vendor-specific prompting
 
-This lets AGUS produce interpretable evidence about *how* a model fails, not only *whether* it fails.
+In hindsight, that limitation helped. It forced the benchmark to be inspectable and runnable rather than just ambitious on paper.
 
-AGUS v2 adds branch-aware metrics including:
+All core benchmark code, Kaggle packaging, local evaluation artifacts, replication outputs, and supporting research materials are public in the repository:
 
-- `counterfactual_update_fidelity`
-- `invariant_preservation_score`
-- `branch_belief_coherence`
-- `cross_branch_consistency`
-- `counterfactual_confidence_calibration`
+- GitHub: [sravan27/agus-benchmark](https://github.com/sravan27/agus-benchmark)
 
 ## Results, Insights, and Conclusions
 
-The current local-model comparisons already support the main AGUS claim.
+The main AGUS result is already visible in the current Learning Core runs.
 
-Balanced 100-task runs on three local Ollama models show:
+On the original balanced Learning Core slice:
 
 - **Llama 3.1 8B** static accuracy: `0.6179`
 - **Qwen 2.5 7B** static accuracy: `0.3000`
 - **Mistral NeMo 12B** static accuracy: `0.2714`
 
-But the adaptive metrics do not follow that same ordering:
+But adaptive quality does **not** follow the same ranking:
 
-- Qwen `belief_trajectory_quality`: `0.7281` versus Llama `0.5434`
-- Qwen `episode_cognitive_flexibility_score`: `0.7361` versus Mistral `0.6982` versus Llama `0.6348`
-- Mistral `belief_trajectory_quality`: `0.5828`, despite static accuracy of only `0.2714`
-- Mistral `contradiction_blindness_rate`: `0.56` versus Qwen `0.64` versus Llama `0.66`, lower is better
-- Mistral `trajectory_instability_index`: `0.2513` versus Qwen `0.2626` versus Llama `0.3348`, lower is better
+- **Qwen 2.5 7B** `belief_trajectory_quality`: `0.7281`
+- **Llama 3.1 8B** `belief_trajectory_quality`: `0.5434`
+- **Mistral NeMo 12B** `belief_trajectory_quality`: `0.5828`
 
-A lightweight but meaningful robustness package also succeeded across **three fresh deterministic balanced replication slices** for the main Llama-versus-Qwen comparison. On every replication slice, Llama remained ahead on static accuracy while Qwen remained ahead on `belief_trajectory_quality`:
+That means the strongest frozen-task model in the current local set is **not** the strongest model on adaptive trajectory quality.
 
-- replication: Llama static `0.4857` vs Qwen `0.2857`; Qwen BTQ `0.7494` vs Llama `0.5606`
-- replication_2: Llama static `0.6429` vs Qwen `0.3143`; Qwen BTQ `0.7257` vs Llama `0.5767`
-- replication_3: Llama static `0.6429` vs Qwen `0.3286`; Qwen BTQ `0.7329` vs Llama `0.4879`
+Mistral makes the result more credible, not less. It acts as a third anchor. Mistral is weak on static accuracy, but it is not simply weak everywhere. It is stronger than its static score would suggest on dynamic behavior, and it has the lowest contradiction blindness of the three current local models:
 
-So the central AGUS signal is not just a one-slice artifact in the current local-model setting. The ranking split and the main weakness-proxy directions held on `3/3` replication slices, even though this remains a local-model robustness check rather than a broad frontier study.
+- **Mistral NeMo 12B** `contradiction_blindness_rate`: `0.56`
+- **Qwen 2.5 7B** `contradiction_blindness_rate`: `0.64`
+- **Llama 3.1 8B** `contradiction_blindness_rate`: `0.66`
 
-This is the most important AGUS result so far: **across three local models, frozen-task correctness, adaptive reasoning quality, and reasoning stability do not collapse to one ranking.**
+The most important robustness result is that the main Llama-versus-Qwen split did **not** disappear on a fresh slice.
 
-Llama is clearly strongest on frozen-task correctness. Qwen is strongest on adaptive trajectory quality. Mistral adds a third anchor by showing that a model can look weak on static accuracy yet still look materially better on dynamic revision and contradiction handling than its static score would predict.
+On the first deterministic replication slice:
 
-The most judge-legible weakness patterns in the distilled traces remain:
+- Llama static accuracy: `0.4857`
+- Qwen static accuracy: `0.2857`
+- Llama `belief_trajectory_quality`: `0.5606`
+- Qwen `belief_trajectory_quality`: `0.7494`
+
+And the same directional split held on **3/3 deterministic replication slices**:
+
+- static accuracy ranking held on `3/3`
+- `belief_trajectory_quality` ranking held on `3/3`
+- the static-vs-dynamic divergence held on `3/3`
+- the main weakness-proxy directions held on `3/3`
+
+That is the single strongest empirical reason I think this is a competitive submission. It is no longer just “Llama and Qwen look different.” It is a benchmark result that:
+
+- has a clear cognitive thesis
+- is implemented as a real Kaggle benchmark
+- has public code and artifacts
+- survives fresh deterministic slices
+
+AGUS v2 is a supporting extension, not the main submission claim, but it strengthens the overall story. It asks whether a model stays coherent across nearby alternate futures. On current counterfactual branch runs:
+
+- **Mistral** is strongest on `counterfactual_update_fidelity`: `0.8889`
+- **Mistral** is strongest on `invariant_preservation_score`: `0.9375`
+- **Qwen** is strongest on `branch_belief_coherence`: `0.8542`
+- **Qwen** is strongest on `counterfactual_confidence_calibration`: `0.9717`
+
+I do not think AGUS v2 should be oversold as a fully mature benchmark on its own yet. But I do think it matters because it shows the same core idea extending one step further: not just “can the model revise,” but “can the model stay coherent across nearby alternate futures?”
+
+The project also produces interpretable failure evidence. The strongest separating weakness types in the current runs remain:
 
 - `overconfident_error`
 - `static_dynamic_gap`
 - `social_belief_confusion`
 
-AGUS v2 strengthens that story. On counterfactual branching episodes:
+That matters because I do not want this submission to be “another leaderboard with custom metrics.” I want it to be a benchmark that helps explain **why** models differ, not only **which** model wins.
 
-- Mistral `counterfactual_update_fidelity`: `0.8889`
-- Mistral `invariant_preservation_score`: `0.9375`
-- Qwen `branch_belief_coherence`: `0.8542`
-- Qwen `counterfactual_confidence_calibration`: `0.9717`
-- Llama remains lower on the core branch metrics despite leading static accuracy
+Why do I think this is a strong Learning-track submission?
 
-All three models reached `cross_branch_consistency` of `1.0`, which is encouraging but should not be overstated. The safer interpretation is that AGUS v2 adds a second non-static axis of comparison: not just "can the model revise," but "can it stay coherent across nearby alternate futures."
+Because it is aligned with the official competition thesis, but it also stays concrete:
 
-A focused AGUS v2 expansion also now exists for the main Llama-versus-Qwen pair. On an expanded branch set with `12` bundles and `24` branches per model, Qwen remained ahead of Llama on every discriminative counterfactual metric:
+- the benchmark is live on Kaggle
+- the submitted slice is narrow and legible
+- the main claim is specific
+- the main result replicated
+- the supporting repository makes the work auditable
 
-- Llama: update fidelity `0.7222`, invariant preservation `0.6875`, branch belief coherence `0.6157`, confidence calibration `0.9511`
-- Qwen: update fidelity `0.8611`, invariant preservation `0.8281`, branch belief coherence `0.8090`, confidence calibration `0.9681`
+The broader AGUS repo shows how the idea grew: from hidden-rule adaptation, to revision, to representation shift, to distractors, to social belief tracking, to counterfactual branching. But the submitted Kaggle slice remains disciplined. It packages the strongest and cleanest Learning-track core.
 
-That does not make AGUS v2 a mature leaderboard on its own, but it does make the counterfactual result look less like a one-off demo.
-
-That is exactly why AGUS fits the Learning track. It measures whether a model can acquire and update task-relevant structure efficiently, not only whether it can answer familiar-looking tasks correctly.
-
-Supporting modules matter here, but they are secondary to the main claim:
-
-- metacognition shows whether the model knows when it may be wrong
-- attention shows whether it can resist distractors and recover after clutter
-- social cognition shows whether belief updates remain coherent when multiple agents and incentives are involved
-
-Together they help validate that AGUS is measuring **adaptive learning behavior** rather than a narrow synthetic trick.
-
-One compact validation bundle also supports that interpretation. It shows that adversarial refinement improved retained tasks from `325` to `423`, that the largest benchmark-signal gain came in `attention_distractors` (`+0.2195`), and that static versus interactive rankings diverge on matched-composition runs. On that same matched 100-task slice, a `mock_shallow` baseline reached high static accuracy (`0.7214`) but only middling adaptive quality (`belief_trajectory_quality` `0.5943`), which is exactly the kind of static-versus-dynamic mismatch AGUS is meant to surface.
+If judges want to go deeper, the GitHub repository contains the full benchmark logic, result artifacts, Kaggle packaging, and supporting research materials. If they only read the writeup and click the benchmark, the main story should still stand on its own.
 
 ## Organizational Affiliations
 
-**To fill at submission time:** replace this section with the submitter’s actual affiliation, or state that the work is an independent submission if appropriate.
+Independent submission.  
+Questions or clarifications: `sridharsravan@icloud.com`
 
 ## References & Citations
 
 1. Google DeepMind. *Measuring progress toward AGI: A cognitive framework.* Mar. 17, 2026. [https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/)
-2. Burnell, Yamamori, Firat, et al. *Measuring Progress Toward AGI: A Cognitive Framework.* 2026. [https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf)
+2. Google. *Introducing Community Benchmarks on Kaggle.* Jan. 14, 2026. [https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-community-benchmarks/](https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-community-benchmarks/)
 3. Kaggle competition page. *Measuring Progress Toward AGI - Cognitive Abilities.* [https://www.kaggle.com/competitions/kaggle-measuring-agi](https://www.kaggle.com/competitions/kaggle-measuring-agi)
-4. AGUS local result artifacts in this repository:
-   - `data/evals/comparisons/local_model_triplet_final/comparison_summary.json`
-   - `data/evals/comparisons/local_model_triplet_instability_final/instability_comparison.json`
+4. Kaggle benchmark project. *AGUS Learning Core v1.* [https://www.kaggle.com/benchmarks/sravansridhar27/agus-learning-core-v1](https://www.kaggle.com/benchmarks/sravansridhar27/agus-learning-core-v1)
+5. Kaggle task page. *AGUS Learning Track v1.* [https://www.kaggle.com/benchmarks/tasks/sravansridhar27/agus-learning-track-v1/1](https://www.kaggle.com/benchmarks/tasks/sravansridhar27/agus-learning-track-v1/1)
+6. GitHub repository. *sravan27/agus-benchmark.* [https://github.com/sravan27/agus-benchmark](https://github.com/sravan27/agus-benchmark)
+7. AGUS result artifacts in this repository, including:
+   - `data/evals/llama31_balanced_interactive100/aggregate_summary.json`
+   - `data/evals/qwen25_balanced_interactive100/aggregate_summary.json`
+   - `data/evals/mistralnemo_balanced_interactive100/aggregate_summary.json`
    - `data/evals/comparisons/llama_qwen_multi_slice_robustness_v1/robustness_summary.json`
-   - `data/evals/comparisons/validation_bundle_v1/validation_summary.json`
-   - `data/evals/llama31_balanced_interactive100/distilled_failures.json`
-   - `data/evals/qwen25_balanced_interactive100/distilled_failures.json`
-   - `data/evals/llama31_counterfactual_v2/counterfactual_summary.json`
-   - `data/evals/qwen25_counterfactual_v2/counterfactual_summary.json`
+   - `data/evals/llama31_counterfactual_v2_expanded/counterfactual_summary.json`
+   - `data/evals/qwen25_counterfactual_v2_expanded/counterfactual_summary.json`
    - `data/evals/mistralnemo_counterfactual_v2/counterfactual_summary.json`
-   - `data/evals/comparisons/llama_qwen_counterfactual_expanded_v1/counterfactual_comparison.json`

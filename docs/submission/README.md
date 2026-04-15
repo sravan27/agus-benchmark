@@ -1,33 +1,31 @@
 # AGUS Submission Docs
 
-This folder is the **canonical submission-facing reading set** for AGUS.
+This folder is the **canonical reviewer path** for the current submission.
 
-If you want the shortest reliable path through the project, read these in order:
+## If You Have 3 Minutes
 
 1. [Executive Summary](./executive_summary.md)
-2. [Benchmark Scope](./benchmark_scope.md)
-3. [Key Results](./key_results.md)
-4. [Reviewer Guide](./reviewer_guide.md)
+2. [Key Results](./key_results.md)
+3. [static_vs_adaptive_divergence.svg](./static_vs_adaptive_divergence.svg)
 
-Supporting visual:
+## If You Have 10 Minutes
 
-- [static_vs_adaptive_divergence.svg](./static_vs_adaptive_divergence.svg)
+1. [Benchmark Scope](./benchmark_scope.md)
+2. [Reviewer Guide](./reviewer_guide.md)
+3. [Final writeup draft](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
 
-Figure source:
+## If You Want To Verify The Package
 
-- [generate_static_vs_adaptive_figure.py](./generate_static_vs_adaptive_figure.py)
+1. [Kaggle benchmark package](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
+2. [Kaggle submission audit](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/kaggle_submission_audit.md)
 
-Canonical Kaggle package:
+## Scope Reminder
 
-- [kaggle_benchmark/README.md](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
-
-Important scope note:
-
-- **AGUS** is the umbrella benchmark identity for the repo.
-- **Learning Core** is the currently submitted Kaggle slice.
+- **AGUS** = umbrella benchmark identity
+- **Learning Core** = submitted Kaggle slice
 - Learning Core packages exactly:
   - `hidden_rule`
   - `shift_transfer`
   - `metacog_revision`
 
-Broader AGUS materials remain in the repo as supporting research artifacts, not as the current Kaggle benchmark package.
+Broader AGUS materials remain in the repo as supporting research artifacts. They are useful context, but they are not the same thing as the current Kaggle benchmark package.
