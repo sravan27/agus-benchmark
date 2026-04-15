@@ -16,13 +16,18 @@ AGUS is a **Learning-track benchmark** for the Kaggle competition *Measuring Pro
 
 AGUS centers Learning as the primary faculty and uses metacognition, attention, and social cognition as supporting evidence for whether learning is genuinely adaptive rather than shallow.
 
-The benchmark contains five synthetic, human-inspectable task families:
+In this repository, **AGUS** is the broader benchmark identity, while the **currently submitted Kaggle benchmark slice** is **Learning Core**.
+
+The submitted Learning Core slice contains three synthetic, human-inspectable task families:
 
 1. `hidden_rule`: infer a latent rule from sparse examples, then adapt after a rule shift.
 2. `shift_transfer`: preserve a learned rule across a representation shift.
 3. `metacog_revision`: give an answer, confidence, and rule hypothesis, then revise after corrective evidence.
-4. `attention_distractors`: identify the true latent structure while resisting salient decoys.
-5. `social_miniworlds`: track beliefs, knowledge access, trust, and incentives across short social episodes.
+
+Two additional AGUS families remain in the repo as broader supporting research modules rather than part of the current Kaggle benchmark package:
+
+4. `attention_distractors`
+5. `social_miniworlds`
 
 AGUS includes both static tasks and lightweight interactive episodes. In the interactive setting, the model must:
 
