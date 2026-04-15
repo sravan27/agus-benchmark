@@ -77,7 +77,7 @@ def add_multiline_text(
 
 def build_svg(points):
     width = 980
-    height = 680
+    height = 760
     plot_x = 120
     plot_y = 120
     plot_w = 720
@@ -90,7 +90,7 @@ def build_svg(points):
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="#fbf7ef"/>',
         '<text x="120" y="52" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#1f2937">AGUS Learning Core: Static Accuracy vs Adaptive Quality</text>',
-        '<text x="120" y="82" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#4b5563">Existing local Learning Core artifacts only. X = static accuracy, Y = belief_trajectory_quality.</text>',
+        '<text x="120" y="82" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#4b5563">Repo-backed Learning Core runs only. X = static accuracy. Y = belief_trajectory_quality.</text>',
         f'<rect x="{plot_x}" y="{plot_y}" width="{plot_w}" height="{plot_h}" fill="#fffdf8" stroke="#d6d3d1" stroke-width="1.5"/>',
     ]
 
@@ -148,41 +148,47 @@ def build_svg(points):
             f'<text x="{cx + dx:.1f}" y="{cy + dy + 18:.1f}" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#4b5563">accuracy {point["static_accuracy"]:.4f}, BTQ {point["belief_trajectory_quality"]:.4f}</text>'
         )
 
-    add_multiline_text(
-        parts,
-        x=120,
-        y=548,
-        lines=["Interpretation"],
-        font_size=15,
-        font_weight="700",
-        fill="#111827",
+    parts.append(
+        '<line x1="120" y1="580" x2="840" y2="580" stroke="#ded6c8" stroke-width="1.5"/>'
+    )
+    parts.append(
+        '<rect x="120" y="600" width="438" height="116" rx="14" fill="#fffaf0" stroke="#dfd4bf" stroke-width="1.2"/>'
+    )
+    parts.append(
+        '<text x="144" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#7c5c1b">MAIN FINDING</text>'
     )
     interpretation = (
-        "Llama is strongest on frozen-task correctness, Qwen is strongest on adaptive "
-        "trajectory quality, and Mistral lands between them on dynamic quality despite "
-        "weak static accuracy."
+        "The ranking changes across axes: Llama leads on static accuracy, Qwen leads on "
+        "belief_trajectory_quality, and Mistral is dynamically stronger than its static "
+        "score suggests."
     )
     add_multiline_text(
         parts,
-        x=120,
-        y=574,
-        lines=wrap(interpretation, width=92),
+        x=144,
+        y=652,
+        lines=wrap(interpretation, width=61),
         font_size=14,
         fill="#374151",
-        line_height=20,
+        line_height=22,
+    )
+    parts.append(
+        '<rect x="584" y="600" width="256" height="116" rx="14" fill="#fffdf8" stroke="#d6d3d1" stroke-width="1.2"/>'
+    )
+    parts.append(
+        '<text x="608" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#4b5563">REPO ARTIFACTS</text>'
     )
     source_lines = [
-        "Sources:",
-        "data/evals/llama31_balanced_interactive100/aggregate_summary.json",
-        "data/evals/qwen25_balanced_interactive100/aggregate_summary.json",
-        "data/evals/mistralnemo_balanced_interactive100/aggregate_summary.json",
+        "data/evals/<run>/aggregate_summary.json",
+        "llama31_balanced_interactive100",
+        "qwen25_balanced_interactive100",
+        "mistralnemo_balanced_interactive100",
     ]
     add_multiline_text(
         parts,
-        x=120,
-        y=628,
+        x=608,
+        y=650,
         lines=source_lines,
-        font_size=12,
+        font_size=11,
         fill="#6b7280",
         line_height=16,
     )

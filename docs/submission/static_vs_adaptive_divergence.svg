@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="980" height="680" viewBox="0 0 980 680">
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="760" viewBox="0 0 980 760">
 <rect width="100%" height="100%" fill="#fbf7ef"/>
 <text x="120" y="52" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#1f2937">AGUS Learning Core: Static Accuracy vs Adaptive Quality</text>
-<text x="120" y="82" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#4b5563">Existing local Learning Core artifacts only. X = static accuracy, Y = belief_trajectory_quality.</text>
+<text x="120" y="82" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#4b5563">Repo-backed Learning Core runs only. X = static accuracy. Y = belief_trajectory_quality.</text>
 <rect x="120" y="120" width="720" height="380" fill="#fffdf8" stroke="#d6d3d1" stroke-width="1.5"/>
 <line x1="120.0" y1="120" x2="120.0" y2="500" stroke="#ece7df" stroke-width="1"/>
 <text x="120.0" y="526" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#6b7280">0.0</text>
@@ -38,17 +38,21 @@
 <circle cx="315.4" cy="278.5" r="10" fill="#edae49" stroke="#111827" stroke-width="1.5"/>
 <text x="333.4" y="300.5" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">Mistral NeMo 12B</text>
 <text x="333.4" y="318.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#4b5563">accuracy 0.2714, BTQ 0.5828</text>
-<text x="120" y="548" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#111827">
-<tspan x="120" dy="0">Interpretation</tspan>
+<line x1="120" y1="580" x2="840" y2="580" stroke="#ded6c8" stroke-width="1.5"/>
+<rect x="120" y="600" width="438" height="116" rx="14" fill="#fffaf0" stroke="#dfd4bf" stroke-width="1.2"/>
+<text x="144" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#7c5c1b">MAIN FINDING</text>
+<text x="144" y="652" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#374151">
+<tspan x="144" dy="0">The ranking changes across axes: Llama leads on static</tspan>
+<tspan x="144" dy="22">accuracy, Qwen leads on belief_trajectory_quality, and</tspan>
+<tspan x="144" dy="22">Mistral is dynamically stronger than its static score</tspan>
+<tspan x="144" dy="22">suggests.</tspan>
 </text>
-<text x="120" y="574" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#374151">
-<tspan x="120" dy="0">Llama is strongest on frozen-task correctness, Qwen is strongest on adaptive trajectory</tspan>
-<tspan x="120" dy="20">quality, and Mistral lands between them on dynamic quality despite weak static accuracy.</tspan>
-</text>
-<text x="120" y="628" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280">
-<tspan x="120" dy="0">Sources:</tspan>
-<tspan x="120" dy="16">data/evals/llama31_balanced_interactive100/aggregate_summary.json</tspan>
-<tspan x="120" dy="16">data/evals/qwen25_balanced_interactive100/aggregate_summary.json</tspan>
-<tspan x="120" dy="16">data/evals/mistralnemo_balanced_interactive100/aggregate_summary.json</tspan>
+<rect x="584" y="600" width="256" height="116" rx="14" fill="#fffdf8" stroke="#d6d3d1" stroke-width="1.2"/>
+<text x="608" y="626" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#4b5563">REPO ARTIFACTS</text>
+<text x="608" y="650" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#6b7280">
+<tspan x="608" dy="0">data/evals/<run>/aggregate_summary.json</tspan>
+<tspan x="608" dy="16">llama31_balanced_interactive100</tspan>
+<tspan x="608" dy="16">qwen25_balanced_interactive100</tspan>
+<tspan x="608" dy="16">mistralnemo_balanced_interactive100</tspan>
 </text>
 </svg>
