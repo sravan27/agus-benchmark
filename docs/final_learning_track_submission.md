@@ -1,95 +1,107 @@
-# Project Name
+# AGUS: Adaptive Generalization Under Shift
 
-**AGUS: Adaptive Generalization Under Shift**
-
-## Your Team
-
-**Sridhar Sravan**  
-Independent submission
+**Sravan Sridhar**
 
 ## Problem Statement
 
-I came to this competition with a simple frustration: many model benchmarks are static. They tell us whether a model can answer a frozen task, but they often fail to tell us whether the model can **learn, detect that its old strategy is no longer valid, revise after new evidence, and stay coherent while doing so**.
+I built AGUS out of a frustration with static benchmarking.
 
-That frustration lined up directly with the official framing of this competition. Google DeepMind’s cognitive framework explicitly calls out abilities like **learning, metacognition, attention, executive function, and social cognition**, and the Kaggle Community Benchmarks platform exists to let the research community build evaluations around those harder-to-measure abilities instead of only relying on older frozen benchmarks.  
+Too many model evaluations tell us whether a model can solve a frozen task, but not whether it can **learn from sparse evidence, detect that its old strategy has failed, revise after contradiction, and stay coherent while doing so**. That gap felt especially important in the context of this competition, because the official framing is explicitly cognitive. Google DeepMind’s framework highlights abilities such as learning, metacognition, attention, executive functions, and social cognition, and Kaggle Community Benchmarks exists to let the research community build benchmarks around exactly those harder-to-measure abilities instead of relying only on older static evaluations.  
 Sources: [DeepMind cognitive framework](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/), [Kaggle Community Benchmarks](https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-community-benchmarks/), [competition page](https://www.kaggle.com/competitions/kaggle-measuring-agi)
 
-So the core idea behind AGUS was to benchmark models **dynamically, not statically**.
-
-The main thesis is narrow and testable:
+The core thesis behind AGUS is narrow and testable:
 
 **static correctness and adaptive reasoning quality can diverge sharply.**
 
+That is the heart of this submission.
+
+I also want to be precise about scope. **AGUS** is the umbrella benchmark identity for the broader project. The **submitted Kaggle slice** is intentionally narrower: **Learning Core**. I made that choice on purpose. I did not want to submit a sprawling research program and hope judges guessed where the signal was. I wanted to submit the cleanest, strongest Learning-track core of the idea.
+
+## Why I Built It This Way
+
+There is a personal story behind the shape of the benchmark.
+
+I built AGUS independently, under real constraints. I did not have the budget to run a broad frontier-model evaluation campaign with paid API access. The first serious empirical pass had to be built around public artifacts, deterministic generation, and local open-source model evaluation on a **MacBook Pro M2 Max**. That limitation mattered. It pushed the project away from benchmark theater and toward something much more inspectable:
+
+- compact but meaningful interactive episodes
+- deterministic benchmark slices
+- human-auditable rows
+- model-agnostic evaluation logic
+- a public repository that exposes not just the final artifact, but the research path that led to it
+
+In hindsight, that constraint helped the project. It forced me to build something that could be defended line by line rather than something that only looked ambitious from far away.
+
+AGUS also did not appear fully formed. It evolved over time. The project began with a narrower question: how do you test whether a model can adapt when the task shifts, rather than merely solve a familiar pattern? That led first to hidden-rule adaptation, then revision under contradiction, then transfer across representation shift. From there the broader repo expanded into distractors, social belief tracking, instability analysis, adversarial curation, and later AGUS v2 counterfactual branching.
+
+The submission is therefore intentionally disciplined: it packages the strongest clean Learning-track core of a broader research evolution.
+
 ## Task & Benchmark Construction
 
-**AGUS** is the umbrella benchmark identity for the repository.  
-The **submitted Kaggle benchmark slice** is **Learning Core**.
+The live Kaggle task is:
 
-Learning Core contains exactly three task families:
+**`agus_learning_track_v1`**
 
-1. `hidden_rule`: infer a latent rule from sparse examples, then adapt after a rule shift.
-2. `shift_transfer`: preserve a learned rule across a representation shift.
-3. `metacog_revision`: give an answer, confidence, and rule hypothesis, then revise after corrective evidence.
+The submitted Learning Core slice contains exactly three task families:
 
-I chose these three because they are the cleanest expression of the Learning-track claim. Together they test whether a model can:
+1. `hidden_rule`: infer a latent rule from sparse examples, then adapt after a rule shift  
+2. `shift_transfer`: preserve learned structure across a representation shift  
+3. `metacog_revision`: answer, report confidence and a rule hypothesis, then revise after corrective evidence
 
-- infer task structure from minimal evidence
-- notice that previous structure no longer explains the data
-- maintain latent structure while revising surface form
-- express a hypothesis and then update it when contradiction appears
+I chose these three because together they form the clearest expression of the Learning-track claim. They test whether a model can:
 
-The broader AGUS repository also contains `attention_distractors`, `social_miniworlds`, adversarial curation, refinement loops, instability analysis, and AGUS v2 counterfactual branching. Those broader materials are part of the research program, but they are not the same thing as the submitted Kaggle slice.
+- infer structure from minimal evidence
+- detect that prior structure no longer explains the task
+- preserve latent structure while revising surface form
+- articulate a hypothesis and then update it when contradiction appears
+
+The broader AGUS repository contains additional materials, including `attention_distractors`, `social_miniworlds`, instability analysis, curation and refinement machinery, and AGUS v2 counterfactual branching. Those are part of the larger AGUS research program. They are **not** being presented as the submitted Kaggle benchmark itself.
 
 ## Dataset
 
-The benchmark is synthetic, deterministic, and human-inspectable.
+The submitted benchmark is synthetic, deterministic, and human-inspectable.
 
-For the submitted Kaggle package, Learning Core contains:
+The Kaggle Learning Core slice contains:
 
-- `10` `hidden_rule` tasks
-- `10` `shift_transfer` tasks
-- `10` `metacog_revision` tasks
+- `10` `hidden_rule` rows
+- `10` `shift_transfer` rows
+- `10` `metacog_revision` rows
 
-That gives a total submitted Kaggle slice of **30 Learning Core benchmark rows**, packaged in the Kaggle benchmark implementation here:
+That gives a total of **30 Learning Core rows** in the submitted Kaggle package.
 
-- benchmark project: [agus-learning-core-v1](https://www.kaggle.com/benchmarks/sravansridhar27/agus-learning-core-v1)
-- underlying task: [agus-learning-track-v1 task](https://www.kaggle.com/benchmarks/tasks/sravansridhar27/agus-learning-track-v1/1)
+I chose a deterministic, inspectable slice deliberately. The point was not to hide cognition behind scale. The point was to make adaptive behavior visible enough that a reviewer could inspect the benchmark and understand what it was probing.
 
-The wider repository also includes larger generated pools, interactive traces, curation artifacts, refinement outputs, and local-model evaluation artifacts. Those are supporting materials that make the benchmark easier to inspect and stress-test.
+Submission artifacts:
+
+- **Kaggle task:** [agus_learning_track_v1](https://www.kaggle.com/benchmarks/tasks/sravansridhar27/agus-learning-track-v1)
+- **Kaggle benchmark:** [AGUS benchmark project](https://www.kaggle.com/benchmarks/sravansridhar27/agus/versions/1)
+- **Kaggle dataset:** [agus-benchmark](https://www.kaggle.com/datasets/sravansridhar27/agus-benchmark)
+- **GitHub repository:** [sravan27/agus-benchmark](https://github.com/sravan27/agus-benchmark)
+
+The Kaggle benchmark is the submitted runnable object. The dataset packages the benchmark resources. The GitHub repository is the broader public research record, including the benchmark’s evolution, local evaluation evidence, supporting analyses, and extended AGUS materials.
 
 ## Technical Details
 
-AGUS measures more than final accuracy. The most important Learning Core metrics in the current evidence are:
+The benchmark is implemented as an aggregate Kaggle task over the Learning Core slice. At the evaluation level, AGUS is designed to measure more than final answer accuracy. The most important metrics used in the broader evaluation stack are:
 
 - `accuracy`
 - `belief_trajectory_quality`
 - `episode_cognitive_flexibility_score`
 
-Supporting analyses in the repo also track:
+Supporting analyses in the broader repository also track:
 
 - `trajectory_instability_index`
 - `contradiction_blindness_rate`
-- failure types such as `static_dynamic_gap`, `overconfident_error`, and `social_belief_confusion`
-- AGUS v2 counterfactual metrics such as `counterfactual_update_fidelity` and `branch_belief_coherence`
+- failure categories such as `static_dynamic_gap`, `overconfident_error`, and `social_belief_confusion`
 
-There is also a personal reason the benchmark took this shape. I built and evaluated AGUS on a **MacBook Pro M2 Max** and did not have budget for paid API tokens, so the first full empirical pass had to be done with **open-source local models**. That constraint mattered. It pushed the benchmark toward:
-
-- lightweight but meaningful interactive episodes
-- deterministic generation and reproducible slices
-- transparent artifacts that can be verified in GitHub and Kaggle
-- model-agnostic evaluation rather than vendor-specific prompting
-
-In hindsight, that limitation helped. It forced the benchmark to be inspectable and runnable rather than just ambitious on paper.
-
-All core benchmark code, Kaggle packaging, local evaluation artifacts, replication outputs, and supporting research materials are public in the repository:
-
-- GitHub: [sravan27/agus-benchmark](https://github.com/sravan27/agus-benchmark)
+That broader analysis matters to me because I did not want AGUS to become just another ranking instrument. I wanted it to help explain **why** models differ, not only **which** model looks best on a frozen score.
 
 ## Results, Insights, and Conclusions
 
-The main AGUS result is already visible in the current Learning Core runs.
+The central empirical result behind AGUS is that **static correctness and adaptive reasoning quality separate cleanly**, and that this separation survives fresh deterministic slices.
 
-On the original balanced Learning Core slice:
+It is important to state exactly what the headline evidence is. The strongest model-comparison numbers in the repository come from **broader local AGUS runs over a wider five-family suite**, not from the narrower Kaggle Learning Core slice alone. I am stating that plainly because I do not want to blur the difference between the submitted benchmark object and the broader research record.
+
+In those broader local AGUS runs:
 
 - **Llama 3.1 8B** static accuracy: `0.6179`
 - **Qwen 2.5 7B** static accuracy: `0.3000`
@@ -101,15 +113,15 @@ But adaptive quality does **not** follow the same ranking:
 - **Llama 3.1 8B** `belief_trajectory_quality`: `0.5434`
 - **Mistral NeMo 12B** `belief_trajectory_quality`: `0.5828`
 
-That means the strongest frozen-task model in the current local set is **not** the strongest model on adaptive trajectory quality.
+That is the main point. In the current broader AGUS evidence, the strongest frozen-task model is **not** the strongest model on adaptive trajectory quality.
 
-Mistral makes the result more credible, not less. It acts as a third anchor. Mistral is weak on static accuracy, but it is not simply weak everywhere. It is stronger than its static score would suggest on dynamic behavior, and it has the lowest contradiction blindness of the three current local models:
+Mistral makes the result more credible, not less. It is weak on static accuracy, but not weak everywhere. It performs better on dynamic measures than its static score alone would suggest, and it has the lowest contradiction blindness of the three current local models:
 
 - **Mistral NeMo 12B** `contradiction_blindness_rate`: `0.56`
 - **Qwen 2.5 7B** `contradiction_blindness_rate`: `0.64`
 - **Llama 3.1 8B** `contradiction_blindness_rate`: `0.66`
 
-The most important robustness result is that the main Llama-versus-Qwen split did **not** disappear on a fresh slice.
+The strongest robustness result is that the Llama-versus-Qwen split did **not** disappear on fresh deterministic slices.
 
 On the first deterministic replication slice:
 
@@ -125,58 +137,64 @@ And the same directional split held on **3/3 deterministic replication slices**:
 - the static-vs-dynamic divergence held on `3/3`
 - the main weakness-proxy directions held on `3/3`
 
-That is the single strongest empirical reason I think this is a competitive submission. It is no longer just “Llama and Qwen look different.” It is a benchmark result that:
+That is the single strongest empirical reason I believe this is a strong Learning-track submission. The benchmark is not only conceptually aligned with the competition. It also produces a concrete, replicated result: the model that looks best on static correctness can still be weaker on adaptive reasoning quality.
 
-- has a clear cognitive thesis
-- is implemented as a real Kaggle benchmark
-- has public code and artifacts
-- survives fresh deterministic slices
-
-AGUS v2 is a supporting extension, not the main submission claim, but it strengthens the overall story. It asks whether a model stays coherent across nearby alternate futures. On current counterfactual branch runs:
-
-- **Mistral** is strongest on `counterfactual_update_fidelity`: `0.8889`
-- **Mistral** is strongest on `invariant_preservation_score`: `0.9375`
-- **Qwen** is strongest on `branch_belief_coherence`: `0.8542`
-- **Qwen** is strongest on `counterfactual_confidence_calibration`: `0.9717`
-
-I do not think AGUS v2 should be oversold as a fully mature benchmark on its own yet. But I do think it matters because it shows the same core idea extending one step further: not just “can the model revise,” but “can the model stay coherent across nearby alternate futures?”
-
-The project also produces interpretable failure evidence. The strongest separating weakness types in the current runs remain:
+The project also produces interpretable failure evidence. In the broader AGUS runs, the strongest separating weakness types remain:
 
 - `overconfident_error`
 - `static_dynamic_gap`
 - `social_belief_confusion`
 
-That matters because I do not want this submission to be “another leaderboard with custom metrics.” I want it to be a benchmark that helps explain **why** models differ, not only **which** model wins.
+That matters because I did not want AGUS to be just another benchmark that emits a ranking and stops. I wanted it to point at the *shape* of model failure.
 
-Why do I think this is a strong Learning-track submission?
+Why do I think this submission merits serious consideration?
 
-Because it is aligned with the official competition thesis, but it also stays concrete:
+Because it does two things at once: it submits a narrow, runnable Learning-track benchmark, and it grounds that benchmark in a broader public research record that shows the idea was developed seriously rather than packaged at the last minute.
 
-- the benchmark is live on Kaggle
-- the submitted slice is narrow and legible
-- the main claim is specific
-- the main result replicated
-- the supporting repository makes the work auditable
+- the submitted Kaggle benchmark is live and runnable
+- the submitted slice is disciplined and legible
+- the benchmark claim is specific
+- the broader empirical pattern replicated across fresh deterministic slices
+- the public repository shows the benchmark’s evolution, methodology, supporting evidence, and larger AGUS research direction
 
-The broader AGUS repo shows how the idea grew: from hidden-rule adaptation, to revision, to representation shift, to distractors, to social belief tracking, to counterfactual branching. But the submitted Kaggle slice remains disciplined. It packages the strongest and cleanest Learning-track core.
+I wanted the Kaggle submission to stand on its own as a real benchmark, not just as a GitHub project with a story attached. That is why the submitted slice is narrow and runnable. But I also wanted the benchmark to come from a real research process, not appear out of nowhere. That is why the GitHub repository matters: it shows how AGUS evolved, what evidence supports the thesis, and what the broader benchmark program became beyond the submitted slice.
 
-If judges want to go deeper, the GitHub repository contains the full benchmark logic, result artifacts, Kaggle packaging, and supporting research materials. If they only read the writeup and click the benchmark, the main story should still stand on its own.
+I built AGUS because I think that divergence matters, and because I wanted a benchmark that made it visible instead of hiding it behind a single frozen score.
+
+**Static correctness and adaptive reasoning quality can diverge sharply.**
+
+AGUS is my attempt to measure that divergence directly.
 
 ## Organizational Affiliations
 
-Independent submission.  
-Questions or clarifications: `sridharsravan@icloud.com`
+Independent submission.
+
+Contact: `sridharsravan@icloud.com`
 
 ## References & Citations
 
-1. Google DeepMind. *Measuring progress toward AGI: A cognitive framework.* Mar. 17, 2026. [https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/)
-2. Google. *Introducing Community Benchmarks on Kaggle.* Jan. 14, 2026. [https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-community-benchmarks/](https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-community-benchmarks/)
-3. Kaggle competition page. *Measuring Progress Toward AGI - Cognitive Abilities.* [https://www.kaggle.com/competitions/kaggle-measuring-agi](https://www.kaggle.com/competitions/kaggle-measuring-agi)
-4. Kaggle benchmark project. *AGUS Learning Core v1.* [https://www.kaggle.com/benchmarks/sravansridhar27/agus-learning-core-v1](https://www.kaggle.com/benchmarks/sravansridhar27/agus-learning-core-v1)
-5. Kaggle task page. *AGUS Learning Track v1.* [https://www.kaggle.com/benchmarks/tasks/sravansridhar27/agus-learning-track-v1/1](https://www.kaggle.com/benchmarks/tasks/sravansridhar27/agus-learning-track-v1/1)
-6. GitHub repository. *sravan27/agus-benchmark.* [https://github.com/sravan27/agus-benchmark](https://github.com/sravan27/agus-benchmark)
-7. AGUS result artifacts in this repository, including:
+1. Google DeepMind. *Measuring progress toward AGI: A cognitive framework.*  
+   https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/
+
+2. Google. *Introducing Community Benchmarks on Kaggle.*  
+   https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-community-benchmarks/
+
+3. Kaggle competition page. *Measuring Progress Toward AGI - Cognitive Abilities.*  
+   https://www.kaggle.com/competitions/kaggle-measuring-agi
+
+4. Kaggle task. *agus_learning_track_v1.*  
+   https://www.kaggle.com/benchmarks/tasks/sravansridhar27/agus-learning-track-v1
+
+5. Kaggle benchmark. *AGUS benchmark project.*  
+   https://www.kaggle.com/benchmarks/sravansridhar27/agus/versions/1
+
+6. Kaggle dataset. *agus-benchmark.*  
+   https://www.kaggle.com/datasets/sravansridhar27/agus-benchmark
+
+7. GitHub repository. *sravan27/agus-benchmark.*  
+   https://github.com/sravan27/agus-benchmark
+
+8. Repository result artifacts and supporting AGUS analyses, including:
    - `data/evals/llama31_balanced_interactive100/aggregate_summary.json`
    - `data/evals/qwen25_balanced_interactive100/aggregate_summary.json`
    - `data/evals/mistralnemo_balanced_interactive100/aggregate_summary.json`
