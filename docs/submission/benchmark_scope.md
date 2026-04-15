@@ -51,4 +51,4 @@ If there is any ambiguity:
 
 The canonical Kaggle package lives in:
 
-- [kaggle_benchmark/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark)
+- [kaggle_benchmark/](../../kaggle_benchmark/)

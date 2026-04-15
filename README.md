@@ -6,12 +6,12 @@ It is the umbrella benchmark identity for this repository. The **current Kaggle 
 
 ## Start Here
 
-- [Kaggle benchmark package](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
-- [Final writeup draft](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
-- [Submission overview](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/README.md)
-- [Key results](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/key_results.md)
-- [Key figure](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/static_vs_adaptive_divergence.svg)
-- [Reviewer guide](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/reviewer_guide.md)
+- [Kaggle benchmark package](kaggle_benchmark/README.md)
+- [Final writeup draft](docs/final_learning_track_submission.md)
+- [Submission overview](docs/submission/README.md)
+- [Key results](docs/submission/key_results.md)
+- [Key figure](docs/submission/static_vs_adaptive_divergence.svg)
+- [Reviewer guide](docs/submission/reviewer_guide.md)
 
 ## Main Finding
 
@@ -34,7 +34,7 @@ That split is not confined to the original slice. On the first fresh determinist
 
 And the same Llama-vs-Qwen pattern held on **3/3 deterministic replication slices**.
 
-![AGUS Learning Core static-vs-adaptive divergence](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/static_vs_adaptive_divergence.svg)
+![AGUS Learning Core static-vs-adaptive divergence](docs/submission/static_vs_adaptive_divergence.svg)
 
 ## Submission Scope
 
@@ -68,29 +68,29 @@ AGUS is designed to measure that adaptive layer directly. Learning Core is the n
 
 **3 minutes**
 
-- [Executive summary](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/executive_summary.md)
-- [Key results](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/key_results.md)
-- [Key figure](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/static_vs_adaptive_divergence.svg)
+- [Executive summary](docs/submission/executive_summary.md)
+- [Key results](docs/submission/key_results.md)
+- [Key figure](docs/submission/static_vs_adaptive_divergence.svg)
 
 **10 minutes**
 
-- [Submission overview](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/README.md)
-- [Benchmark scope](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/benchmark_scope.md)
-- [Reviewer guide](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission/reviewer_guide.md)
-- [Final writeup draft](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
+- [Submission overview](docs/submission/README.md)
+- [Benchmark scope](docs/submission/benchmark_scope.md)
+- [Reviewer guide](docs/submission/reviewer_guide.md)
+- [Final writeup draft](docs/final_learning_track_submission.md)
 
 **Deeper review**
 
-- [Kaggle benchmark package](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
-- [Kaggle submission audit](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/kaggle_submission_audit.md)
-- [Hostile review defense](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/hostile_review_defense.md)
-- [Broader docs folder](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs)
+- [Kaggle benchmark package](kaggle_benchmark/README.md)
+- [Kaggle submission audit](docs/kaggle_submission_audit.md)
+- [Hostile review defense](docs/hostile_review_defense.md)
+- [Broader docs folder](docs/)
 
 ## Repo Map
 
-- [docs/submission/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/submission): canonical reviewer path
-- [kaggle_benchmark/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark): submitted Learning Core package
-- [data/evals/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals): result and replication artifacts
-- [docs/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs): writeups, audits, and supporting research materials
-- [src/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/src): benchmark generation and evaluation code
-- [tests/](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/tests): regression and unit tests
+- [docs/submission/](docs/submission/): canonical reviewer path
+- [kaggle_benchmark/](kaggle_benchmark/): submitted Learning Core package
+- [data/evals/](data/evals/): result and replication artifacts
+- [docs/](docs/): writeups, audits, and supporting research materials
+- [src/](src/): benchmark generation and evaluation code
+- [tests/](tests/): regression and unit tests

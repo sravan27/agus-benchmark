@@ -12,12 +12,12 @@ This folder is the **canonical reviewer path** for the current submission.
 
 1. [Benchmark Scope](./benchmark_scope.md)
 2. [Reviewer Guide](./reviewer_guide.md)
-3. [Final writeup draft](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/final_learning_track_submission.md)
+3. [Final writeup draft](../final_learning_track_submission.md)
 
 ## If You Want To Verify The Package
 
-1. [Kaggle benchmark package](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/kaggle_benchmark/README.md)
-2. [Kaggle submission audit](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/docs/kaggle_submission_audit.md)
+1. [Kaggle benchmark package](../../kaggle_benchmark/README.md)
+2. [Kaggle submission audit](../kaggle_submission_audit.md)
 
 ## Scope Reminder
 

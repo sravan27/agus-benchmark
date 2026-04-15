@@ -34,19 +34,19 @@ Current evidence for that claim:
 
 Learning Core run artifacts:
 
-- [llama31_balanced_interactive100](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals/llama31_balanced_interactive100/aggregate_summary.json)
-- [qwen25_balanced_interactive100](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals/qwen25_balanced_interactive100/aggregate_summary.json)
-- [mistralnemo_balanced_interactive100](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals/mistralnemo_balanced_interactive100/aggregate_summary.json)
+- [llama31_balanced_interactive100](../../data/evals/llama31_balanced_interactive100/aggregate_summary.json)
+- [qwen25_balanced_interactive100](../../data/evals/qwen25_balanced_interactive100/aggregate_summary.json)
+- [mistralnemo_balanced_interactive100](../../data/evals/mistralnemo_balanced_interactive100/aggregate_summary.json)
 
 Replication artifact:
 
-- [llama_qwen_multi_slice_robustness_v1](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals/comparisons/llama_qwen_multi_slice_robustness_v1/robustness_summary.json)
+- [llama_qwen_multi_slice_robustness_v1](../../data/evals/comparisons/llama_qwen_multi_slice_robustness_v1/robustness_summary.json)
 
 Supporting AGUS v2 artifacts:
 
-- [llama31_counterfactual_v2_expanded](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals/llama31_counterfactual_v2_expanded/counterfactual_summary.json)
-- [qwen25_counterfactual_v2_expanded](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals/qwen25_counterfactual_v2_expanded/counterfactual_summary.json)
-- [mistralnemo_counterfactual_v2](/Users/sravansridhar/Documents/Codex/Kaggle-benchmarks/data/evals/mistralnemo_counterfactual_v2/counterfactual_summary.json)
+- [llama31_counterfactual_v2_expanded](../../data/evals/llama31_counterfactual_v2_expanded/counterfactual_summary.json)
+- [qwen25_counterfactual_v2_expanded](../../data/evals/qwen25_counterfactual_v2_expanded/counterfactual_summary.json)
+- [mistralnemo_counterfactual_v2](../../data/evals/mistralnemo_counterfactual_v2/counterfactual_summary.json)
 
 ## What Is Supporting Scope
 
